@@ -15,6 +15,7 @@ class CreateProductAccessoriesTable extends Migration
     {
         Schema::create('product_accessories', function (Blueprint $table) {
             $table->increments('id');
+            $table->decimal('quantity', 12 , 5)->unsigned();
             $table->integer('product_id')->unsigned();
             $table->integer('accessory_id')->unsigned();
             $table->timestamps();

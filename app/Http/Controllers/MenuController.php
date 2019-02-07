@@ -77,31 +77,31 @@ class MenuController extends Controller
                 ['name' => 'Documentos', 'route' => 'id_types.index' ],
             ],
             'Finanzas'=>[
-                ['name' => 'Emite Letras', 'route' => 'issuance_letters.index' ],
-                ['name' => 'Recibe Letras', 'route' => 'reception_letters.index' ],
+                ['name' => 'Distribuidores', 'route' => 'providers.index' ],
+                ['name' => 'Clientes', 'route' => 'clients.index' ],
+                // ['name' => 'Emite Letras', 'route' => 'issuance_letters.index' ],
+                // ['name' => 'Recibe Letras', 'route' => 'reception_letters.index' ],
                 
-                ['name' => 'Empresas', 'route' => 'companies.index' ],
+                // ['name' => 'Empresas', 'route' => 'companies.index' ],
                 // ['name' => 'Cuentas por Cobrar', 'url' => '#' ],
                 // ['name' => 'Cuentas por Pagar', 'url' => '#' ],
                 ['name' => 'Monedas', 'route' => 'currencies.index', 'div' => '1' ],
                 ['name' => 'Tipo de Cambio', 'route' => 'exchanges.index' ],
-                ['name' => 'Documentos', 'route' => 'document_types.index' ],
-                ['name' => 'Control de Documentos', 'route' => 'document_controls.index' ],
-                ['name' => 'Condiciones de Pago', 'route' => 'payment_conditions.index' ],
-                ['name' => 'Medios de Pago', 'route' => 'payment_conditions.index' ],
+                // ['name' => 'Documentos', 'route' => 'document_types.index' ],
+                // ['name' => 'Control de Documentos', 'route' => 'document_controls.index' ],
+                // ['name' => 'Condiciones de Pago', 'route' => 'payment_conditions.index' ],
+                // ['name' => 'Medios de Pago', 'route' => 'payment_conditions.index' ],
             ],
             'Ventas'=>[
                 ['name' => 'Cotizaciones', 'route' => 'quotes.filter2' ],
                 ['name' => 'Pedidos', 'route' => 'orders.filter2' ],
                 ['name' => 'Facturación', 'route' => 'issuance_vouchers.index' ],
-                ['name' => 'Clientes', 'route' => 'clients.index' ],
                 ['name' => 'Transportistas', 'route' => 'shippers.index' ],
             ],
-            'Logística'=>[
+            // 'Logística'=>[
                 // ['name' => 'Ordenes de Compra', 'url' => '#' ],
-                ['name' => 'Proveedores', 'route' => 'providers.index' ],
-                ['name' => 'Compras', 'route' => 'reception_vouchers.index' ],
-            ],
+                // ['name' => 'Compras', 'route' => 'reception_vouchers.index' ],
+            // ],
         ];
         return $links;
     }
