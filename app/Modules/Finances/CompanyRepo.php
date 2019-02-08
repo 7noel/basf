@@ -76,6 +76,10 @@ class CompanyRepo extends BaseRepo{
 			return false;
 		}
 	}
+	public function getProviders()
+	{
+		return ['' => 'Seleccionar'] + Company::where('is_provider','1')->pluck('company_name', 'id')->toArray();
+	}
 
 	
 }

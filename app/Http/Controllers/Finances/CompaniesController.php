@@ -81,7 +81,8 @@ class CompaniesController extends Controller {
 		$id_types = $this->idTypeRepo->getList('symbol');
 		$ubigeo = $this->ubigeoRepo->listUbigeo($model->ubigeo_id);
 		$countries = $this->sunatRepo->getList2('FE', 4);
-		return view('partials.edit', compact('model', 'id_types', 'ubigeo', 'countries'));
+		$providers = $this->repo->getProviders();
+		return view('partials.edit', compact('model', 'id_types', 'ubigeo', 'countries', 'providers'));
 	}
 
 	public function update($id, FormCompanyRequest $request)

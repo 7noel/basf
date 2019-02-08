@@ -66,9 +66,9 @@
 						<div class="col-sm-3">
 						{!! Form::text('email', null, ['class'=>'form-control']) !!}
 						</div>
-						{!! Form::label('birth','Nacimiento', ['class'=>'col-sm-2 control-label']) !!}
+						{!! Form::label('provider_id','Distribuidor', ['class'=>'col-sm-2 control-label']) !!}
 						<div class="col-sm-3">
-						{!! Form::date('birth', null, ['class'=>'form-control']) !!}
+						{!! Form::select('provider_id', $providers, null, ['class'=>'form-control']) !!}
 						</div>
 					</div>
 					<div class="form-group form-group-sm">

@@ -13,11 +13,11 @@ class Company extends Model implements Auditable {
 
 	public function provider()
 	{
-		return $this->belongsTo('App\Modules\Finances\Company', 'company_id');
+		return $this->belongsTo('App\Modules\Finances\Company', 'provider_id');
 	}
 	public function clients()
 	{
-		return $this->hasMany('App\Modules\Finances\Company', 'company_id');
+		return $this->hasMany('App\Modules\Finances\Company', 'provider_id');
 	}
 	public function id_type()
     {

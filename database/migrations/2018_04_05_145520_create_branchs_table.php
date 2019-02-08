@@ -40,7 +40,7 @@ class CreateBranchsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('branchs');
+		Schema::dropIfExists('branches');
 	}
 
 }

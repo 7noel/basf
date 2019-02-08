@@ -307,10 +307,10 @@ return array(
 	// ],
 	// 'logistics' => [
 		'providers' => [
-			'index'  => ['panel'=>'Proveedores', 'create'=>'Crear Proveedor'],
-			'create' => ['panel'=>'Nueva Proveedor', 'create'=>'Crear Proveedor'],
-			'show'   => ['panel'=>'Vizualizando Proveedor:'],
-			'edit'   => ['panel'=>'Editar Proveedor: ', 'update'=>'Actualizar Proveedor', 'delete'=>'Eliminar Proveedor']
+			'index'  => ['panel'=>'Distribuidores', 'create'=>'Crear Distribuidor'],
+			'create' => ['panel'=>'Nuevo Distribuidor', 'create'=>'Crear Distribuidor'],
+			'show'   => ['panel'=>'Vizualizando Distribuidor:'],
+			'edit'   => ['panel'=>'Editar Distribuidor: ', 'update'=>'Actualizar Distribuidor', 'delete'=>'Eliminar Distribuidor']
 		],
 		'brands' => [
 			'index'  => ['panel'=>'Marcas', 'create'=>'Crear Marca'],
@@ -333,10 +333,10 @@ return array(
 			'edit'   => ['panel'=>'Editar Transportista: ', 'update'=>'Actualizar Transportista', 'delete'=>'Eliminar Transportista']
 		],
 		'clients' => [
-			'index'  => ['panel'=>'Clientes', 'create'=>'Crear Cliente'],
-			'create' => ['panel'=>'Nueva Cliente', 'create'=>'Crear Cliente'],
-			'show'   => ['panel'=>'Vizualizando Cliente:'],
-			'edit'   => ['panel'=>'Editar Cliente: ', 'update'=>'Actualizar Cliente', 'delete'=>'Eliminar Cliente']
+			'index'  => ['panel'=>'Talleres', 'create'=>'Crear Taller'],
+			'create' => ['panel'=>'Nueva Taller', 'create'=>'Crear Taller'],
+			'show'   => ['panel'=>'Vizualizando Taller:'],
+			'edit'   => ['panel'=>'Editar Taller: ', 'update'=>'Actualizar Taller', 'delete'=>'Eliminar Taller']
 		],
 		'quotes' => [
 			'index'  => ['panel'=>'Cotizaciones', 'create'=>'Crear Cotización'],

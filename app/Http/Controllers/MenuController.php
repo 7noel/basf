@@ -78,7 +78,7 @@ class MenuController extends Controller
             ],
             'Finanzas'=>[
                 ['name' => 'Distribuidores', 'route' => 'providers.index' ],
-                ['name' => 'Clientes', 'route' => 'clients.index' ],
+                ['name' => 'Talleres', 'route' => 'clients.index' ],
                 // ['name' => 'Emite Letras', 'route' => 'issuance_letters.index' ],
                 // ['name' => 'Recibe Letras', 'route' => 'reception_letters.index' ],
                 
