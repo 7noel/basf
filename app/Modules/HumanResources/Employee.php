@@ -11,17 +11,22 @@ class Employee extends Model implements Auditable {
 
 	protected $fillable = ['name', 'paternal_surname', 'maternal_surname', 'full_name', 'id_type_id', 'doc', 'job_id', 'gender', 'address', 'ubigeo_id', 'phone_personal', 'mobile_personal', 'phone_company', 'mobile_company', 'email_personal', 'email_company', 'user_id', 'signature', 'other_id', 'branch_id'];
 
+	public function warehouse()
+	{
+		return $this->belongsTo('App\Modules\Storage\Warehouse');
+	}
+
 	public function id_type()
 	{
-		return $this->hasOne('App\Modules\Base\IdType','id','id_type_id');
+		return $this->belongsTo('App\Modules\Base\IdType');
 	}
 	public function job()
 	{
-		return $this->hasOne('App\Modules\HumanResources\Job','id','job_id');
+		return $this->belongsTo('App\Modules\HumanResources\Job');
 	}
 	public function ubigeo()
 	{
-		return $this->hasOne('App\Modules\Base\Ubigeo','id','ubigeo_id');
+		return $this->belongsTo('App\Modules\Base\Ubigeo');
 	}
 	public function user()
 	{

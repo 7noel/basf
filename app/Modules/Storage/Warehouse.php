@@ -9,20 +9,29 @@ class Warehouse extends Model implements Auditable {
 	use \OwenIt\Auditing\Auditable;
 	use SoftDeletes;
 
-	protected $fillable = ['name', 'address', 'ubigeo_id'];
+	protected $fillable = ['company_id', 'name', 'address', 'ubigeo_id', 'country_id', 'phone', 'mobile', 'email', 'contact', 'comment'];
 
+
+	public function company()
+	{
+		return $this->belongsTo('App\Modules\Finances\Company');
+	}
+	public function country()
+	{
+		return $this->belongsTo('App\Modules\Base\SunatTable','id','country_id');
+	}
     public function ubigeo()
 	{
 		return $this->hasOne('App\Modules\Base\Ubigeo','id','ubigeo_id');
+	}
+	public function stocks()
+	{
+		return $this->hasMany('App\Modules\Storage\Stock');
 	}
 
 	public function scopeName($query, $name){
 		if (trim($name) != "") {
 			$query->where('name', 'LIKE', "%$name%");
 		}
-	}
-	public function stocks()
-	{
-		return $this->hasMany('App\Modules\Storage\Stock');
 	}
 }

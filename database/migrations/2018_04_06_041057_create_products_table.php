@@ -21,9 +21,11 @@ class CreateProductsTable extends Migration {
 			$table->string('name');
 			$table->text('description');
 			$table->integer('country_id')->unsigned();
-			$table->integer('brand_id')->unsigned();
+			$table->string('brand');
 			$table->string('model');
 			$table->integer('sub_category_id')->unsigned();
+			$table->decimal('density', 12, 4);
+			$table->decimal('presentacion', 12, 4);
 			$table->integer('unit_id')->unsigned();
 			$table->integer('currency_id')->unsigned();
 

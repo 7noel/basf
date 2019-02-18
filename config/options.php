@@ -339,16 +339,16 @@ return array(
 			'edit'   => ['panel'=>'Editar Taller: ', 'update'=>'Actualizar Taller', 'delete'=>'Eliminar Taller']
 		],
 		'quotes' => [
-			'index'  => ['panel'=>'Cotizaciones', 'create'=>'Crear Cotización'],
-			'create' => ['panel'=>'Nuevo Cotización', 'create'=>'Crear Cotización'],
-			'show'   => ['panel'=>'Vizualizando Cotización:'],
-			'edit'   => ['panel'=>'Editar Cotización: ', 'update'=>'Actualizar Cotización', 'delete'=>'Eliminar Cotización']
+			'index'  => ['panel'=>'Ordenes de Compra', 'create'=>'Crear Orden de Compra'],
+			'create' => ['panel'=>'Nuevo Orden de Compra', 'create'=>'Crear Orden de Compra'],
+			'show'   => ['panel'=>'Vizualizando Orden de Compra:'],
+			'edit'   => ['panel'=>'Editar Orden de Compra: ', 'update'=>'Actualizar Orden de Compra', 'delete'=>'Eliminar Orden de Compra']
 		],
 		'orders' => [
-			'index'  => ['panel'=>'Pedidos', 'create'=>'Crear Pedido'],
-			'create' => ['panel'=>'Nuevo Pedido', 'create'=>'Crear Pedido'],
-			'show'   => ['panel'=>'Vizualizando Pedido:'],
-			'edit'   => ['panel'=>'Editar Pedido: ', 'update'=>'Actualizar Pedido', 'delete'=>'Eliminar Pedido']
+			'index'  => ['panel'=>'Despachos', 'create'=>'Crear Despachos'],
+			'create' => ['panel'=>'Nuevo Despachos', 'create'=>'Crear Despachos'],
+			'show'   => ['panel'=>'Vizualizando Despachos:'],
+			'edit'   => ['panel'=>'Editar Despachos: ', 'update'=>'Actualizar Despachos', 'delete'=>'Eliminar Despachos']
 		],
 	// ],
 	// 'guard' => [

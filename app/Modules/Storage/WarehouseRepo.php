@@ -27,4 +27,17 @@ class WarehouseRepo extends BaseRepo{
 	{
 		return $this->model->pluck($name, $id)->toArray();
 	}
+	
+	public function getListGroup($group = 'company', $name='name', $id='id')
+	{
+		foreach (Warehouse::with('company.provider')->get() as $key => $u) {
+			$r[$u->company->provider->company_name][$u->$id] = $u->company->company_name.' | '.$u->$name;
+		}
+		if (isset($r)) {
+			return [''=>'Seleccionar'] + $r;
+		} else {
+			return [''=>'Seleccionar'];
+		}
+		
+	}
 }

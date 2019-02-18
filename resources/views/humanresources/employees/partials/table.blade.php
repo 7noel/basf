@@ -5,6 +5,7 @@
 								<th>Empleado</th>
 								<th>Documento</th>
 								<th>Cargo</th>
+								<th>Sucursal</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
@@ -15,6 +16,7 @@
 								<td>{{ $model->full_name }}</td>
 								<td>{{ $model->id_type->symbol.' '.$model->doc }}</td>
 								<td>{{ $model->job->name }}</td>
+								<td>{{ isset($model->warehouse->name) ? $model->warehouse->company->company_name.' | '.$model->warehouse->name : 'BASF' }}</td>
 								<td>
 									<a href="{{ route( $routes['edit'] , $model) }}" class="btn btn-primary btn-xs" title="Editar">{!! config('options.icons.edit') !!}</a>
 									<a href="#" class="btn-delete btn btn-danger btn-xs" title="Eliminar">{!! config('options.icons.remove') !!}</a>

@@ -4,7 +4,7 @@ namespace App\Modules\Finances;
 
 use App\Modules\Base\BaseRepo;
 use App\Modules\Finances\Company;
-use App\Modules\Finances\BranchRepo;
+use App\Modules\Storage\WarehouseRepo;
 
 class CompanyRepo extends BaseRepo{
 
@@ -50,9 +50,9 @@ class CompanyRepo extends BaseRepo{
 		$data = $this->prepareData($data);
 		$model = parent::save($data, $id);
 
-		if (isset($data['branches'])) {
-			$branchRepo= new BranchRepo;
-			$branchRepo->saveMany($data['branches'], ['key'=>'company_id', 'value'=>$model->id]);
+		if (isset($data['warehouses'])) {
+			$warehouseRepo= new WarehouseRepo;
+			$warehouseRepo->saveMany($data['warehouses'], ['key'=>'company_id', 'value'=>$model->id]);
 		}
 
 		return $model;

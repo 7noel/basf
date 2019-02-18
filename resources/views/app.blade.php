@@ -21,7 +21,7 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	<link rel="shortcut icon" href="/img/logo.png" type="image/x-icon" />
+	<link rel="shortcut icon" href="/img/logo.jpeg" type="image/x-icon" />
 
 </head>
 <body>
@@ -36,7 +36,7 @@
 				</button>
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="/img/logo.png" alt="" height="90%">
+                    <img src="/img/logo.jpeg" alt="" height="90%">
                 </a>
 			</div>
 

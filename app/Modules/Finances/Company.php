@@ -31,9 +31,9 @@ class Company extends Model implements Auditable {
 	{
 		return $this->hasOne('App\Modules\Base\SunatTable','id','country_id');
 	}
-	public function branches()
+	public function warehouses()
 	{
-		return $this->hasMany('App\Modules\Finances\Branch');
+		return $this->hasMany('App\Modules\Storage\Warehouse');
 	}
 	public function scopeName($query, $name){
 		if (trim($name) != "") {

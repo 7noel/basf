@@ -35,8 +35,8 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#btnAddBranch').click(function(e){
-		addRowBranch();
+	$('#btnAddWarehouse').click(function(e){
+		addRowWarehouse();
 	});
 
 	$(document).on('focus','.txtUbigeo', function (e) {
@@ -72,16 +72,16 @@ function getDataPadron (ruc) {
 	});
 }
 
-function addRowBranch() {
+function addRowWarehouse() {
 	var items = $('#items').val();
 	if (items>0) {
-		if ($("input[name='branches["+(items-1)+"][name]']").val() == "") {
+		if ($("input[name='warehouses["+(items-1)+"][name]']").val() == "") {
 			console.log('en el segundo if');
-			$("input[name='branches["+(items-1)+"][name]']").focus();
-		} else if ($("input[name='branches["+(items-1)+"][address]']").val() == "") {
-			$("input[name='branches["+(items-1)+"][address]']").focus();
-		} else if ($("input[name='branches["+(items-1)+"][ubigeo_id]']").val() == "") {
-			$("input[name='branches["+(items-1)+"][ubigeo]']").focus();
+			$("input[name='warehouses["+(items-1)+"][name]']").focus();
+		} else if ($("input[name='warehouses["+(items-1)+"][address]']").val() == "") {
+			$("input[name='warehouses["+(items-1)+"][address]']").focus();
+		} else if ($("input[name='warehouses["+(items-1)+"][ubigeo_id]']").val() == "") {
+			$("input[name='warehouses["+(items-1)+"][ubigeo]']").focus();
 		} else{
 			renderTemplateRowProduct();
 		}
@@ -93,21 +93,21 @@ function addRowBranch() {
 function renderTemplateRowProduct () {
 	var clone = activateTemplate("#template-row-item");
 	var items = $('#items').val();
-	clone.querySelector("[data-branchId]").setAttribute("name", "branches[" + items + "][branch_id]");
-	clone.querySelector("[data-ubigeoId]").setAttribute("name", "branches[" + items + "][ubigeo_id]");
-	clone.querySelector("[data-name]").setAttribute("name", "branches[" + items + "][name]");
-	clone.querySelector("[data-address]").setAttribute("name", "branches[" + items + "][address]");
-	clone.querySelector("[data-ubigeo]").setAttribute("name", "branches[" + items + "][ubigeo]");
-	clone.querySelector("[data-mobile]").setAttribute("name", "branches[" + items + "][mobile]");
-	clone.querySelector("[data-contact]").setAttribute("name", "branches[" + items + "][contact]");
-	clone.querySelector("[data-isdeleted]").setAttribute("name", "branches[" + items + "][is_deleted]");
-	//if (items>0) {$("input[name='branches["+(items-1)+"][txtProduct]']").attr('disabled', true);};
+	clone.querySelector("[data-warehouseId]").setAttribute("name", "warehouses[" + items + "][warehouse_id]");
+	clone.querySelector("[data-ubigeoId]").setAttribute("name", "warehouses[" + items + "][ubigeo_id]");
+	clone.querySelector("[data-name]").setAttribute("name", "warehouses[" + items + "][name]");
+	clone.querySelector("[data-address]").setAttribute("name", "warehouses[" + items + "][address]");
+	clone.querySelector("[data-ubigeo]").setAttribute("name", "warehouses[" + items + "][ubigeo]");
+	clone.querySelector("[data-mobile]").setAttribute("name", "warehouses[" + items + "][mobile]");
+	clone.querySelector("[data-contact]").setAttribute("name", "warehouses[" + items + "][contact]");
+	clone.querySelector("[data-isdeleted]").setAttribute("name", "warehouses[" + items + "][is_deleted]");
+	//if (items>0) {$("input[name='warehouses["+(items-1)+"][txtProduct]']").attr('disabled', true);};
 	
 	items = parseInt(items) + 1;
 	$('#items').val(items);
 	$("#tableItems").append(clone);
 
-	$("input[name='branches["+(items-1)+"][name]']").focus();
+	$("input[name='warehouses["+(items-1)+"][name]']").focus();
 }
 
 function activateTemplate (id) {

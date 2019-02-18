@@ -53,7 +53,8 @@ class CompaniesController extends Controller {
 		$id_types = $this->idTypeRepo->getList('symbol');
 		$ubigeo = $this->ubigeoRepo->listUbigeo();
 		$countries = $this->sunatRepo->getList2('FE', 4);
-		return view('partials.create', compact('id_types', 'ubigeo', 'countries'));
+		$providers = $this->repo->getProviders();
+		return view('partials.create', compact('id_types', 'ubigeo', 'countries', 'providers'));
 	}
 
 	public function store(FormCompanyRequest $request)

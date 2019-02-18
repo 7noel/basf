@@ -20,4 +20,16 @@ class BranchRepo extends BaseRepo{
 		return [""=>"Seleccionar"] + Branch::where('company_id', $company_id)->pluck('name', 'id')->toArray();
 	}
 	
+	public function getListGroup($group = 'company', $name='name', $id='id')
+	{
+		foreach (Branch::with('company.provider')->get() as $key => $u) {
+			$r[$u->company->provider->company_name][$u->$id] = $u->company->company_name.' | '.$u->$name;
+		}
+		if (isset($r)) {
+			return [''=>'Seleccionar'] + $r;
+		} else {
+			return [''=>'Seleccionar'];
+		}
+		
+	}
 }

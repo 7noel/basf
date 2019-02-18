@@ -38,6 +38,12 @@
 						</div>
 					</div>
 					<div class="form-group  form-group-sm">
+						{!! Form::label('warehouse_id', 'Sucursal', ['class'=>'col-sm-2 control-label']) !!}
+						<div class="col-sm-4">
+							{!! Form::select('warehouse_id', $warehouses , null, ['class'=>'form-control col-sm-1']) !!}
+						</div>
+					</div>
+					<div class="form-group  form-group-sm">
 						{!! Form::label('address','Direccion', ['class'=>'col-sm-2 control-label']) !!}
 						<div class="col-sm-8">
 						{!! Form::text('address', null, ['class'=>'form-control uppercase']) !!}

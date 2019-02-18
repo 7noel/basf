@@ -68,7 +68,7 @@
 						</div>
 						{!! Form::label('provider_id','Distribuidor', ['class'=>'col-sm-2 control-label']) !!}
 						<div class="col-sm-3">
-						{!! Form::select('provider_id', $providers, null, ['class'=>'form-control']) !!}
+						{!! Form::select('provider_id', $providers, null, ['class'=>'form-control', 'required'=>'required']) !!}
 						</div>
 					</div>
 					<div class="form-group form-group-sm">
@@ -82,7 +82,7 @@
 						</div>
 					</div>
 
-						<a href="#" id="btnAddBranch" class="btn btn-success btn-sm" title="Agregar Sucursal">{!! config('options.icons.add') !!} Agregar Sucursal</a>
+						<a href="#" id="btnAddWarehouse" class="btn btn-success btn-sm" title="Agregar Sucursal">{!! config('options.icons.add') !!} Agregar Sucursal</a>
 						@php $i=0; @endphp
 						<div class="table-responsive">
 						<table class="table table-condensed">
@@ -97,20 +97,20 @@
 								</tr>
 							</thead>
 							<tbody id="tableItems">
-							@if(isset($model->branches))
-							@foreach($model->branches as $branch)
-								<tr data-id="{{ $branch->id }}">
-									{!! Form::hidden("branches[$i][id]", $branch->id, ['class'=>'branchId','data-branchId'=>'']) !!}
-									{!! Form::hidden("branches[$i][ubigeo_id]", $branch->ubigeo_id, ['class'=>'ubigeoId','data-ubigeoId'=>'']) !!}
+							@if(isset($model->warehouses))
+							@foreach($model->warehouses as $warehouse)
+								<tr data-id="{{ $warehouse->id }}">
+									{!! Form::hidden("warehouses[$i][id]", $warehouse->id, ['class'=>'warehouseId','data-warehouseId'=>'']) !!}
+									{!! Form::hidden("warehouses[$i][ubigeo_id]", $warehouse->ubigeo_id, ['class'=>'ubigeoId','data-ubigeoId'=>'']) !!}
 
-<td>{!! Form::text("branches[$i][name]", null, ['class'=>'form-control input-sm txtName uppercase', 'data-name'=>'', 'required'=>'required']) !!}</td>
-<td>{!! Form::text("branches[$i][address]", null, ['class'=>'form-control input-sm txtAddress uppercase', 'data-address'=>'']) !!}</td>
-<td>{!! Form::text("branches[$i][ubigeo]", $branch->ubigeo->departamento.'-'.$branch->ubigeo->provincia.'-'.$branch->ubigeo->distrito, ['class'=>'form-control input-sm txtUbigeo', 'data-ubigeo'=>'']) !!}</td>
-<td>{!! Form::text("branches[$i][mobile]", null, ['class'=>'form-control input-sm txtMobile', 'data-mobile'=>'']) !!}</td>
-<td>{!! Form::text("branches[$i][contact]", null, ['class'=>'form-control input-sm txtContact uppercase', 'data-contact'=>'']) !!}</td>
+<td>{!! Form::text("warehouses[$i][name]", null, ['class'=>'form-control input-sm txtName uppercase', 'data-name'=>'', 'required'=>'required']) !!}</td>
+<td>{!! Form::text("warehouses[$i][address]", null, ['class'=>'form-control input-sm txtAddress uppercase', 'data-address'=>'']) !!}</td>
+<td>{!! Form::text("warehouses[$i][ubigeo]", $warehouse->ubigeo->departamento.'-'.$warehouse->ubigeo->provincia.'-'.$warehouse->ubigeo->distrito, ['class'=>'form-control input-sm txtUbigeo', 'data-ubigeo'=>'']) !!}</td>
+<td>{!! Form::text("warehouses[$i][mobile]", null, ['class'=>'form-control input-sm txtMobile', 'data-mobile'=>'']) !!}</td>
+<td>{!! Form::text("warehouses[$i][contact]", null, ['class'=>'form-control input-sm txtContact uppercase', 'data-contact'=>'']) !!}</td>
 									<td class="text-center form-inline">
 										<a href="#" class="btn btn-danger btn-xs btn-delete-item" title="Eliminar">{!! config('options.icons.remove') !!}</a>
-										<input type="checkbox" name="branches[{{$i}}][is_deleted]" data-isdeleted class="isdeleted hidden">
+										<input type="checkbox" name="warehouses[{{$i}}][is_deleted]" data-isdeleted class="isdeleted hidden">
 									</td>
 								</tr>
 								@php $i++; @endphp
@@ -121,7 +121,7 @@
 						</div>
 						<template id="template-row-item">
 							<tr>
-								{!! Form::hidden('data1', null, ['class'=>'branchId','data-branchId'=>'']) !!}
+								{!! Form::hidden('data1', null, ['class'=>'warehouseId','data-warehouseId'=>'']) !!}
 								{!! Form::hidden('data2', null, ['class'=>'ubigeoId','data-ubigeoId'=>'']) !!}
 								<td>{!! Form::text('data3', null, ['class'=>'form-control input-sm txtName uppercase', 'data-name'=>'', 'required'=>'required']) !!}</td>
 								<td>{!! Form::text('data4', null, ['class'=>'form-control input-sm txtAddress uppercase', 'data-address'=>'']) !!}</td>

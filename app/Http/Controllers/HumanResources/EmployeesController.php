@@ -8,6 +8,7 @@ use App\Modules\Base\IdTypeRepo;
 use App\Modules\HumanResources\EmployeeRepo;
 use App\Modules\HumanResources\JobRepo;
 use App\Modules\Base\UbigeoRepo;
+use App\Modules\Storage\WarehouseRepo;
 
 use App\Http\Requests\HumanResources\FormEmployeeRequest;
 
@@ -17,12 +18,14 @@ class EmployeesController extends Controller {
 	protected $jobRepo;
 	protected $ubigeoRepo;
 	protected $idTypeRepo;
+	protected $warehouseRepo;
 
-	public function __construct(EmployeeRepo $repo, JobRepo $jobRepo, UbigeoRepo $ubigeoRepo, IdTypeRepo $idTypeRepo) {
+	public function __construct(EmployeeRepo $repo, JobRepo $jobRepo, UbigeoRepo $ubigeoRepo, IdTypeRepo $idTypeRepo, WarehouseRepo $warehouseRepo) {
 		$this->repo = $repo;
 		$this->jobRepo = $jobRepo;
 		$this->ubigeoRepo = $ubigeoRepo;
 		$this->idTypeRepo = $idTypeRepo;
+		$this->warehouseRepo = $warehouseRepo;
 	}
 
 	public function index()
@@ -36,7 +39,8 @@ class EmployeesController extends Controller {
 		$jobs = $this->jobRepo->getList();
 		$id_types = $this->idTypeRepo->getList2('symbol');
 		$ubigeo = $this->ubigeoRepo->listUbigeo();
-		return view('partials.create', compact('jobs', 'id_types','ubigeo'));
+		$warehouses = $this->warehouseRepo->getListGroup();
+		return view('partials.create', compact('jobs', 'id_types','ubigeo', 'warehouses'));
 	}
 
 	public function store(FormEmployeeRequest $request)
@@ -56,7 +60,8 @@ class EmployeesController extends Controller {
 		$jobs = $this->jobRepo->getList();
 		$id_types = $this->idTypeRepo->getList2('symbol');
 		$ubigeo = $this->ubigeoRepo->listUbigeo($model->ubigeo_id);
-		return view('partials.edit', compact('model', 'jobs', 'id_types', 'ubigeo'));
+		$warehouses = $this->warehouseRepo->getListGroup();
+		return view('partials.edit', compact('model', 'jobs', 'id_types', 'ubigeo', 'warehouses'));
 	}
 
 	public function update($id, FormEmployeeRequest $request)
