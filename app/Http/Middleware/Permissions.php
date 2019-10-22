@@ -1,5 +1,6 @@
 <?php namespace App\Http\Middleware;
 
+use App\Modules\Finances\CompanyRepo;
 use Closure;
 
 class Permissions {
@@ -13,6 +14,11 @@ class Permissions {
 	 */
 	public function handle($request, Closure $next)
 	{
+		
+        if (null == session('my_company')) {
+            $c = new CompanyRepo;
+            session(['my_company' => $c->find(1)]);
+        }
 		if (\Auth::user()->is_superuser) {
 			return $next($request);
 		} else {

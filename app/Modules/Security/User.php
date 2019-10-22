@@ -58,7 +58,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	}
 	public function employee()
 	{
-		return $this->belongsto('App\Modules\HumanResources\Employee', 'id', 'user_id');
+		return $this->hasOne('App\Modules\HumanResources\Employee');
 	}
 	public function comments()
     {

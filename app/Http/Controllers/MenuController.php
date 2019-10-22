@@ -15,10 +15,10 @@ class MenuController extends Controller
 
     public function __construct(UserRepo $repo) {
         $this->repo = $repo;
-        if (null == session('my_company')) {
+        /*if (null == session('my_company')) {
             $c = new CompanyRepo;
             session(['my_company' => $c->find(1)]);
-        }
+        }*/
         //session(['my_company' => 1]);
         // $value = session('my_company');
     }

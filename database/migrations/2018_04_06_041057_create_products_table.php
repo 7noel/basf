@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration {
 			$table->decimal('density', 12, 4);
 			$table->decimal('presentacion', 12, 4);
 			$table->integer('unit_id')->unsigned();
+			$table->integer('unit_dispatch_id')->unsigned();
 			$table->integer('currency_id')->unsigned();
 
 			$table->decimal('last_purchase', 15, 2);

@@ -30,7 +30,7 @@ class Employee extends Model implements Auditable {
 	}
 	public function user()
 	{
-		return $this->hasOne('App\Modules\Security\User','id','user_id');
+		return $this->belongsTo('App\Modules\Security\User');
 	}
 	public function scopeName($query, $name){
 		if (trim($name) != "") {
