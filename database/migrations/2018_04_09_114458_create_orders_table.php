@@ -19,9 +19,9 @@ class CreateOrdersTable extends Migration
             $table->string('sn'); // numero correlativo para cotizaciones y pedidos para las 3 empresas
             $table->integer('order_type')->unsigned(); // typo de documento {1=>'despacho', 2=>'orden de compra'}
             $table->string('type_op'); // segun ello afecta el valor promedio
-            $table->integer('my_company')->unsigned();
-            $table->integer('company_id')->unsigned();
-            $table->integer('branch_id')->unsigned();
+            $table->integer('my_company')->unsigned(); // distribuidor
+            $table->integer('company_id')->unsigned(); // taller
+            $table->integer('warehouse_id')->unsigned(); // sucursal
             $table->integer('shipper_id')->unsigned();
             $table->integer('currency_id')->unsigned();
 
@@ -29,8 +29,8 @@ class CreateOrdersTable extends Migration
             $table->string('placa');
             $table->string('oc');
             $table->string('ot');
-            $table->string('marca');
-            $table->string('modelo');
+            $table->string('brand');
+            $table->string('model');
             $table->integer('pintor_id')->unsigned();
             $table->integer('matizador_id')->unsigned();
             $table->string('color_code');
@@ -57,6 +57,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('company_id')->references('id')->on('companies');
             $table->foreign('currency_id')->references('id')->on('currencies');
             $table->foreign('matizador_id')->references('id')->on('employees');
+            $table->foreign('pintor_id')->references('id')->on('employees');
             $table->timestamps();
             $table->softDeletes();
         });

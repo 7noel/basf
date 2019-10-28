@@ -1,3 +1,15 @@
+					<div class="form-group form-group-sm">
+						{!! Form::label('txtcompany','Empresa:', ['class'=>'col-sm-2 control-label']) !!}
+						<div class="col-sm-4">
+							@if(isset($company))
+								{!! Form::hidden('company_id', $company->id, ['id'=>'company_id']) !!}
+								{!! Form::text('company', $company->company_name, ['class'=>'form-control', 'id'=>'txtCompany', 'required']) !!}
+							@else
+								{!! Form::hidden('company_id', null, ['id'=>'company_id']) !!}
+								{!! Form::text('company', ((isset($model->company_id)) ? $model->company->company_name : null), ['class'=>'form-control', 'id'=>'txtCompany', 'required']) !!}
+							@endif
+						</div>
+					</div>
 					<div class="form-group  form-group-sm">
 						{!! Form::label('name','Nombres', ['class'=>'col-sm-2 control-label']) !!}
 						<div class="col-sm-10">
@@ -21,5 +33,42 @@
 						{!! Form::label('address','Direccion', ['class'=>'col-sm-2 control-label']) !!}
 						<div class="col-sm-10">
 						{!! Form::text('address', null, ['class'=>'form-control uppercase']) !!}
+						</div>
+					</div>
+
+					
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-1">
+							<label>Empleados No Autorizados</label>
+							<select name="origen[]" id="origen" multiple size="10" class="form-control">
+								@foreach($employees as $employee)
+								@if(!isset($model) or !isset($employee->roles()->where('role_id',$model->id)->first()->id))
+								<option value="{{ $employee->id }}" class="groupx group_{{ $employee->job_id }}">{{ $employee->name }}</option>
+								@endif
+								@endforeach
+							</select>
+						</div>
+						<div class="col-sm-3 btn-group-vertical" role="group">
+							<select name="" id="groups" class="form-control">
+								<option value="">TODOS LOS TIPOS</option>
+								@foreach($jobs as $job)
+								<option value="{{ $job->id }}">{{ $job->name }}</option>
+								@endforeach			
+							</select>
+							<br>
+							<input type="button" class="btn btn-default pasar izq" value="Pasar »">
+							<input type="button" class="btn btn-default quitar der" value="« Quitar">
+							<input type="button" class="btn btn-default pasartodos izq" value="Todos »">
+							<input type="button" class="btn btn-default quitartodos der" value="« Ninguno">
+						</div>
+						<div class="col-sm-4">
+							<label>Empleados Autorizados</label>
+							<select name="employees[]" id="destino" multiple size="10" class="form-control">
+								@if(isset($model))
+									@foreach($model->employees as $employee)
+									<option value="{{ $employee->id }}" class="groupx group_{{ $employee->job_id }}">{{ $employee->name }}</option>
+									@endforeach
+								@endif
+							</select>
 						</div>
 					</div>

@@ -11,9 +11,13 @@ class Employee extends Model implements Auditable {
 
 	protected $fillable = ['name', 'paternal_surname', 'maternal_surname', 'full_name', 'id_type_id', 'doc', 'job_id', 'gender', 'address', 'ubigeo_id', 'phone_personal', 'mobile_personal', 'phone_company', 'mobile_company', 'email_personal', 'email_company', 'user_id', 'signature', 'other_id', 'branch_id'];
 
-	public function warehouse()
+	// public function warehouse()
+	// {
+	// 	return $this->belongsTo('App\Modules\Storage\Warehouse');
+	// }
+	public function warehouses()
 	{
-		return $this->belongsTo('App\Modules\Storage\Warehouse');
+		return $this->belongsToMany('App\Modules\Storage\Warehouse');
 	}
 
 	public function id_type()

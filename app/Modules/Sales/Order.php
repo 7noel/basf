@@ -11,7 +11,7 @@ class Order extends Model implements Auditable
 	use \OwenIt\Auditing\Auditable;
 	use SoftDeletes;
 
-	protected $fillable = ['company_id', 'order_type', 'branch_id', 'shipper_id', 'my_company', 'document_type_id', 'payment_condition_id', 'currency_id', 'seller_id', 'attention', 'matter', 'approved_at', 'checked_at', 'invoiced_at', 'sent_at', 'canceled_at', 'gross_value', 'discount', 'discount_items', 'subtotal', 'tax', 'total', 'amortization', 'exchange', 'exchange_sunat', 'comment', 'status', 'delivery_period', 'installation_period', 'delivery_place', 'offer_period', 'mov', 'type_op', 'proof_id', 'user_id'];
+	protected $fillable = ['mov', 'sn', 'order_type', 'type_op', 'my_company', 'company_id', 'warehouse_id', 'shipper_id', 'currency_id', 'type_ot', 'placa', 'oc', 'ot', 'brand', 'model', 'pintor_id', 'matizador_id', 'color_code', 'color_code2', 'quantity', 'quantity2', 'approved_at', 'checked_at', 'invoiced_at', 'sent_at', 'canceled_at', 'status', 'subtotal', 'tax', 'total', 'amortization', 'exchange', 'exchange_sunat', 'order_id', 'user_id', 'comment'];
 
 	public function scopeName($query, $name){
 		if (trim($name) != "") {

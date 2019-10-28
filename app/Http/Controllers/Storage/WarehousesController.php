@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Modules\Storage\WarehouseRepo;
+use App\Modules\HumanResources\EmployeeRepo;
+use App\Modules\HumanResources\JobRepo;
 use App\Modules\Base\UbigeoRepo;
 
 use App\Http\Requests\Storage\FormWarehouseRequest;
@@ -13,9 +15,13 @@ class WarehousesController extends Controller {
 
 	protected $repo;
 	protected $ubigeoRepo;
+	protected $employeeRepo;
+	protected $jobRepo;
 
-	public function __construct(WarehouseRepo $repo, UbigeoRepo $ubigeoRepo) {
+	public function __construct(WarehouseRepo $repo, EmployeeRepo $employeeRepo, JobRepo $jobRepo, UbigeoRepo $ubigeoRepo) {
 		$this->repo = $repo;
+		$this->employeeRepo = $employeeRepo;
+		$this->jobRepo = $jobRepo;
 		$this->ubigeoRepo = $ubigeoRepo;
 	}
 
@@ -27,8 +33,10 @@ class WarehousesController extends Controller {
 
 	public function create()
 	{
+		$employees = $this->employeeRepo->all();
+		$jobs = $this->jobRepo->all();
 		$ubigeo = $this->ubigeoRepo->listUbigeo();
-		return view('partials.create', compact('ubigeo'));
+		return view('partials.create', compact('employees', 'jobs', 'ubigeo'));
 	}
 
 	public function store(FormWarehouseRequest $request)
@@ -45,8 +53,11 @@ class WarehousesController extends Controller {
 	public function edit($id)
 	{
 		$model = $this->repo->findOrFail($id);
+		$employees = $this->employeeRepo->toWarehouses($model->company_id);
+		$employees = $employees->diff($model->employees);
+		$jobs = $this->jobRepo->all();
 		$ubigeo = $this->ubigeoRepo->listUbigeo($model->ubigeo_id);
-		return view('partials.edit', compact('model', 'ubigeo'));
+		return view('partials.edit', compact('model', 'employees', 'jobs', 'ubigeo'));
 	}
 
 	public function update($id, FormWarehouseRequest $request)

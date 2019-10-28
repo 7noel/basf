@@ -38,4 +38,8 @@ class EmployeeRepo extends BaseRepo{
 	{
 		return [""=>"Seleccionar"] + Employee::where('job_id', 8)->orWhere('id',3)->orWhere('id',1)->pluck('full_name', 'id')->toArray();
 	}
+	public function toWarehouses($company_id)
+	{
+		return Employee::where('job_id','!=',3)->orWhere(function($query) {$query->where('job_id', '3')->where('company_id', $company_id);});
+	}
 }

@@ -28,6 +28,10 @@ class Warehouse extends Model implements Auditable {
 	{
 		return $this->hasMany('App\Modules\Storage\Stock');
 	}
+	public function employees()
+	{
+		return $this->belongsToMany('App\Modules\HumanResources\Employee');
+	}
 
 	public function scopeName($query, $name){
 		if (trim($name) != "") {
