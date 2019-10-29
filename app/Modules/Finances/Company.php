@@ -35,6 +35,10 @@ class Company extends Model implements Auditable {
 	{
 		return $this->hasMany('App\Modules\Storage\Warehouse');
 	}
+	public function employees()
+	{
+		return $this->hasMany('App\Modules\HumanResources\Employee');
+	}
 	public function scopeName($query, $name){
 		if (trim($name) != "") {
 			// $query->where(function ($q) use ($a,$b) {

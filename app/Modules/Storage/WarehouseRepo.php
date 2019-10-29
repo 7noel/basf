@@ -10,6 +10,16 @@ class WarehouseRepo extends BaseRepo{
 	public function getModel(){
 		return new Warehouse;
 	}
+	public function save($data, $id=0)
+	{
+		$model = parent::save($data,$id);
+		if (!isset($data['employees'])) {
+			$data['employees'] = [];
+		}
+		$model->employees()->sync($data['employees']);
+		
+		return $model;
+	}
 	public function index($filter = false, $search = false)
 	{
 		if ($filter and $search) {

@@ -149,7 +149,7 @@ $(document).ready(function () {
 	$('.quitar').click(function() { return !$('#destino option:selected').remove().appendTo('#origen'); });
 	$('.pasartodos').click(function() { $('#origen option:visible').each(function() { $(this).remove().appendTo('#destino'); }); });
 	$('.quitartodos').click(function() { $('#destino option:visible').each(function() { $(this).remove().appendTo('#origen'); }); });
-	$('#submit-role').click(function() { $('#destino option').prop('selected', 'selected'); });
+	$('#submit').click(function() { $('#destino option').prop('selected', 'selected'); });
 	$('#groups').change(function(){
 		var clasegrupo = $('#groups').val();
 		$('.groupx').hide();

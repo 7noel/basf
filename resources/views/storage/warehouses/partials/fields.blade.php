@@ -42,9 +42,7 @@
 							<label>Empleados No Autorizados</label>
 							<select name="origen[]" id="origen" multiple size="10" class="form-control">
 								@foreach($employees as $employee)
-								@if(!isset($model) or !isset($employee->roles()->where('role_id',$model->id)->first()->id))
-								<option value="{{ $employee->id }}" class="groupx group_{{ $employee->job_id }}">{{ $employee->name }}</option>
-								@endif
+								<option value="{{ $employee->id }}" class="groupx group_{{ $employee->job_id }}">{{ $employee->full_name }}</option>
 								@endforeach
 							</select>
 						</div>
@@ -66,7 +64,7 @@
 							<select name="employees[]" id="destino" multiple size="10" class="form-control">
 								@if(isset($model))
 									@foreach($model->employees as $employee)
-									<option value="{{ $employee->id }}" class="groupx group_{{ $employee->job_id }}">{{ $employee->name }}</option>
+									<option value="{{ $employee->id }}" class="groupx group_{{ $employee->job_id }}">{{ $employee->full_name }}</option>
 									@endforeach
 								@endif
 							</select>

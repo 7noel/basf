@@ -8,7 +8,7 @@ use App\Modules\Base\IdTypeRepo;
 use App\Modules\HumanResources\EmployeeRepo;
 use App\Modules\HumanResources\JobRepo;
 use App\Modules\Base\UbigeoRepo;
-use App\Modules\Storage\WarehouseRepo;
+use App\Modules\Finances\CompanyRepo;
 
 use App\Http\Requests\HumanResources\FormEmployeeRequest;
 
@@ -18,14 +18,14 @@ class EmployeesController extends Controller {
 	protected $jobRepo;
 	protected $ubigeoRepo;
 	protected $idTypeRepo;
-	protected $warehouseRepo;
+	protected $companyRepo;
 
-	public function __construct(EmployeeRepo $repo, JobRepo $jobRepo, UbigeoRepo $ubigeoRepo, IdTypeRepo $idTypeRepo, WarehouseRepo $warehouseRepo) {
+	public function __construct(EmployeeRepo $repo, JobRepo $jobRepo, UbigeoRepo $ubigeoRepo, IdTypeRepo $idTypeRepo, CompanyRepo $companyRepo) {
 		$this->repo = $repo;
 		$this->jobRepo = $jobRepo;
 		$this->ubigeoRepo = $ubigeoRepo;
 		$this->idTypeRepo = $idTypeRepo;
-		$this->warehouseRepo = $warehouseRepo;
+		$this->companyRepo = $companyRepo;
 	}
 
 	public function index()
@@ -39,8 +39,8 @@ class EmployeesController extends Controller {
 		$jobs = $this->jobRepo->getList();
 		$id_types = $this->idTypeRepo->getList2('symbol');
 		$ubigeo = $this->ubigeoRepo->listUbigeo();
-		$warehouses = $this->warehouseRepo->getListGroup();
-		return view('partials.create', compact('jobs', 'id_types','ubigeo', 'warehouses'));
+		$companies = $this->companyRepo->getList('company_name');
+		return view('partials.create', compact('jobs', 'id_types','ubigeo', 'companies'));
 	}
 
 	public function store(FormEmployeeRequest $request)
@@ -60,8 +60,8 @@ class EmployeesController extends Controller {
 		$jobs = $this->jobRepo->getList();
 		$id_types = $this->idTypeRepo->getList2('symbol');
 		$ubigeo = $this->ubigeoRepo->listUbigeo($model->ubigeo_id);
-		$warehouses = $this->warehouseRepo->getListGroup();
-		return view('partials.edit', compact('model', 'jobs', 'id_types', 'ubigeo', 'warehouses'));
+		$companies = $this->companyRepo->getList();
+		return view('partials.edit', compact('model', 'jobs', 'id_types', 'ubigeo', 'companies'));
 	}
 
 	public function update($id, FormEmployeeRequest $request)

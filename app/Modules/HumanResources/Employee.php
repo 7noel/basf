@@ -9,7 +9,7 @@ class Employee extends Model implements Auditable {
 	use \OwenIt\Auditing\Auditable;
 	use SoftDeletes;
 
-	protected $fillable = ['name', 'paternal_surname', 'maternal_surname', 'full_name', 'id_type_id', 'doc', 'job_id', 'gender', 'address', 'ubigeo_id', 'phone_personal', 'mobile_personal', 'phone_company', 'mobile_company', 'email_personal', 'email_company', 'user_id', 'signature', 'other_id', 'branch_id'];
+	protected $fillable = ['name', 'paternal_surname', 'maternal_surname', 'full_name', 'id_type_id', 'doc', 'job_id', 'gender', 'address', 'ubigeo_id', 'phone_personal', 'mobile_personal', 'phone_company', 'mobile_company', 'email_personal', 'email_company', 'user_id', 'signature', 'other_id', 'company_id'];
 
 	// public function warehouse()
 	// {
@@ -27,6 +27,10 @@ class Employee extends Model implements Auditable {
 	public function job()
 	{
 		return $this->belongsTo('App\Modules\HumanResources\Job');
+	}
+	public function company()
+	{
+		return $this->belongsTo('App\Modules\Finances\Company');
 	}
 	public function ubigeo()
 	{

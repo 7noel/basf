@@ -40,6 +40,8 @@ class EmployeeRepo extends BaseRepo{
 	}
 	public function toWarehouses($company_id)
 	{
-		return Employee::where('job_id','!=',3)->orWhere(function($query) {$query->where('job_id', '3')->where('company_id', $company_id);});
+		//dd($company_id);
+		//return Employee::where(function($query) use ($company_id) {$query->where('job_id', '3')->where('company_id', $company_id);})->get();
+		return Employee::where('job_id','!=',3)->orWhere(function($query) use ($company_id) {$query->where('job_id', '3')->where('company_id', $company_id);})->get();
 	}
 }

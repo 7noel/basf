@@ -19,9 +19,9 @@ class CreateOrdersTable extends Migration
             $table->string('sn'); // numero correlativo para cotizaciones y pedidos para las 3 empresas
             $table->integer('order_type')->unsigned(); // typo de documento {1=>'despacho', 2=>'orden de compra'}
             $table->string('type_op'); // segun ello afecta el valor promedio
-            $table->integer('my_company')->unsigned(); // distribuidor
-            $table->integer('company_id')->unsigned(); // taller
-            $table->integer('warehouse_id')->unsigned(); // sucursal
+            $table->integer('my_company')->unsigned(); // xxxxxxxxxxxxxxx
+            $table->integer('company_id')->unsigned(); // distribuidor
+            $table->integer('warehouse_id')->unsigned(); // almacen
             $table->integer('shipper_id')->unsigned();
             $table->integer('currency_id')->unsigned();
 
@@ -29,14 +29,32 @@ class CreateOrdersTable extends Migration
             $table->string('placa');
             $table->string('oc');
             $table->string('ot');
-            $table->string('brand');
-            $table->string('model');
+            $table->integer('brand_id')->unsigned();
+            $table->integer('model_id')->unsigned();
             $table->integer('pintor_id')->unsigned();
             $table->integer('matizador_id')->unsigned();
             $table->string('color_code');
             $table->string('color_code2');
             $table->decimal('quantity', 12, 2);
             $table->decimal('quantity2', 12, 2);
+            $table->decimal('quantity_news', 12, 2);
+            $table->decimal('quantity_news2', 12, 2);
+
+            $table->decimal('meta_gr_pintura', 12, 4);
+            $table->decimal('meta_soles_pintura', 12, 4);
+            $table->decimal('meta_soles_directos', 12, 4);
+            $table->decimal('meta_soles_indirectos', 12, 4);
+            $table->decimal('real_gr_pintura', 12, 4);
+            $table->decimal('real_soles_pintura', 12, 4);
+            $table->decimal('real_soles_directos', 12, 4);
+            $table->decimal('real_soles_directos', 12, 4);
+            $table->decimal('real_soles_indirectos', 12, 4);
+            $table->decimal('ahorro_pintura', 12, 4);
+            $table->decimal('ahorro_directos', 12, 4);
+            $table->decimal('ahorro_indirectos', 12, 4);
+            $table->decimal('cumpli_total', 12, 4);
+            $table->decimal('cumpli_panios', 12, 4);
+            $table->string('pintor_recibe');
 
             $table->dateTime('approved_at')->nullable();
             $table->dateTime('checked_at')->nullable();
@@ -56,8 +74,8 @@ class CreateOrdersTable extends Migration
 
             $table->foreign('company_id')->references('id')->on('companies');
             $table->foreign('currency_id')->references('id')->on('currencies');
-            $table->foreign('matizador_id')->references('id')->on('employees');
-            $table->foreign('pintor_id')->references('id')->on('employees');
+            //$table->foreign('matizador_id')->references('id')->on('employees');
+            //$table->foreign('pintor_id')->references('id')->on('employees');
             $table->timestamps();
             $table->softDeletes();
         });

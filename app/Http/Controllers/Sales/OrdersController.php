@@ -60,7 +60,10 @@ class OrdersController extends Controller {
 		$payment_conditions = $this->paymentConditionRepo->getList();
 		$currencies = $this->currencyRepo->getList('symbol');
 		$sellers = $this->employeeRepo->getListSellers();
-		return view('partials.create', compact('payment_conditions', 'currencies', 'sellers', 'my_companies'));
+		$warehouses = [];
+		$painters = [];
+		$tints = [];
+		return view('partials.create', compact('payment_conditions', 'currencies', 'sellers', 'my_companies', 'warehouses', 'painters', 'tints'));
 	}
 
 	public function store()
