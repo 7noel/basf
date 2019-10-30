@@ -83,7 +83,7 @@
 						{!! Form::label('user','Usuario', ['class'=>'col-sm-2 control-label']) !!}
 						<div class="col-sm-8">
 							{!! Form::hidden('user_id', null, ['id'=>'user_id']) !!}
-							{!! Form::text('user', ((isset($model->user_id)) ? $model->user->email.' '.$model->user->name : null), ['class'=>'form-control', 'id'=>'txtuser', 'required']) !!}
+							{!! Form::text('user', ((isset($model) and $model->user_id>0) ? $model->user->email.' '.$model->user->name : null), ['class'=>'form-control', 'id'=>'txtuser', 'required']) !!}
 						</div>
 					</div>
 					<div class="form-group form-group-sm">

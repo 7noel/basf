@@ -34,9 +34,27 @@ class EmployeeRepo extends BaseRepo{
 		
 		return $data;
 	}
-	public function getListSellers()
+	public function getListPainters($warehouse_id=0)
 	{
-		return [""=>"Seleccionar"] + Employee::where('job_id', 8)->orWhere('id',3)->orWhere('id',1)->pluck('full_name', 'id')->toArray();
+		if (\Auth::user()->employee->job_id==3) {
+			return [\Auth::user()->employee->id => \Auth::user()->employee->full_name];
+		} elseif ($warehouse_id==0) {
+			return [""=>"Seleccionar"];
+		} else {
+			return [""=>"Seleccionar"] + Employee::where('job_id', 3)->whereHas('warehouses', function($q) use ($warehouse_id){$q->where('warehouse_id', $warehouse_id);})->pluck('full_name', 'id')->toArray();
+		}
+		
+	}
+	public function getListTints($warehouse_id=0)
+	{
+		if (\Auth::user()->employee->job_id==2) {
+			return [\Auth::user()->employee->id => \Auth::user()->employee->full_name];
+		} elseif ($warehouse_id==0) {
+			return [""=>"Seleccionar"];
+		} else {
+			return [""=>"Seleccionar"] + Employee::where('job_id', 2)->whereHas('warehouses', function($q) use ($warehouse_id){$q->where('warehouse_id', $warehouse_id);})->pluck('full_name', 'id')->toArray();
+		}
+		
 	}
 	public function toWarehouses($company_id)
 	{

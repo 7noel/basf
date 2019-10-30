@@ -10,6 +10,9 @@ use App\Modules\Finances\PaymentConditionRepo;
 use App\Modules\Finances\CompanyRepo;
 use App\Modules\Base\CurrencyRepo;
 use App\Modules\HumanResources\EmployeeRepo;
+use App\Modules\Logistics\BrandRepo;
+use App\Modules\Logistics\ModeloRepo;
+use App\Modules\Storage\WarehouseRepo;
 
 class OrdersController extends Controller {
 
@@ -18,13 +21,19 @@ class OrdersController extends Controller {
 	protected $currencyRepo;
 	protected $employeeRepo;
 	protected $companyRepo;
+	protected $brandRepo;
+	protected $modeloRepo;
+	protected $warehouseRepo;
 
-	public function __construct(EmployeeRepo $employeeRepo, OrderRepo $repo, PaymentConditionRepo $paymentConditionRepo, CurrencyRepo $currencyRepo, CompanyRepo $companyRepo) {
+	public function __construct(EmployeeRepo $employeeRepo, OrderRepo $repo, PaymentConditionRepo $paymentConditionRepo, CurrencyRepo $currencyRepo, CompanyRepo $companyRepo, BrandRepo $brandRepo, ModeloRepo $modeloRepo, WarehouseRepo $warehouseRepo) {
 		$this->repo = $repo;
 		$this->paymentConditionRepo = $paymentConditionRepo;
 		$this->currencyRepo = $currencyRepo;
 		$this->employeeRepo = $employeeRepo;
 		$this->companyRepo = $companyRepo;
+		$this->brandRepo = $brandRepo;
+		$this->modeloRepo = $modeloRepo;
+		$this->warehouseRepo = $warehouseRepo;
 	}
 	public function filter()
 	{
@@ -37,16 +46,16 @@ class OrdersController extends Controller {
 		$filter = (object) \Request::all();
 		if( !((array) $filter) ) {
 			$filter->sn = '';
-			$filter->seller_id = '';
+			$filter->painter_id = '';
 			$filter->status = '';
 			$filter->f1 = date('Y-m-d');
 			$filter->f2 = date('Y-m-d');
 		}
 		$models = $this->repo->filter($filter, $order_type);
 
-		$sellers = $this->employeeRepo->getListSellers();
+		$painters = $this->employeeRepo->getListPainters();
 		$payment_conditions = $this->paymentConditionRepo->getList();
-		return view('partials.filter',compact('models', 'filter', 'sellers'));
+		return view('partials.filter',compact('models', 'filter', 'painters'));
 	}
 	public function index()
 	{
@@ -59,11 +68,14 @@ class OrdersController extends Controller {
 		$my_companies = $this->companyRepo->getListMyCompany();
 		$payment_conditions = $this->paymentConditionRepo->getList();
 		$currencies = $this->currencyRepo->getList('symbol');
-		$sellers = $this->employeeRepo->getListSellers();
-		$warehouses = [];
-		$painters = [];
-		$tints = [];
-		return view('partials.create', compact('payment_conditions', 'currencies', 'sellers', 'my_companies', 'warehouses', 'painters', 'tints'));
+		$warehouses = $this->warehouseRepo->getList();
+		$painters = $this->employeeRepo->getListPainters(array_keys($warehouses)[0]);
+		//dd($painters);
+		$tints = $this->employeeRepo->getListTints(array_keys($warehouses)[0]);
+		$brands = $this->brandRepo->getList();
+		// $modelos = ['Seleccionar'];
+		$modelos = $this->modeloRepo->getListGroup('brand');
+		return view('partials.create', compact('payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos'));
 	}
 
 	public function store()
@@ -84,9 +96,12 @@ class OrdersController extends Controller {
 		$my_companies = $this->companyRepo->getListMyCompany();
 		$payment_conditions = $this->paymentConditionRepo->getList();
 		$currencies = $this->currencyRepo->getList('symbol');
-		$sellers = $this->employeeRepo->getListSellers();
-		$details = [];
-		return view('partials.edit', compact('model', 'payment_conditions', 'currencies', 'sellers', 'my_companies'));
+		$warehouses = $this->warehouseRepo->getList();
+		$painters = $this->employeeRepo->getListPainters($model->warehouse_id);
+		$tints = $this->employeeRepo->getListTints($model->warehouse_id);
+		$brands = $this->brandRepo->getList();
+		$modelos = $this->brandRepo->getListByBrand($model->brand_id);
+		return view('partials.edit', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos'));
 	}
 
 	public function update($id)

@@ -34,10 +34,11 @@ Route::group(['middleware' => ['web']], function() {
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('employeesByWarehouse/{warehouse_id}', ['as' => 'employeesByWarehouse', 'uses' => 'HumanResources\EmployeesController@employeesByWarehouse']);
 Route::group(['middleware'=>['auth']], function(){
 	Route::get('api/ubigeos/autocompleteAjax', ['as' => 'ubigeosAutocomplete', 'uses' => 'Admin\UbigeosController@autocompleteAjax']);
 	//Obtener provincas y distritos x ajax
-	Route::get('listarProvincias/{departamento}', ['as' => 'ajaxprovincias', 'uses' => 'Admin\UbigeosController@ajaxProvincias']);
+	//Route::get('listarProvincias/{departamento}', ['as' => 'ajaxprovincias', 'uses' => 'Admin\UbigeosController@ajaxProvincias']);
 	Route::get('listarDistritos/{departamento}/{provincia}', ['as' => 'ajaxdistritos','uses' => 'Admin\UbigeosController@ajaxDistritos']);
 	Route::get('getDataUbigeo/{code}', ['as' => 'ajaxGetDataUbigeo','uses' => 'Admin\UbigeosController@ajaxGetDataUbigeo']);
 	Route::get('listUnits/{unit_type_id}', ['as' => 'ajaxUnits','uses' => 'Storage\UnitsController@ajaxList']);
@@ -135,6 +136,7 @@ Route::group(['prefix'=>'logistics', 'middleware'=>['auth', 'permissions'], 'nam
 	Route::resource('purchases','PurchasesController');
 	Route::get('purchases/createByCompany/{company_id}', ['as' => 'create_purchase_by_company','uses' => 'PurchasesController@createByCompany']);
 	Route::resource('brands','BrandsController');
+	Route::resource('modelos','ModelosController');
 });
 
 Route::get('enviar', ['as' => 'enviar', function () {

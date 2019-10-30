@@ -162,8 +162,8 @@ class OrderRepo extends BaseRepo{
 			return Order::where('sn', $filter->sn)->get();
 		} else {
 			$q->where('created_at', '>=', $filter->f1)->where('created_at', '<=', $filter->f2.' 24:00:00');
-			if($filter->seller_id > 0) {
-				$q->where('seller_id', $filter->seller_id);
+			if($filter->painter_id > 0) {
+				$q->where('painter_id', $filter->painter_id);
 			}
 			if($filter->status > 0) {
 				$q->where('status', $filter->status);

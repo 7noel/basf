@@ -60,7 +60,7 @@ class EmployeesController extends Controller {
 		$jobs = $this->jobRepo->getList();
 		$id_types = $this->idTypeRepo->getList2('symbol');
 		$ubigeo = $this->ubigeoRepo->listUbigeo($model->ubigeo_id);
-		$companies = $this->companyRepo->getList();
+		$companies = $this->companyRepo->getList('company_name');
 		return view('partials.edit', compact('model', 'jobs', 'id_types', 'ubigeo', 'companies'));
 	}
 
@@ -90,6 +90,11 @@ class EmployeesController extends Controller {
 			];
 		}
 		return \Response::json($result);
+	}
+
+	public function employeesByWarehouse($warehouse_id)
+	{
+		return \Response::json($this->repo->getList('full_name'));
 	}
 
 }

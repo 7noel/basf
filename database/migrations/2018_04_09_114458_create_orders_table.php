@@ -30,7 +30,7 @@ class CreateOrdersTable extends Migration
             $table->string('oc');
             $table->string('ot');
             $table->integer('brand_id')->unsigned();
-            $table->integer('model_id')->unsigned();
+            $table->integer('modelo_id')->unsigned();
             $table->integer('pintor_id')->unsigned();
             $table->integer('matizador_id')->unsigned();
             $table->string('color_code');
@@ -46,7 +46,6 @@ class CreateOrdersTable extends Migration
             $table->decimal('meta_soles_indirectos', 12, 4);
             $table->decimal('real_gr_pintura', 12, 4);
             $table->decimal('real_soles_pintura', 12, 4);
-            $table->decimal('real_soles_directos', 12, 4);
             $table->decimal('real_soles_directos', 12, 4);
             $table->decimal('real_soles_indirectos', 12, 4);
             $table->decimal('ahorro_pintura', 12, 4);

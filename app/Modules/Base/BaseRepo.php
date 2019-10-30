@@ -36,17 +36,22 @@ abstract class BaseRepo{
 
 	public function getList($name='name', $id='id')
 	{
-		return $list = [""=>'Seleccionar'] + $this->model->pluck($name, $id)->toArray();
+		$list = $this->model->pluck($name, $id)->toArray();
+		if (count($list)==1) {
+			return $list;
+		}
+		return [''=>'Seleccionar'] + $list;
 	}
 	public function getListGroup($group, $name='name', $id='id')
 	{
+		$r = [];
 		foreach ($this->model->with($group)->get() as $key => $u) {
 			$r[$u->$group->name][$u->$id] = $u->$name;
 		}
-		if (isset($r)) {
-			return [''=>'Seleccionar'] + $r;
+		if (count($r)==1) {
+			return $r;
 		} else {
-			return [''=>'Seleccionar'];
+			return [''=>'Seleccionar'] + $r;
 		}
 		
 	}

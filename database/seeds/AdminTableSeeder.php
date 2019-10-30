@@ -19,10 +19,10 @@ use App\Modules\Storage\Stock;
 use App\Modules\Storage\ProductAccessory;
 use App\Modules\Storage\Warehouse;
 use App\Modules\Logistics\Brand;
+use App\Modules\Logistics\Modelo;
 use App\Modules\Base\DocumentType;
 use App\Modules\Base\DocumentControl;
 use App\Modules\Finances\PaymentCondition;
-use App\Modules\Sales\Modelo;
 use App\Modules\HumanResources\Job;
 use App\Modules\HumanResources\Employee;
 use App\Modules\Finances\Bank;
@@ -36,6 +36,52 @@ class AdminTableSeeder extends Seeder {
         $faker = Faker::create();
         User::create(['name' => 'Noel', 'email' => 'noel.logan@gmail.com', 'password' => '123', 'is_superuser' => true]);
         User::create(['name' => 'MAT_001', 'email' => 'matizador_001@gmail.com', 'password' => '123', 'is_superuser' => true]);
+        User::create(['name' => 'MAT_002', 'email' => 'matizador_002@gmail.com', 'password' => '123', 'is_superuser' => true]);
+        User::create(['name' => 'MAT_003', 'email' => 'matizador_003@gmail.com', 'password' => '123', 'is_superuser' => true]);
+        User::create(['name' => 'MAT_004', 'email' => 'matizador_004@gmail.com', 'password' => '123', 'is_superuser' => true]);
+        User::create(['name' => 'PIN_001', 'email' => 'pintor_001@gmail.com', 'password' => '123', 'is_superuser' => true]);
+        User::create(['name' => 'PIN_002', 'email' => 'pintor_002@gmail.com', 'password' => '123', 'is_superuser' => true]);
+        User::create(['name' => 'PIN_003', 'email' => 'pintor_003@gmail.com', 'password' => '123', 'is_superuser' => true]);
+        User::create(['name' => 'PIN_004', 'email' => 'pintor_004@gmail.com', 'password' => '123', 'is_superuser' => true]);
+
+        // MARCAS DE VEHICULOS
+        Brand::create(['name' => 'HONDA']);
+        Brand::create(['name' => 'CREVROLET']);
+
+        // MODELOS DE VEHICULOS
+        Modelo::create(['name' => 'FIT', 'brand_id' => 1]);
+        Modelo::create(['name' => 'CIVIC', 'brand_id' => 1]);
+        Modelo::create(['name' => 'ACCORD', 'brand_id' => 1]);
+        Modelo::create(['name' => 'LEGEND', 'brand_id' => 1]);
+        Modelo::create(['name' => 'WRV', 'brand_id' => 1]);
+        Modelo::create(['name' => 'HRV', 'brand_id' => 1]);
+        Modelo::create(['name' => 'CRV', 'brand_id' => 1]);
+        Modelo::create(['name' => 'PILOT', 'brand_id' => 1]);
+        Modelo::create(['name' => 'ODISSEY', 'brand_id' => 1]);
+        Modelo::create(['name' => 'RIDGELINE', 'brand_id' => 1]);
+        Modelo::create(['name' => 'SPARK', 'brand_id' => 2]);
+        Modelo::create(['name' => 'SAIL', 'brand_id' => 2]);
+        Modelo::create(['name' => 'SPIN', 'brand_id' => 2]);
+        Modelo::create(['name' => 'SONIC', 'brand_id' => 2]);
+        Modelo::create(['name' => 'AVEO', 'brand_id' => 2]);
+        Modelo::create(['name' => 'COBALT', 'brand_id' => 2]);
+        Modelo::create(['name' => 'CRUZE', 'brand_id' => 2]);
+        Modelo::create(['name' => 'MALIBÚ', 'brand_id' => 2]);
+        Modelo::create(['name' => 'TRACKER', 'brand_id' => 2]);
+        Modelo::create(['name' => 'CAPTIVA', 'brand_id' => 2]);
+        Modelo::create(['name' => 'TRAVERSE', 'brand_id' => 2]);
+        Modelo::create(['name' => 'TAHOE', 'brand_id' => 2]);
+        Modelo::create(['name' => 'SUBURBAN', 'brand_id' => 2]);
+        Modelo::create(['name' => 'COLORADO', 'brand_id' => 2]);
+        Modelo::create(['name' => 'PRISMA', 'brand_id' => 2]);
+        Modelo::create(['name' => 'EQUINOX', 'brand_id' => 2]);
+        Modelo::create(['name' => 'ONIX', 'brand_id' => 2]);
+        Modelo::create(['name' => 'ORLANDO', 'brand_id' => 2]);
+        Modelo::create(['name' => 'N300 MAX', 'brand_id' => 2]);
+        Modelo::create(['name' => 'N300 MOVE', 'brand_id' => 2]);
+        Modelo::create(['name' => 'N300 CARGO', 'brand_id' => 2]);
+        Modelo::create(['name' => 'N300 WORK', 'brand_id' => 2]);
+        Modelo::create(['name' => 'TRAILBLAZER', 'brand_id' => 2]);
 
         Role::create(['name' => 'ADMINISTRADOR DE SISTEMA']);
         Role::create(['name' => 'MATIZADOR']);
@@ -71,14 +117,14 @@ class AdminTableSeeder extends Seeder {
         Job::create(['name' => 'PINTOR']);
 
         Employee::create(['name' => 'NOEL', 'paternal_surname'=>'HUILLCA', 'maternal_surname'=>'HUAMANI', 'full_name'=>'HUILLCA HUAMANI NOEL', 'id_type_id'=>'2', 'doc'=>'44243484', 'job_id'=>'1', 'gender'=>'0', 'address'=>'JR. LAS GROSELLAS 910', 'ubigeo_id'=>'1306', 'user_id'=>'1', 'email_company' => '']);
-        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000001', 'job_id'=>'2', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'1', 'email_company' => '', 'company_id' => 1]);
-        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000002', 'job_id'=>'2', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'0', 'email_company' => '', 'company_id' => 2]);
-        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000003', 'job_id'=>'2', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'0', 'email_company' => '', 'company_id' => 3]);
-        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000004', 'job_id'=>'2', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'0', 'email_company' => '', 'company_id' => 4]);
-        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000005', 'job_id'=>'3', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'0', 'email_company' => '', 'company_id' => 5]);
-        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000006', 'job_id'=>'3', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'0', 'email_company' => '', 'company_id' => 6]);
-        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000007', 'job_id'=>'3', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'0', 'email_company' => '', 'company_id' => 7]);
-        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000008', 'job_id'=>'3', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'0', 'email_company' => '', 'company_id' => 8]);
+        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000001', 'job_id'=>'2', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'2', 'email_company' => '', 'company_id' => 1]);
+        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000002', 'job_id'=>'2', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'3', 'email_company' => '', 'company_id' => 2]);
+        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000003', 'job_id'=>'2', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'4', 'email_company' => '', 'company_id' => 3]);
+        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000004', 'job_id'=>'2', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'5', 'email_company' => '', 'company_id' => 4]);
+        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000005', 'job_id'=>'3', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'6', 'email_company' => '', 'company_id' => 5]);
+        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000006', 'job_id'=>'3', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'7', 'email_company' => '', 'company_id' => 6]);
+        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000007', 'job_id'=>'3', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'8', 'email_company' => '', 'company_id' => 7]);
+        Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000008', 'job_id'=>'3', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'9', 'email_company' => '', 'company_id' => 8]);
 
 
         Company::create(['company_name'=>'basf', 'id_type_id'=>'1', 'doc'=>'20000000001', 'address'=> strtoupper($faker->address), 'ubigeo_id'=>'1307', 'country_id' => 1465, 'is_my_company'=>1]);
@@ -346,16 +392,16 @@ class AdminTableSeeder extends Seeder {
         // SubCategory::create(['name' => 'SEGURIDAD INDUSTRIAL Y PROTECCION PERSONAL', 'category_id' => 1]);
 
 
-        Brand::create(['name' => 'ADVANCED', 'is_car' => '0']);
-        Brand::create(['name' => 'EUROCOLUMBUS', 'is_car' => '0']);
-        Brand::create(['name' => 'FAMED LODZ', 'is_car' => '0']);
-        Brand::create(['name' => 'FAMED ZYWIEC', 'is_car' => '0']);
-        Brand::create(['name' => 'GMM', 'is_car' => '0']);
-        Brand::create(['name' => 'HERSILL', 'is_car' => '0']);
-        Brand::create(['name' => 'NEUMOVENT', 'is_car' => '0']);
-        Brand::create(['name' => 'PROHS', 'is_car' => '0']);
-        Brand::create(['name' => 'TSE', 'is_car' => '0']);
-        Brand::create(['name' => 'ZOLL', 'is_car' => '0']);
+        // Brand::create(['name' => 'ADVANCED', 'is_car' => '0']);
+        // Brand::create(['name' => 'EUROCOLUMBUS', 'is_car' => '0']);
+        // Brand::create(['name' => 'FAMED LODZ', 'is_car' => '0']);
+        // Brand::create(['name' => 'FAMED ZYWIEC', 'is_car' => '0']);
+        // Brand::create(['name' => 'GMM', 'is_car' => '0']);
+        // Brand::create(['name' => 'HERSILL', 'is_car' => '0']);
+        // Brand::create(['name' => 'NEUMOVENT', 'is_car' => '0']);
+        // Brand::create(['name' => 'PROHS', 'is_car' => '0']);
+        // Brand::create(['name' => 'TSE', 'is_car' => '0']);
+        // Brand::create(['name' => 'ZOLL', 'is_car' => '0']);
 
 
     }

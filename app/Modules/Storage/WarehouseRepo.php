@@ -35,10 +35,18 @@ class WarehouseRepo extends BaseRepo{
 	}
 	public function getList($name='name', $id='id')
 	{
-		return $this->model->pluck($name, $id)->toArray();
+		$ws = (\Auth::user()->is_superuser) ? Warehouse::with('company')->get() : \Auth::user()->employee->warehouses;
+		$r = [];
+		foreach ($ws as $key => $u) {
+			$r[$u->company->company_name][$u->$id] = $u->$name;
+		}
+		if (count($ws)==1) {
+			return $r;
+		}
+		return [''=>'Seleccionar'] + $r;		
 	}
 	
-	public function getListGroup($group = 'company', $name='name', $id='id')
+	public function getListGroup2($group = 'company', $name='name', $id='id')
 	{
 		foreach (Warehouse::with('company.provider')->get() as $key => $u) {
 			$r[$u->company->provider->company_name][$u->$id] = $u->company->company_name.' | '.$u->$name;

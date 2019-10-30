@@ -10,9 +10,9 @@
 						</div>
 
 						<div class="form-group form-group-sm">
-							{!! Form::label('seller_id','Vendedor', ['class'=>'col-sm-2 control-label']) !!}
+							{!! Form::label('painter_id','Pintor', ['class'=>'col-sm-2 control-label']) !!}
 							<div class="col-sm-2">
-							{!! Form::select('seller_id', $sellers, null, ['class'=>'form-control', 'id'=>'seller_id']); !!}
+							{!! Form::select('painter_id', $painters, null, ['class'=>'form-control', 'id'=>'seller_id']); !!}
 							</div>
 							{!! Form::label('status','Status', ['class'=>'col-sm-1 control-label']) !!}
 							<div class="col-sm-2">
