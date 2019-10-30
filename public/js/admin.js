@@ -60,15 +60,16 @@ $(document).ready(function () {
 	// 	cadena = cadena.toUpperCase();
 	// 	$(this).val(cadena);
 	// });
- 
+
 	//carga almacenes
 	$('#warehouse_id').change(function(){
 		cargaEmpleados();
-		var depa=$('#warehouse_id').val();
-		if (depa==='') {
-			$('#pintor_id').html("");
-			$('#matizador_id').html("");
+		var w=$('#warehouse_id').val();
+		if (w==='') {
+			$('#painter_id').html("");
+			$('#tint_id').html("");
 		}
+		cargaDistribuidor();
 	});
 
 	//carga departamentos
@@ -209,24 +210,37 @@ $(document).ready(function () {
 	$('#date2').datepicker({ format: "dd/mm/yyyy", language: 'es', autoclose: true });
 	$('#birth2').datepicker({ format: "dd/mm/yyyy", language: 'es', autoclose: true });
 });
-
+/*carga distribuidor*/
+function cargaDistribuidor() {
+	var warehouse_id = $('#warehouse_id option:selected').val();
+	var page ="/distribuidorByWarehouse/" + warehouse_id;
+	if(warehouse_id !== ''){
+		$.get(page, function(data){
+			console.log(data);
+		});
+	}
+	
+}
 /*carga pintores y matizadores*/
 function cargaEmpleados() {
 	var warehouse_id = $('#warehouse_id option:selected').val();
 	var page ="/employeesByWarehouse/" + warehouse_id;
+	var $i=0, $j=0
 	if(warehouse_id !== ''){
 		$.get(page, function(data){
 			$('#painter_id').empty();
 			$('#tint_id').empty();
-			$('#painter_id').append("<option value=''>Seleccionar</option>");
-			$('#tint_id').append("<option value=''>Seleccionar</option>");
 			$.each(data, function (index, Obj) {
 				if (Obj.job_id==3) {
+					$i++;
 					$('#painter_id').append("<option value='"+Obj.id+"'>"+Obj.full_name+"</option>");
 				} else if (Obj.job_id==2) {
+					$j++;
 					$('#tint_id').append("<option value='"+Obj.id+"'>"+Obj.full_name+"</option>");
 				}
 			});
+			if ($i==1) {$('#painter_id').prepend("<option value=''>Seleccionar</option>");}
+			if ($j==1) {$('#tint_id').prepend("<option value=''>Seleccionar</option>");}
 		});
 	}
 }

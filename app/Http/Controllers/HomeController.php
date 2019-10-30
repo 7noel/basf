@@ -37,6 +37,7 @@ class HomeController extends Controller
     }
     public function beta()
     {
+        dd('sdsdsdsd');
         /*
         $fam = [
             "AUTOMOTRIZ"=>1,

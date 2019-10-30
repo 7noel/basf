@@ -69,13 +69,13 @@ class OrdersController extends Controller {
 		$payment_conditions = $this->paymentConditionRepo->getList();
 		$currencies = $this->currencyRepo->getList('symbol');
 		$warehouses = $this->warehouseRepo->getList();
+		$w = (array_keys($warehouses)[0]=='') ? '' : $this->warehouseRepo->find(array_keys($warehouses[array_keys($warehouses)[0]])[0])->company->provider->id;
 		$painters = $this->employeeRepo->getListPainters(array_keys($warehouses)[0]);
-		//dd($painters);
 		$tints = $this->employeeRepo->getListTints(array_keys($warehouses)[0]);
 		$brands = $this->brandRepo->getList();
 		// $modelos = ['Seleccionar'];
 		$modelos = $this->modeloRepo->getListGroup('brand');
-		return view('partials.create', compact('payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos'));
+		return view('partials.create', compact('payment_conditions', 'currencies', 'my_companies', 'warehouses', 'w', 'painters', 'tints', 'brands', 'modelos'));
 	}
 
 	public function store()
@@ -153,5 +153,20 @@ class OrdersController extends Controller {
 		$sellers = $this->employeeRepo->getListSellers();
 		$company = $this->companyRepo->findOrFail($company_id);
 		return view('partials.create', compact('payment_conditions', 'currencies', 'sellers', 'company'));
+	}
+	public function createByQuote($quote_id)
+	{
+		$model = $this->repo->findOrFail($id);
+		$my_companies = $this->companyRepo->getListMyCompany();
+		$payment_conditions = $this->paymentConditionRepo->getList();
+		$currencies = $this->currencyRepo->getList('symbol');
+		$warehouses = $this->warehouseRepo->getList();
+		dd($warehouses);
+		// $w = (count($warehouses)) ? a : b ;
+		$painters = $this->employeeRepo->getListPainters($model->warehouse_id);
+		$tints = $this->employeeRepo->getListTints($model->warehouse_id);
+		$brands = $this->brandRepo->getList();
+		$modelos = $this->brandRepo->getListByBrand($model->brand_id);
+		return view('partials.edit', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos'));
 	}
 }

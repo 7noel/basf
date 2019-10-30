@@ -11,6 +11,11 @@ use App\Modules\Sales\Order;
 |
 */
 
+Route::get('/testa', function() {
+	dd('nooooo');
+	// Session::put('progress', '54%');
+	dd(Session::get('progress'));
+});
 Route::get('/', 'HomeController@index');
 Route::get('beta', 'HomeController@beta');
 // Auth::routes();
@@ -34,8 +39,9 @@ Route::group(['middleware' => ['web']], function() {
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('employeesByWarehouse/{warehouse_id}', ['as' => 'employeesByWarehouse', 'uses' => 'HumanResources\EmployeesController@employeesByWarehouse']);
 Route::group(['middleware'=>['auth']], function(){
+	Route::get('employeesByWarehouse/{warehouse_id}', ['as' => 'employeesByWarehouse', 'uses' => 'HumanResources\EmployeesController@employeesByWarehouse']);
+	Route::get('distribuidorByWarehouse/{warehouse_id}', ['as' => 'distribuidorByWarehouse', 'uses' => 'Storage\WarehousesController@distribuidorByWarehouse']);
 	Route::get('api/ubigeos/autocompleteAjax', ['as' => 'ubigeosAutocomplete', 'uses' => 'Admin\UbigeosController@autocompleteAjax']);
 	//Obtener provincas y distritos x ajax
 	//Route::get('listarProvincias/{departamento}', ['as' => 'ajaxprovincias', 'uses' => 'Admin\UbigeosController@ajaxProvincias']);
@@ -130,6 +136,7 @@ Route::group(['prefix'=>'sales', 'middleware'=>['auth', 'permissions'], 'namespa
 	Route::resource('orders','OrdersController');
 	Route::get('orders/print/{id}', ['as' => 'print_order','uses' => 'OrdersController@print']);
 	Route::get('orders/createByCompany/{company_id}', ['as' => 'create_order_by_company','uses' => 'OrdersController@createByCompany']);
+	Route::get('orders/createByQuote/{quote_id}', ['as' => 'create_order_by_quote','uses' => 'OrdersController@createByQuote']);
 });
 
 Route::group(['prefix'=>'logistics', 'middleware'=>['auth', 'permissions'], 'namespace'=>'Logistics'], function(){
@@ -138,7 +145,7 @@ Route::group(['prefix'=>'logistics', 'middleware'=>['auth', 'permissions'], 'nam
 	Route::resource('brands','BrandsController');
 	Route::resource('modelos','ModelosController');
 });
-
+/*
 Route::get('enviar', ['as' => 'enviar', function () {
 	//obtener modelo
 	$model = Order::findOrFail(1);
@@ -156,8 +163,4 @@ Route::get('enviar', ['as' => 'enviar', function () {
 
     return "Se envío el email";
 }]);
-
-Route::get('test', function() {
-	// Session::put('progress', '54%');
-	dd(Session::get('progress'));
-});
+*/

@@ -15,8 +15,8 @@
 							<td>{{ $model->status }}</td>
 							<td>{{ $model->currency->symbol." ".$model->total}} </td>
 							<td>
-								@if($model->proof_id == 0)
-								<a href="{{ route('issuance_vouchers.by_order', $model->id) }}" target="_blank" class="btn btn-default btn-xs" title="Generar Comnprobante">{!! config('options.icons.invoice') !!}</a>
+								@if(0 == 0)
+								<a href="{{ route('create_order_by_quote', $model->id) }}" target="_blank" class="btn btn-default btn-xs" title="Generar Despacho">{!! config('options.icons.invoice') !!}</a>
 								@endif
 								@if($model->checked_at)
 								<a href="{{ route( 'print_order' , $model->id ) }}" target="_blank" class="btn btn-success btn-xs" title="Imprimir">{!! config('options.icons.printer') !!} </a>

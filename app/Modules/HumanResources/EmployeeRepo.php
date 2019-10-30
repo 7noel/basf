@@ -56,6 +56,10 @@ class EmployeeRepo extends BaseRepo{
 		}
 		
 	}
+	public function getByWarehouse($warehouse_id)
+	{
+		return Employee::select('id', 'full_name', 'job_id')->whereHas('warehouses', function($q) use ($warehouse_id){$q->where('warehouse_id', $warehouse_id);})->get();
+	}
 	public function toWarehouses($company_id)
 	{
 		//dd($company_id);

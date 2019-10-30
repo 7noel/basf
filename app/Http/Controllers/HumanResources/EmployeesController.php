@@ -94,7 +94,7 @@ class EmployeesController extends Controller {
 
 	public function employeesByWarehouse($warehouse_id)
 	{
-		return \Response::json($this->repo->getList('full_name'));
+		return \Response::json($this->repo->getByWarehouse($warehouse_id));
 	}
 
 }

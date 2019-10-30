@@ -58,4 +58,8 @@ class WarehouseRepo extends BaseRepo{
 		}
 		
 	}
+	public function getDistribuidor($id)
+	{
+		return \Response::json(Warehouse::find($id)->company->provider);
+	}
 }

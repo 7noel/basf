@@ -31,8 +31,8 @@ class CreateOrdersTable extends Migration
             $table->string('ot');
             $table->integer('brand_id')->unsigned();
             $table->integer('modelo_id')->unsigned();
-            $table->integer('pintor_id')->unsigned();
-            $table->integer('matizador_id')->unsigned();
+            $table->integer('painter_id')->unsigned();
+            $table->integer('tint_id')->unsigned();
             $table->string('color_code');
             $table->string('color_code2');
             $table->decimal('quantity', 12, 2);

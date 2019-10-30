@@ -2,6 +2,7 @@
 					{!! Form::hidden('currency_id', 1, ['id'=>'currency_id']) !!}
 					{!! Form::hidden('order_type', 2) !!}
 					{!! Form::hidden('my_company', session('my_company')->id) !!}
+					{!! Form::hidden('company_id', isset($model) ? $model->company_id : $w) !!}
 					<div class="form-group form-group-sm">
 						<div class="col-sm-2">
 							{!! Form::label('sn','Nro Seguimiento', ['class'=>'control-label']) !!}
