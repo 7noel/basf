@@ -41,7 +41,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware'=>['auth']], function(){
 	Route::get('employeesByWarehouse/{warehouse_id}', ['as' => 'employeesByWarehouse', 'uses' => 'HumanResources\EmployeesController@employeesByWarehouse']);
-	Route::get('distribuidorByWarehouse/{warehouse_id}', ['as' => 'distribuidorByWarehouse', 'uses' => 'Storage\WarehousesController@distribuidorByWarehouse']);
+	Route::get('distribuidorByWarehouse/{warehouse_id}', ['as' => 'distribuidorByWarehouse', 'uses' => 'Storage\WarehousesController@getWarehouse']);
 	Route::get('api/ubigeos/autocompleteAjax', ['as' => 'ubigeosAutocomplete', 'uses' => 'Admin\UbigeosController@autocompleteAjax']);
 	//Obtener provincas y distritos x ajax
 	//Route::get('listarProvincias/{departamento}', ['as' => 'ajaxprovincias', 'uses' => 'Admin\UbigeosController@ajaxProvincias']);

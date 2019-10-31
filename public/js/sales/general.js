@@ -47,6 +47,14 @@ $(document).ready(function(){
 					$('#document_type_id').val(2)
 				}
 			}
+			if (ui.item.provider_id == 0) {
+				$('#provider_id').val(ui.item.id);
+				$('#txtProvider').text(ui.item.value);
+			} else {
+				$('#provider_id').val(ui.item.provider.id);
+				$('#txtProvider').text(ui.item.provider.company_name);
+			}
+
 		}
 	});
 	$(document).on('click', '.btn-delete-item', function (e) {

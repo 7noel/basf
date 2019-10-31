@@ -58,8 +58,8 @@ class WarehouseRepo extends BaseRepo{
 		}
 		
 	}
-	public function getDistribuidor($id)
+	public function getDistribuidorAjax($id)
 	{
-		return \Response::json(Warehouse::find($id)->company->provider);
+		return \Response::json(Warehouse::find($id));
 	}
 }

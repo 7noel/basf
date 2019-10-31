@@ -136,10 +136,10 @@ class AdminTableSeeder extends Seeder {
         Company::create(['company_name' => strtoupper($faker->company), 'id_type_id'=>'1', 'doc'=>'20000000007', 'address'=>strtoupper($faker->address), 'ubigeo_id'=>'1307', 'country_id' => 1465, 'is_client'=>1, 'provider_id' => 3]);
         Company::create(['company_name' => strtoupper($faker->company), 'id_type_id'=>'1', 'doc'=>'20000000008', 'address'=>strtoupper($faker->address), 'ubigeo_id'=>'1307', 'country_id' => 1465, 'is_client'=>1, 'provider_id' => 4]);
 
-        Warehouse::create(['company_id' => 5, 'name' => 'CAMACHO', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
-        Warehouse::create(['company_id' => 6, 'name' => 'CAMPOY', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
-        Warehouse::create(['company_id' => 7, 'name' => 'ZARATE', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
-        Warehouse::create(['company_id' => 8, 'name' => 'LINCE', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
+        Warehouse::create(['company_id' => 5, 'provider_id' => 2, 'name' => 'CAMACHO', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
+        Warehouse::create(['company_id' => 6, 'provider_id' => 2, 'name' => 'CAMPOY', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
+        Warehouse::create(['company_id' => 7, 'provider_id' => 3, 'name' => 'ZARATE', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
+        Warehouse::create(['company_id' => 8, 'provider_id' => 4, 'name' => 'LINCE', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
 
 
 
@@ -360,8 +360,9 @@ class AdminTableSeeder extends Seeder {
 
         Exchange::create(['date' => date('Y-m-d'), 'currency_id' => 1, 'sales' => 3, 'purchase' => 3]);
 
-        Category::create(['name' => 'PRODUCTO FINAL', 'code' => '01']);
-        Category::create(['name' => 'ACCESORIOS', 'code' => '01']);
+        Category::create(['name' => 'PINTURA', 'code' => '01']);
+        Category::create(['name' => 'DIRECTOS', 'code' => '01']);
+        Category::create(['name' => 'INDIRECTOS', 'code' => '01']);
         // Category::create(['name' => 'PRODUCTO TERMINADO', 'code' => '02']);
         // Category::create(['name' => 'MATERIA PRIMA', 'code' => '03']);
         // Category::create(['name' => 'ENVASES Y EMBALAJES', 'code' => '04']);

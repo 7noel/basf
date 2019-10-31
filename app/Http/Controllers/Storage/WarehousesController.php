@@ -78,8 +78,9 @@ class WarehousesController extends Controller {
 		$ajax = $this->repo->ajaxList();
 		return \Response::json($ajax);
 	}
-	public function getDistribuidor($id)
+	public function getWarehouse($warehouse_id)
 	{
-		return $this->repo->getDistribuidor($id);
+		//return $this->repo->getDistribuidorAjax($warehouse_id);
+		return \Response::json($this->repo->find($warehouse_id));
 	}
 }

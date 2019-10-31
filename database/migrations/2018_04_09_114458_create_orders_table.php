@@ -20,7 +20,8 @@ class CreateOrdersTable extends Migration
             $table->integer('order_type')->unsigned(); // typo de documento {1=>'despacho', 2=>'orden de compra'}
             $table->string('type_op'); // segun ello afecta el valor promedio
             $table->integer('my_company')->unsigned(); // xxxxxxxxxxxxxxx
-            $table->integer('company_id')->unsigned(); // distribuidor
+            $table->integer('company_id')->unsigned(); // taller
+            $table->integer('provider_id')->unsigned(); // distribuidor
             $table->integer('warehouse_id')->unsigned(); // almacen
             $table->integer('shipper_id')->unsigned();
             $table->integer('currency_id')->unsigned();

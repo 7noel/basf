@@ -121,7 +121,10 @@ class CompaniesController extends Controller {
 				'id' => $model->id,
 				'country_id' =>$model->country_id,
 				'id_type_id' =>$model->id_type_id,
-				'label' => $model->id_type->symbol.' '.$model->doc.' '.$model->company_name
+				'label' => $model->id_type->symbol.' '.$model->doc.' '.$model->company_name,
+				'is_provider' =>$model->is_provider,
+				'provider_id' =>$model->provider_id,
+				'provider' =>$model->provider,
 			];
 		}
 		return \Response::json($result);

@@ -1,5 +1,5 @@
 					<div class="form-group form-group-sm">
-						{!! Form::label('txtcompany','Empresa:', ['class'=>'col-sm-2 control-label']) !!}
+						{!! Form::label('txtcompany','Taller:', ['class'=>'col-sm-2 control-label']) !!}
 						<div class="col-sm-4">
 							@if(isset($company))
 								{!! Form::hidden('company_id', $company->id, ['id'=>'company_id']) !!}
@@ -8,6 +8,11 @@
 								{!! Form::hidden('company_id', null, ['id'=>'company_id']) !!}
 								{!! Form::text('company', ((isset($model->company_id)) ? $model->company->company_name : null), ['class'=>'form-control', 'id'=>'txtCompany', 'required']) !!}
 							@endif
+						</div>
+						{!! Form::label('provider_id','Distribuidor:', ['class'=>'col-sm-2 control-label']) !!}
+						<div class="col-sm-4">
+								{!! Form::hidden('provider_id', null, ['id'=>'provider_id']) !!}
+								<p class="form-control-static" id="txtProvider">{{ isset($model) ? $model->provider->company_name : '' }}</p>
 						</div>
 					</div>
 					<div class="form-group  form-group-sm">

@@ -69,7 +69,7 @@ $(document).ready(function () {
 			$('#painter_id').html("");
 			$('#tint_id').html("");
 		}
-		cargaDistribuidor();
+		cargaEmpresas();
 	});
 
 	//carga departamentos
@@ -210,13 +210,15 @@ $(document).ready(function () {
 	$('#date2').datepicker({ format: "dd/mm/yyyy", language: 'es', autoclose: true });
 	$('#birth2').datepicker({ format: "dd/mm/yyyy", language: 'es', autoclose: true });
 });
-/*carga distribuidor*/
-function cargaDistribuidor() {
+/*carga distribuidor y taller*/
+function cargaEmpresas() {
 	var warehouse_id = $('#warehouse_id option:selected').val();
 	var page ="/distribuidorByWarehouse/" + warehouse_id;
 	if(warehouse_id !== ''){
 		$.get(page, function(data){
 			console.log(data);
+			$('#company_id').val(data.company_id);
+			$('#provider_id').val(data.provider_id);
 		});
 	}
 	
@@ -239,8 +241,8 @@ function cargaEmpleados() {
 					$('#tint_id').append("<option value='"+Obj.id+"'>"+Obj.full_name+"</option>");
 				}
 			});
-			if ($i==1) {$('#painter_id').prepend("<option value=''>Seleccionar</option>");}
-			if ($j==1) {$('#tint_id').prepend("<option value=''>Seleccionar</option>");}
+			if ($i!=1) {$('#painter_id').prepend("<option value=''>Seleccionar</option>");}
+			if ($j!=1) {$('#tint_id').prepend("<option value=''>Seleccionar</option>");}
 		});
 	}
 }
