@@ -38,9 +38,9 @@ class OrdersController extends Controller {
 	public function filter()
 	{
 		if (explode('.', \Request::route()->getName())[0] == 'quotes') {
-			$order_type = 1;
-		} else {
 			$order_type = 2;
+		} else {
+			$order_type = 1;
 		}
 		
 		$filter = (object) \Request::all();
@@ -53,7 +53,7 @@ class OrdersController extends Controller {
 		}
 		$models = $this->repo->filter($filter, $order_type);
 
-		$painters = $this->employeeRepo->getListPainters();
+		$painters = $this->employeeRepo->getListByJobWarehouse(3);
 		$payment_conditions = $this->paymentConditionRepo->getList();
 		return view('partials.filter',compact('models', 'filter', 'painters'));
 	}
@@ -70,8 +70,8 @@ class OrdersController extends Controller {
 		$currencies = $this->currencyRepo->getList('symbol');
 		$warehouses = $this->warehouseRepo->getList();
 		$w = (array_keys($warehouses)[0]=='') ? '' : $this->warehouseRepo->find(array_keys($warehouses[array_keys($warehouses)[0]])[0])->company->provider->id;
-		$painters = $this->employeeRepo->getListPainters(array_keys($warehouses)[0]);
-		$tints = $this->employeeRepo->getListTints(array_keys($warehouses)[0]);
+		$painters = $this->employeeRepo->getListByJobWarehouse(3, array_keys($warehouses)[0]);
+		$tints = $this->employeeRepo->getListByJobWarehouse(2, array_keys($warehouses)[0]);
 		$brands = $this->brandRepo->getList();
 		// $modelos = ['Seleccionar'];
 		$modelos = $this->modeloRepo->getListGroup('brand');
@@ -97,10 +97,10 @@ class OrdersController extends Controller {
 		$payment_conditions = $this->paymentConditionRepo->getList();
 		$currencies = $this->currencyRepo->getList('symbol');
 		$warehouses = $this->warehouseRepo->getList();
-		$painters = $this->employeeRepo->getListPainters($model->warehouse_id);
-		$tints = $this->employeeRepo->getListTints($model->warehouse_id);
+		$painters = $this->employeeRepo->getListByJobWarehouse(3, $model->warehouse_id);
+		$tints = $this->employeeRepo->getListByJobWarehouse(2, $model->warehouse_id);
 		$brands = $this->brandRepo->getList();
-		$modelos = $this->brandRepo->getListByBrand($model->brand_id);
+		$modelos = $this->modeloRepo->getListGroup('brand');
 		return view('partials.edit', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos'));
 	}
 
@@ -156,17 +156,28 @@ class OrdersController extends Controller {
 	}
 	public function createByQuote($quote_id)
 	{
-		$model = $this->repo->findOrFail($id);
+		$model = $this->repo->findOrFail($quote_id);
 		$my_companies = $this->companyRepo->getListMyCompany();
 		$payment_conditions = $this->paymentConditionRepo->getList();
 		$currencies = $this->currencyRepo->getList('symbol');
 		$warehouses = $this->warehouseRepo->getList();
-		dd($warehouses);
-		// $w = (count($warehouses)) ? a : b ;
-		$painters = $this->employeeRepo->getListPainters($model->warehouse_id);
-		$tints = $this->employeeRepo->getListTints($model->warehouse_id);
+		$painters = $this->employeeRepo->getListByJobWarehouse(3, $model->warehouse_id);
+		$tints = $this->employeeRepo->getListByJobWarehouse(2, $model->warehouse_id);
 		$brands = $this->brandRepo->getList();
-		$modelos = $this->brandRepo->getListByBrand($model->brand_id);
-		return view('partials.edit', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos'));
+		$modelos = $this->modeloRepo->getListGroup('brand');
+		return view('partials.create', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos'));
+
+		// $model = $this->repo->findOrFail($id);
+		// $my_companies = $this->companyRepo->getListMyCompany();
+		// $payment_conditions = $this->paymentConditionRepo->getList();
+		// $currencies = $this->currencyRepo->getList('symbol');
+		// $warehouses = $this->warehouseRepo->getList();
+		// //dd($warehouses);
+		// // $w = (count($warehouses)) ? a : b ;
+		// $painters = $this->employeeRepo->getListPainters($model->warehouse_id);
+		// $tints = $this->employeeRepo->getListTints($model->warehouse_id);
+		// $brands = $this->brandRepo->getList();
+		// $modelos = $this->brandRepo->getListByBrand($model->brand_id);
+		// return view('partials.edit', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos'));
 	}
 }

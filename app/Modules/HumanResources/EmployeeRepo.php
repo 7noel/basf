@@ -37,12 +37,16 @@ class EmployeeRepo extends BaseRepo{
 	public function getListPainters($warehouse_id=0)
 	{
 		if (\Auth::user()->employee->job_id==3) {
-			return [\Auth::user()->employee->id => \Auth::user()->employee->full_name];
-		} elseif ($warehouse_id==0) {
-			return [""=>"Seleccionar"];
+			$r = [\Auth::user()->employee->id => \Auth::user()->employee->full_name];
 		} else {
-			return [""=>"Seleccionar"] + Employee::where('job_id', 3)->whereHas('warehouses', function($q) use ($warehouse_id){$q->where('warehouse_id', $warehouse_id);})->pluck('full_name', 'id')->toArray();
+			$r = Employee::where('job_id', 3)->whereHas('warehouses', function($q) use ($warehouse_id){$q->where('warehouse_id', $warehouse_id);})->pluck('full_name', 'id')->toArray();
 		}
+		if (count($r)==1) {
+			return $r;
+		} else {
+			return [""=>"Seleccionar"] + $r;
+		}
+		
 		
 	}
 	public function getListTints($warehouse_id=0)
@@ -54,6 +58,21 @@ class EmployeeRepo extends BaseRepo{
 		} else {
 			return [""=>"Seleccionar"] + Employee::where('job_id', 2)->whereHas('warehouses', function($q) use ($warehouse_id){$q->where('warehouse_id', $warehouse_id);})->pluck('full_name', 'id')->toArray();
 		}
+		
+	}
+	public function getListByJobWarehouse($job_id, $warehouse_id=0)
+	{
+		if (\Auth::user()->employee->job_id==$job_id) {
+			$r = [\Auth::user()->employee->id => \Auth::user()->employee->full_name];
+		} else {
+			$r = Employee::where('job_id', $job_id)->whereHas('warehouses', function($q) use ($warehouse_id){$q->where('warehouse_id', $warehouse_id);})->pluck('full_name', 'id')->toArray();
+		}
+		if (count($r)==1) {
+			return $r;
+		} else {
+			return [""=>"Seleccionar"] + $r;
+		}
+		
 		
 	}
 	public function getByWarehouse($warehouse_id)

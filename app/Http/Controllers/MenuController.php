@@ -32,10 +32,11 @@ class MenuController extends Controller
             return $arrayLinks;
         }
 
-        $permissions = $this->repo->allPermissions();
-
+        $permissions = $this->repo->allPermissions()->toArray();
+        //dd($permissions);
         foreach ($arrayLinks as $k => $module) {
             foreach ($module as $key => $link) {
+                //dd($link);
                 if (!isset($link['route'])) {
                     unset($arrayLinks[$k][$key]);
                 } else if (!in_array($link['route'], $permissions)) {
@@ -46,7 +47,7 @@ class MenuController extends Controller
                 unset($arrayLinks[$k]);
             }
         }
-
+        //dd($arrayLinks);
         return $arrayLinks;
 
     }
@@ -93,8 +94,8 @@ class MenuController extends Controller
                 // ['name' => 'Medios de Pago', 'route' => 'payment_conditions.index' ],
             ],
             'Ventas'=>[
-                ['name' => 'Ordenes de Compra', 'route' => 'quotes.filter2' ],
-                ['name' => 'Despachos', 'route' => 'orders.filter2' ],
+                ['name' => 'Ordenes de Compra', 'route' => 'quotes.filter' ],
+                ['name' => 'Despachos', 'route' => 'orders.filter' ],
                 // ['name' => 'Facturación', 'route' => 'issuance_vouchers.index' ],
                 // ['name' => 'Transportistas', 'route' => 'shippers.index' ],
             ],

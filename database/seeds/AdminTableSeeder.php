@@ -35,14 +35,23 @@ class AdminTableSeeder extends Seeder {
     {
         $faker = Faker::create();
         User::create(['name' => 'Noel', 'email' => 'noel.logan@gmail.com', 'password' => '123', 'is_superuser' => true]);
-        User::create(['name' => 'MAT_001', 'email' => 'matizador_001@gmail.com', 'password' => '123', 'is_superuser' => true]);
-        User::create(['name' => 'MAT_002', 'email' => 'matizador_002@gmail.com', 'password' => '123', 'is_superuser' => true]);
-        User::create(['name' => 'MAT_003', 'email' => 'matizador_003@gmail.com', 'password' => '123', 'is_superuser' => true]);
-        User::create(['name' => 'MAT_004', 'email' => 'matizador_004@gmail.com', 'password' => '123', 'is_superuser' => true]);
-        User::create(['name' => 'PIN_001', 'email' => 'pintor_001@gmail.com', 'password' => '123', 'is_superuser' => true]);
-        User::create(['name' => 'PIN_002', 'email' => 'pintor_002@gmail.com', 'password' => '123', 'is_superuser' => true]);
-        User::create(['name' => 'PIN_003', 'email' => 'pintor_003@gmail.com', 'password' => '123', 'is_superuser' => true]);
-        User::create(['name' => 'PIN_004', 'email' => 'pintor_004@gmail.com', 'password' => '123', 'is_superuser' => true]);
+        User::create(['name' => 'MAT_001', 'email' => 'matizador_001@gmail.com', 'password' => '123', 'is_superuser' => false]);
+        User::create(['name' => 'MAT_002', 'email' => 'matizador_002@gmail.com', 'password' => '123', 'is_superuser' => false]);
+        User::create(['name' => 'MAT_003', 'email' => 'matizador_003@gmail.com', 'password' => '123', 'is_superuser' => false]);
+        User::create(['name' => 'MAT_004', 'email' => 'matizador_004@gmail.com', 'password' => '123', 'is_superuser' => false]);
+        User::create(['name' => 'PIN_001', 'email' => 'pintor_001@gmail.com', 'password' => '123', 'is_superuser' => false]);
+        User::create(['name' => 'PIN_002', 'email' => 'pintor_002@gmail.com', 'password' => '123', 'is_superuser' => false]);
+        User::create(['name' => 'PIN_003', 'email' => 'pintor_003@gmail.com', 'password' => '123', 'is_superuser' => false]);
+        User::create(['name' => 'PIN_004', 'email' => 'pintor_004@gmail.com', 'password' => '123', 'is_superuser' => false]);
+
+        $r=Role::create(['name' => 'ADMINISTRADOR DE SISTEMA']);
+        $r->users()->sync([1]);
+        $r=Role::create(['name' => 'MATIZADOR']);
+        $r->users()->sync([2,3,4,5]);
+        $r=Role::create(['name' => 'PINTOR']);
+        $r->users()->sync([6,7,8,9]);
+        $r4=Role::create(['name' => 'ADMINISTRADOR']);
+
 
         // MARCAS DE VEHICULOS
         Brand::create(['name' => 'HONDA']);
@@ -83,27 +92,6 @@ class AdminTableSeeder extends Seeder {
         Modelo::create(['name' => 'N300 WORK', 'brand_id' => 2]);
         Modelo::create(['name' => 'TRAILBLAZER', 'brand_id' => 2]);
 
-        Role::create(['name' => 'ADMINISTRADOR DE SISTEMA']);
-        Role::create(['name' => 'MATIZADOR']);
-        Role::create(['name' => 'PINTOR']);
-        Role::create(['name' => 'ADMINISTRADOR']);
-
-        // UserRole::create(['user_id' => 1, 'role_id' => 1]);
-        // UserRole::create(['user_id' => 2, 'role_id' => 5]);
-        // UserRole::create(['user_id' => 3, 'role_id' => 6]);
-        // UserRole::create(['user_id' => 4, 'role_id' => 6]);
-        // UserRole::create(['user_id' => 5, 'role_id' => 6]);
-        // UserRole::create(['user_id' => 6, 'role_id' => 2]);
-        // UserRole::create(['user_id' => 7, 'role_id' => 6]);
-        // UserRole::create(['user_id' => 8, 'role_id' => 3]);
-        // UserRole::create(['user_id' => 9, 'role_id' => 7]);
-        //Role::create(['name' => 'JEFE DE ALMACEN']);
-        //Role::create(['name' => 'ASISTENTE DE ALMACEN']);
-        //Role::create(['name' => 'JEFE DE COMPRAS']);
-        //Role::create(['name' => 'ASISTENTE DE ADV']);
-        //Role::create(['name' => 'JEFE DE VENTAS']);
-        //Role::create(['name' => 'RECEPCIONISTA']);
-
         IdType::create(['name' => 'REGISTRO UNICO DE CONTRIBUYENTE', 'symbol' => 'RUC', 'code' => '6']);
         IdType::create(['name' => 'DOCUMENTO NACIONAL DE IDENTIDAD', 'symbol' => 'DNI', 'code' => '1']);
         IdType::create(['name' => 'CARNET DE EXTRANJERÍA', 'symbol' => 'CEX', 'code' => '4']);
@@ -112,9 +100,11 @@ class AdminTableSeeder extends Seeder {
         IdType::create(['name' => 'DOC.TRIB.NO.DOM.SIN.RUC', 'symbol' => 'NDO', 'code' => '0']);
         IdType::create(['name' => 'VARIOS', 'symbol' => 'S/D', 'code' => '-']);
 
-        Job::create(['name' => 'ANALISTA DE SISTEMAS']);
+        Job::create(['name' => 'ADMINISTRADOR DEL SISTEMA']);
         Job::create(['name' => 'MATIZADOR']);
         Job::create(['name' => 'PINTOR']);
+        Job::create(['name' => 'SUPERVISOR']);
+
 
         Employee::create(['name' => 'NOEL', 'paternal_surname'=>'HUILLCA', 'maternal_surname'=>'HUAMANI', 'full_name'=>'HUILLCA HUAMANI NOEL', 'id_type_id'=>'2', 'doc'=>'44243484', 'job_id'=>'1', 'gender'=>'0', 'address'=>'JR. LAS GROSELLAS 910', 'ubigeo_id'=>'1306', 'user_id'=>'1', 'email_company' => '']);
         Employee::create(['name' => strtoupper($faker->firstNameMale), 'paternal_surname' => strtoupper($faker->lastName), 'maternal_surname' => strtoupper($faker->lastName), 'full_name'=>strtoupper($faker->firstNameMale.' '.$faker->lastName.' '.$faker->lastName), 'id_type_id'=>'2', 'doc'=>'08000001', 'job_id'=>'2', 'gender'=>'0', 'address'=>$faker->address, 'ubigeo_id'=>'1306', 'user_id'=>'2', 'email_company' => '', 'company_id' => 1]);
@@ -136,10 +126,14 @@ class AdminTableSeeder extends Seeder {
         Company::create(['company_name' => strtoupper($faker->company), 'id_type_id'=>'1', 'doc'=>'20000000007', 'address'=>strtoupper($faker->address), 'ubigeo_id'=>'1307', 'country_id' => 1465, 'is_client'=>1, 'provider_id' => 3]);
         Company::create(['company_name' => strtoupper($faker->company), 'id_type_id'=>'1', 'doc'=>'20000000008', 'address'=>strtoupper($faker->address), 'ubigeo_id'=>'1307', 'country_id' => 1465, 'is_client'=>1, 'provider_id' => 4]);
 
-        Warehouse::create(['company_id' => 5, 'provider_id' => 2, 'name' => 'CAMACHO', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
-        Warehouse::create(['company_id' => 6, 'provider_id' => 2, 'name' => 'CAMPOY', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
-        Warehouse::create(['company_id' => 7, 'provider_id' => 3, 'name' => 'ZARATE', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
-        Warehouse::create(['company_id' => 8, 'provider_id' => 4, 'name' => 'LINCE', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
+        $w=Warehouse::create(['company_id' => 5, 'provider_id' => 2, 'name' => 'CAMACHO', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
+        $w->employees()->sync([2,6]);
+        $w=Warehouse::create(['company_id' => 6, 'provider_id' => 2, 'name' => 'CAMPOY', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
+        $w->employees()->sync([3,7]);
+        $w=Warehouse::create(['company_id' => 7, 'provider_id' => 3, 'name' => 'ZARATE', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
+        $w->employees()->sync([4,8]);
+        $w=Warehouse::create(['company_id' => 8, 'provider_id' => 4, 'name' => 'LINCE', 'ubigeo_id' => 1309, 'address' => strtoupper($faker->address)]);
+        $w->employees()->sync([5,9]);
 
 
 
@@ -154,139 +148,181 @@ class AdminTableSeeder extends Seeder {
         PermissionGroup::create(['name' => 'CONTABILIDAD']);
 
         // Usuarios
-        Permission::create(['name' => 'Contraseña Editar', 'action' => 'change_password', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Contraseña Actualizar', 'action' => 'update_password', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Usuarios Listar', 'action' => 'users.index', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Usuarios Ver', 'action' => 'users.show', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Usuarios Crear', 'action' => 'users.create', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Usuarios Editar', 'action' => 'users.edit', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Usuarios Eliminar', 'action' => 'users.destroy', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Contraseña Editar', 'action' => 'change_password', 'permission_group_id' => 1]);
+        $p->roles()->sync([1,2,3,4]);
+        $p=Permission::create(['name' => 'Contraseña Actualizar', 'action' => 'update_password', 'permission_group_id' => 1]);
+        $p->roles()->sync([1,2,3,4]);
+        $p=Permission::create(['name' => 'Usuarios Listar', 'action' => 'users.index', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Usuarios Ver', 'action' => 'users.show', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Usuarios Crear', 'action' => 'users.create', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Usuarios Editar', 'action' => 'users.edit', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Usuarios Eliminar', 'action' => 'users.destroy', 'permission_group_id' => 1]);
         // Roles
-        Permission::create(['name' => 'Roles Listar', 'action' => 'roles.index', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Roles Ver', 'action' => 'roles.show', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Roles Crear', 'action' => 'roles.create', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Roles Editar', 'action' => 'roles.edit', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Roles Eliminar', 'action' => 'roles.destroy', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Roles Listar', 'action' => 'roles.index', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Roles Ver', 'action' => 'roles.show', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Roles Crear', 'action' => 'roles.create', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Roles Editar', 'action' => 'roles.edit', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Roles Eliminar', 'action' => 'roles.destroy', 'permission_group_id' => 1]);
         // Grupos
-        Permission::create(['name' => 'Grupos Listar', 'action' => 'permission_groups.index', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Grupos Ver', 'action' => 'permission_groups.show', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Grupos Crear', 'action' => 'permission_groups.create', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Grupos Editar', 'action' => 'permission_groups.edit', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Grupos Eliminar', 'action' => 'permission_groups.destroy', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Grupos Listar', 'action' => 'permission_groups.index', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Grupos Ver', 'action' => 'permission_groups.show', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Grupos Crear', 'action' => 'permission_groups.create', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Grupos Editar', 'action' => 'permission_groups.edit', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Grupos Eliminar', 'action' => 'permission_groups.destroy', 'permission_group_id' => 1]);
         // Permisos
-        Permission::create(['name' => 'Permisos Listar', 'action' => 'permissions.index', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Permisos Ver', 'action' => 'permissions.show', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Permisos Crear', 'action' => 'permissions.create', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Permisos Editar', 'action' => 'permissions.edit', 'permission_group_id' => 1]);
-        Permission::create(['name' => 'Permisos Eliminar', 'action' => 'permissions.destroy', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Permisos Listar', 'action' => 'permissions.index', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Permisos Ver', 'action' => 'permissions.show', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Permisos Crear', 'action' => 'permissions.create', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Permisos Editar', 'action' => 'permissions.edit', 'permission_group_id' => 1]);
+        $p=Permission::create(['name' => 'Permisos Eliminar', 'action' => 'permissions.destroy', 'permission_group_id' => 1]);
         // Tipos de Unidad
-        Permission::create(['name' => 'Tipos de Unidad Listar', 'action' => '.index', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Tipos de Unidad Ver', 'action' => '.show', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Tipos de Unidad Crear', 'action' => '.create', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Tipos de Unidad Editar', 'action' => '.edit', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Tipos de Unidad Eliminar', 'action' => '.destroy', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Tipos de Unidad Listar', 'action' => 'unit_types.index', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Tipos de Unidad Ver', 'action' => 'unit_types.show', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Tipos de Unidad Crear', 'action' => 'unit_types.create', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Tipos de Unidad Editar', 'action' => 'unit_types.edit', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Tipos de Unidad Eliminar', 'action' => 'unit_types.destroy', 'permission_group_id' => 3]);
         // Unidad
-        Permission::create(['name' => 'Unidad Listar', 'action' => '.index', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Unidad Ver', 'action' => '.show', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Unidad Crear', 'action' => '.create', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Unidad Editar', 'action' => '.edit', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Unidad Eliminar', 'action' => '.destroy', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Unidad Listar', 'action' => 'units.index', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Unidad Ver', 'action' => 'units.show', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Unidad Crear', 'action' => 'units.create', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Unidad Editar', 'action' => 'units.edit', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Unidad Eliminar', 'action' => 'units.destroy', 'permission_group_id' => 3]);
         // Categorías
-        Permission::create(['name' => 'Categorías Listar', 'action' => '.index', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Categorías Ver', 'action' => '.show', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Categorías Crear', 'action' => '.create', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Categorías Editar', 'action' => '.edit', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Categorías Eliminar', 'action' => '.destroy', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Categorías Listar', 'action' => 'categories.index', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Categorías Ver', 'action' => 'categories.show', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Categorías Crear', 'action' => 'categories.create', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Categorías Editar', 'action' => 'categories.edit', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Categorías Eliminar', 'action' => 'categories.destroy', 'permission_group_id' => 3]);
         // Sub Categorías
-        Permission::create(['name' => 'Sub Categorías Listar', 'action' => '.index', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Sub Categorías Ver', 'action' => '.show', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Sub Categorías Crear', 'action' => '.create', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Sub Categorías Editar', 'action' => '.edit', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Sub Categorías Eliminar', 'action' => '.destroy', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Sub Categorías Listar', 'action' => 'sub_categories.index', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Sub Categorías Ver', 'action' => 'sub_categories.show', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Sub Categorías Crear', 'action' => 'sub_categories.create', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Sub Categorías Editar', 'action' => 'sub_categories.edit', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Sub Categorías Eliminar', 'action' => 'sub_categories.destroy', 'permission_group_id' => 3]);
         // Marcas
-        Permission::create(['name' => 'Marcas Listar', 'action' => '.index', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Marcas Ver', 'action' => '.show', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Marcas Crear', 'action' => '.create', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Marcas Editar', 'action' => '.edit', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Marcas Eliminar', 'action' => '.destroy', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Marcas Listar', 'action' => 'brands.index', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Marcas Ver', 'action' => 'brands.show', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Marcas Crear', 'action' => 'brands.create', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Marcas Editar', 'action' => 'brands.edit', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Marcas Eliminar', 'action' => 'brands.destroy', 'permission_group_id' => 3]);
         // Almacenes
-        Permission::create(['name' => 'Almacenes Listar', 'action' => '.index', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Almacenes Ver', 'action' => '.show', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Almacenes Crear', 'action' => '.create', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Almacenes Editar', 'action' => '.edit', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Almacenes Eliminar', 'action' => '.destroy', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Almacenes Listar', 'action' => 'warehouses.index', 'permission_group_id' => 3]);
+        $p->roles()->sync([4]);
+        $p=Permission::create(['name' => 'Almacenes Ver', 'action' => 'warehouses.show', 'permission_group_id' => 3]);
+        $p->roles()->sync([4]);
+        $p=Permission::create(['name' => 'Almacenes Crear', 'action' => 'warehouses.create', 'permission_group_id' => 3]);
+        $p->roles()->sync([4]);
+        $p=Permission::create(['name' => 'Almacenes Editar', 'action' => 'warehouses.edit', 'permission_group_id' => 3]);
+        $p->roles()->sync([4]);
+        $p=Permission::create(['name' => 'Almacenes Eliminar', 'action' => 'warehouses.destroy', 'permission_group_id' => 3]);
+        $p->roles()->sync([4]);
         // Productos
-        Permission::create(['name' => 'Productos Listar', 'action' => '.index', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Productos Ver', 'action' => '.show', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Productos Crear', 'action' => '.create', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Productos Editar', 'action' => '.edit', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Productos Eliminar', 'action' => '.destroy', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Productos Listar', 'action' => 'products.index', 'permission_group_id' => 3]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Productos Ver', 'action' => 'products.show', 'permission_group_id' => 3]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Productos Crear', 'action' => 'products.create', 'permission_group_id' => 3]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Productos Editar', 'action' => 'products.edit', 'permission_group_id' => 3]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Productos Eliminar', 'action' => 'products.destroy', 'permission_group_id' => 3]);
+        $p->roles()->sync([2, 4]);
         // Tickets de E/S
-        Permission::create(['name' => 'Tickets de E/S Listar', 'action' => '.index', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Tickets de E/S Ver', 'action' => '.show', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Tickets de E/S Crear', 'action' => '.create', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Tickets de E/S Editar', 'action' => '.edit', 'permission_group_id' => 3]);
-        Permission::create(['name' => 'Tickets de E/S Eliminar', 'action' => '.destroy', 'permission_group_id' => 3]);
+        $p=Permission::create(['name' => 'Tickets de E/S Listar', 'action' => 'tickets.index', 'permission_group_id' => 3]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Tickets de E/S Ver', 'action' => 'tickets.show', 'permission_group_id' => 3]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Tickets de E/S Crear', 'action' => 'tickets.create', 'permission_group_id' => 3]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Tickets de E/S Editar', 'action' => 'tickets.edit', 'permission_group_id' => 3]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Tickets de E/S Eliminar', 'action' => 'tickets.destroy', 'permission_group_id' => 3]);
+        $p->roles()->sync([2, 4]);
         // Documentos Identidad
-        Permission::create(['name' => 'Documentos Identidad Listar', 'action' => '.index', 'permission_group_id' => 2]);
-        Permission::create(['name' => 'Documentos Identidad Ver', 'action' => '.show', 'permission_group_id' => 2]);
-        Permission::create(['name' => 'Documentos Identidad Crear', 'action' => '.create', 'permission_group_id' => 2]);
-        Permission::create(['name' => 'Documentos Identidad Editar', 'action' => '.edit', 'permission_group_id' => 2]);
-        Permission::create(['name' => 'Documentos Identidad Eliminar', 'action' => '.destroy', 'permission_group_id' => 2]);
+        $p=Permission::create(['name' => 'Documentos Identidad Listar', 'action' => '.index', 'permission_group_id' => 2]);
+        $p=Permission::create(['name' => 'Documentos Identidad Ver', 'action' => '.show', 'permission_group_id' => 2]);
+        $p=Permission::create(['name' => 'Documentos Identidad Crear', 'action' => '.create', 'permission_group_id' => 2]);
+        $p=Permission::create(['name' => 'Documentos Identidad Editar', 'action' => '.edit', 'permission_group_id' => 2]);
+        $p=Permission::create(['name' => 'Documentos Identidad Eliminar', 'action' => '.destroy', 'permission_group_id' => 2]);
         // Empresas
-        Permission::create(['name' => 'Empresas Listar', 'action' => '.index', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Empresas Ver', 'action' => '.show', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Empresas Crear', 'action' => '.create', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Empresas Editar', 'action' => '.edit', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Empresas Eliminar', 'action' => '.destroy', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Empresas Listar', 'action' => '.index', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Empresas Ver', 'action' => '.show', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Empresas Crear', 'action' => '.create', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Empresas Editar', 'action' => '.edit', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Empresas Eliminar', 'action' => '.destroy', 'permission_group_id' => 6]);
         // Monedas
-        Permission::create(['name' => 'Monedas Listar', 'action' => '.index', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Monedas Ver', 'action' => '.show', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Monedas Crear', 'action' => '.create', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Monedas Editar', 'action' => '.edit', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Monedas Eliminar', 'action' => '.destroy', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Monedas Listar', 'action' => 'id_types.index', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Monedas Ver', 'action' => 'id_types.show', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Monedas Crear', 'action' => 'id_types.create', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Monedas Editar', 'action' => 'id_types.edit', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Monedas Eliminar', 'action' => 'id_types.destroy', 'permission_group_id' => 6]);
         // Documentos Comprobantes
-        Permission::create(['name' => 'Documentos Comprobantes Listar', 'action' => '.index', 'permission_group_id' => 2]);
-        Permission::create(['name' => 'Documentos Comprobantes Ver', 'action' => '.show', 'permission_group_id' => 2]);
-        Permission::create(['name' => 'Documentos Comprobantes Crear', 'action' => '.create', 'permission_group_id' => 2]);
-        Permission::create(['name' => 'Documentos Comprobantes Editar', 'action' => '.edit', 'permission_group_id' => 2]);
-        Permission::create(['name' => 'Documentos Comprobantes Eliminar', 'action' => '.destroy', 'permission_group_id' => 2]);
+        $p=Permission::create(['name' => 'Documentos Comprobantes Listar', 'action' => 'sub_categories.index', 'permission_group_id' => 2]);
+        $p=Permission::create(['name' => 'Documentos Comprobantes Ver', 'action' => 'sub_categories.show', 'permission_group_id' => 2]);
+        $p=Permission::create(['name' => 'Documentos Comprobantes Crear', 'action' => 'sub_categories.create', 'permission_group_id' => 2]);
+        $p=Permission::create(['name' => 'Documentos Comprobantes Editar', 'action' => 'sub_categories.edit', 'permission_group_id' => 2]);
+        $p=Permission::create(['name' => 'Documentos Comprobantes Eliminar', 'action' => 'sub_categories.destroy', 'permission_group_id' => 2]);
         // Condiciones de Pago
-        Permission::create(['name' => 'Condiciones de Pago Listar', 'action' => '.index', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Condiciones de Pago Ver', 'action' => '.show', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Condiciones de Pago Crear', 'action' => '.create', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Condiciones de Pago Editar', 'action' => '.edit', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Condiciones de Pago Eliminar', 'action' => '.destroy', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Condiciones de Pago Listar', 'action' => 'payment_conditions.index', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Condiciones de Pago Ver', 'action' => 'payment_conditions.show', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Condiciones de Pago Crear', 'action' => 'payment_conditions.create', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Condiciones de Pago Editar', 'action' => 'payment_conditions.edit', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Condiciones de Pago Eliminar', 'action' => 'payment_conditions.destroy', 'permission_group_id' => 6]);
         // Tipos de Cambio
-        Permission::create(['name' => 'Tipos de Cambio Listar', 'action' => '.index', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Tipos de Cambio Ver', 'action' => '.show', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Tipos de Cambio Crear', 'action' => '.create', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Tipos de Cambio Editar', 'action' => '.edit', 'permission_group_id' => 6]);
-        Permission::create(['name' => 'Tipos de Cambio Eliminar', 'action' => '.destroy', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Tipos de Cambio Listar', 'action' => 'exchanges.index', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Tipos de Cambio Ver', 'action' => 'exchanges.show', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Tipos de Cambio Crear', 'action' => 'exchanges.create', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Tipos de Cambio Editar', 'action' => 'exchanges.edit', 'permission_group_id' => 6]);
+        $p=Permission::create(['name' => 'Tipos de Cambio Eliminar', 'action' => 'exchanges.destroy', 'permission_group_id' => 6]);
         // Cargos
-        Permission::create(['name' => 'Cargos Listar', 'action' => '.index', 'permission_group_id' => 7]);
-        Permission::create(['name' => 'Cargos Ver', 'action' => '.show', 'permission_group_id' => 7]);
-        Permission::create(['name' => 'Cargos Crear', 'action' => '.create', 'permission_group_id' => 7]);
-        Permission::create(['name' => 'Cargos Editar', 'action' => '.edit', 'permission_group_id' => 7]);
-        Permission::create(['name' => 'Cargos Eliminar', 'action' => '.destroy', 'permission_group_id' => 7]);
+        $p=Permission::create(['name' => 'Cargos Listar', 'action' => 'jobs.index', 'permission_group_id' => 7]);
+        $p=Permission::create(['name' => 'Cargos Ver', 'action' => 'jobs.show', 'permission_group_id' => 7]);
+        $p=Permission::create(['name' => 'Cargos Crear', 'action' => 'jobs.create', 'permission_group_id' => 7]);
+        $p=Permission::create(['name' => 'Cargos Editar', 'action' => 'jobs.edit', 'permission_group_id' => 7]);
+        $p=Permission::create(['name' => 'Cargos Eliminar', 'action' => 'jobs.destroy', 'permission_group_id' => 7]);
         // Empleados
-        Permission::create(['name' => 'Empleados Listar', 'action' => '.index', 'permission_group_id' => 7]);
-        Permission::create(['name' => 'Empleados Ver', 'action' => '.show', 'permission_group_id' => 7]);
-        Permission::create(['name' => 'Empleados Crear', 'action' => '.create', 'permission_group_id' => 7]);
-        Permission::create(['name' => 'Empleados Editar', 'action' => '.edit', 'permission_group_id' => 7]);
-        Permission::create(['name' => 'Empleados Eliminar', 'action' => '.destroy', 'permission_group_id' => 7]);
-        // Cotizaciones orders
-        Permission::create(['name' => 'Cotizaciones Listar', 'action' => '.index', 'permission_group_id' => 5]);
-        Permission::create(['name' => 'Cotizaciones Ver', 'action' => '.show', 'permission_group_id' => 5]);
-        Permission::create(['name' => 'Cotizaciones Crear', 'action' => '.create', 'permission_group_id' => 5]);
-        Permission::create(['name' => 'Cotizaciones Editar', 'action' => '.edit', 'permission_group_id' => 5]);
-        Permission::create(['name' => 'Cotizaciones Eliminar', 'action' => '.destroy', 'permission_group_id' => 5]);
+        $p=Permission::create(['name' => 'Empleados Listar', 'action' => 'employees.index', 'permission_group_id' => 7]);
+        $p->roles()->sync([1, 4]);
+        $p=Permission::create(['name' => 'Empleados Ver', 'action' => 'employees.show', 'permission_group_id' => 7]);
+        $p->roles()->sync([1, 4]);
+        $p=Permission::create(['name' => 'Empleados Crear', 'action' => 'employees.create', 'permission_group_id' => 7]);
+        $p->roles()->sync([1, 4]);
+        $p=Permission::create(['name' => 'Empleados Editar', 'action' => 'employees.edit', 'permission_group_id' => 7]);
+        $p->roles()->sync([1, 4]);
+        $p=Permission::create(['name' => 'Empleados Eliminar', 'action' => 'employees.destroy', 'permission_group_id' => 7]);
+        $p->roles()->sync([1, 4]);
+        // Cotizaciones orders ocompra/servicio
+        $p=Permission::create(['name' => 'Ordenes de Compra Filtrar', 'action' => 'quotes.filter', 'permission_group_id' => 5]);
+        $p->roles()->sync([3, 4]);
+        $p=Permission::create(['name' => 'Ordenes de Compra Listar', 'action' => 'quotes.index', 'permission_group_id' => 5]);
+        $p->roles()->sync([3, 4]);
+        $p=Permission::create(['name' => 'Ordenes de Compra Ver', 'action' => 'quotes.show', 'permission_group_id' => 5]);
+        $p->roles()->sync([3, 4]);
+        $p=Permission::create(['name' => 'Ordenes de Compra Crear', 'action' => 'quotes.create', 'permission_group_id' => 5]);
+        $p->roles()->sync([3, 4]);
+        $p=Permission::create(['name' => 'Ordenes de Compra Editar', 'action' => 'quotes.edit', 'permission_group_id' => 5]);
+        $p->roles()->sync([3, 4]);
+        $p=Permission::create(['name' => 'Ordenes de Compra Eliminar', 'action' => 'quotes.destroy', 'permission_group_id' => 5]);
+        $p->roles()->sync([3, 4]);
+        // Orders despacho
+        $p=Permission::create(['name' => 'Despachos Filtrar', 'action' => 'orders.filter', 'permission_group_id' => 5]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Despachos Listar', 'action' => 'orders.index', 'permission_group_id' => 5]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Despachos Ver', 'action' => 'orders.show', 'permission_group_id' => 5]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Despachos Crear', 'action' => 'orders.create', 'permission_group_id' => 5]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Despachos Editar', 'action' => 'orders.edit', 'permission_group_id' => 5]);
+        $p->roles()->sync([2, 4]);
+        $p=Permission::create(['name' => 'Despachos Eliminar', 'action' => 'orders.destroy', 'permission_group_id' => 5]);
+        $p->roles()->sync([2, 4]);
         // Compras
-        Permission::create(['name' => 'Compras Listar', 'action' => '.index', 'permission_group_id' => 4]);
-        Permission::create(['name' => 'Compras Ver', 'action' => '.show', 'permission_group_id' => 4]);
-        Permission::create(['name' => 'Compras Crear', 'action' => '.create', 'permission_group_id' => 4]);
-        Permission::create(['name' => 'Compras Editar', 'action' => '.edit', 'permission_group_id' => 4]);
-        Permission::create(['name' => 'Compras Eliminar', 'action' => '.destroy', 'permission_group_id' => 4]);
+        $p=Permission::create(['name' => 'Compras Listar', 'action' => 'purchases.index', 'permission_group_id' => 4]);
+        $p=Permission::create(['name' => 'Compras Ver', 'action' => 'purchases.show', 'permission_group_id' => 4]);
+        $p=Permission::create(['name' => 'Compras Crear', 'action' => 'purchases.create', 'permission_group_id' => 4]);
+        $p=Permission::create(['name' => 'Compras Editar', 'action' => 'purchases.edit', 'permission_group_id' => 4]);
+        $p=Permission::create(['name' => 'Compras Eliminar', 'action' => 'purchases.destroy', 'permission_group_id' => 4]);
         // // Control de Documentos
         // Permission::create(['name' => 'Control de Documentos Listar', 'action' => '.index', 'permission_group_id' => '4']);
         // Permission::create(['name' => 'Control de Documentos Ver', 'action' => '.show', 'permission_group_id' => '4']);
@@ -376,10 +412,13 @@ class AdminTableSeeder extends Seeder {
         SubCategory::create(['name' => 'BÁSICOS L-22 (POLIURETANO BRILLO DIRECTO)', 'category_id' => 1]);
         SubCategory::create(['name' => 'BÁSICOS L-55 (POLIÉSTER)', 'category_id' => 1]);
         SubCategory::create(['name' => 'BÁSICOS L-90 (BASE AGUA)', 'category_id' => 1]);
-        SubCategory::create(['name' => 'DILUYENTES Y DESENGRASANTES', 'category_id' => 1]);
+        SubCategory::create(['name' => 'DILUYENTES Y DESENGRASANTES', 'category_id' => 2]);
         SubCategory::create(['name' => 'IMPRIMACIÓN, APAREJO, SELLADOR', 'category_id' => 1]);
-        SubCategory::create(['name' => 'PROCESIVOS PULITURA', 'category_id' => 1]);
-        SubCategory::create(['name' => 'PROCESIVOS VARIOS', 'category_id' => 1]);
+        SubCategory::create(['name' => 'PROCESIVOS PULITURA', 'category_id' => 2]);
+        SubCategory::create(['name' => 'PROCESIVOS VARIOS', 'category_id' => 2]);
+        SubCategory::create(['name' => 'DILUYENTES Y DESENGRASANTES', 'category_id' => 3]);
+        SubCategory::create(['name' => 'PROCESIVOS PULITURA', 'category_id' => 3]);
+        SubCategory::create(['name' => 'PROCESIVOS VARIOS', 'category_id' => 3]);
 
         // SubCategory::create(['name' => 'AUTOMOTRIZ', 'category_id' => 1]);
         // SubCategory::create(['name' => 'CERRAJERIA PARA MADERA Y VIDRIO', 'category_id' => 1]);
