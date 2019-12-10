@@ -76,4 +76,8 @@ class Order extends Model implements Auditable
 	{
 		return $this->belongsto('App\Modules\Logistics\Modelo');
 	}
+	public function color()
+	{
+		return $this->belongsto('App\Modules\Logistics\Color');
+	}
 }

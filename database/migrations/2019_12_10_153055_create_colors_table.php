@@ -17,11 +17,11 @@ class CreateColorsTable extends Migration
             $table->increments('id');
             $table->string('code');
             $table->string('other_code');
-            $table->string('description');
             $table->integer('brand_id')->unsigned();
+            $table->string('description');
             $table->string('modelos');
             $table->boolean('is_tricapa');
-            $table->boolean('is_brillo_directo');
+            $table->boolean('has_brillo_directo');
             $table->timestamps();
             $table->softDeletes();
         });

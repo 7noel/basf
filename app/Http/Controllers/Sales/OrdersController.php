@@ -12,6 +12,7 @@ use App\Modules\Base\CurrencyRepo;
 use App\Modules\HumanResources\EmployeeRepo;
 use App\Modules\Logistics\BrandRepo;
 use App\Modules\Logistics\ModeloRepo;
+use App\Modules\Logistics\ColorRepo;
 use App\Modules\Storage\WarehouseRepo;
 
 class OrdersController extends Controller {
@@ -23,9 +24,10 @@ class OrdersController extends Controller {
 	protected $companyRepo;
 	protected $brandRepo;
 	protected $modeloRepo;
+	protected $colorRepo;
 	protected $warehouseRepo;
 
-	public function __construct(EmployeeRepo $employeeRepo, OrderRepo $repo, PaymentConditionRepo $paymentConditionRepo, CurrencyRepo $currencyRepo, CompanyRepo $companyRepo, BrandRepo $brandRepo, ModeloRepo $modeloRepo, WarehouseRepo $warehouseRepo) {
+	public function __construct(EmployeeRepo $employeeRepo, OrderRepo $repo, PaymentConditionRepo $paymentConditionRepo, CurrencyRepo $currencyRepo, CompanyRepo $companyRepo, BrandRepo $brandRepo, ModeloRepo $modeloRepo, ColorRepo $colorRepo, WarehouseRepo $warehouseRepo) {
 		$this->repo = $repo;
 		$this->paymentConditionRepo = $paymentConditionRepo;
 		$this->currencyRepo = $currencyRepo;
@@ -33,6 +35,7 @@ class OrdersController extends Controller {
 		$this->companyRepo = $companyRepo;
 		$this->brandRepo = $brandRepo;
 		$this->modeloRepo = $modeloRepo;
+		$this->colorRepo = $colorRepo;
 		$this->warehouseRepo = $warehouseRepo;
 	}
 	public function filter()
@@ -73,9 +76,10 @@ class OrdersController extends Controller {
 		$painters = $this->employeeRepo->getListByJobWarehouse(3, array_keys($warehouses)[0]);
 		$tints = $this->employeeRepo->getListByJobWarehouse(2, array_keys($warehouses)[0]);
 		$brands = $this->brandRepo->getList();
+		$colors = $this->colorRepo->getList('code', 'code');
 		// $modelos = ['Seleccionar'];
 		$modelos = $this->modeloRepo->getListGroup('brand');
-		return view('partials.create', compact('payment_conditions', 'currencies', 'my_companies', 'warehouses', 'w', 'painters', 'tints', 'brands', 'modelos'));
+		return view('partials.create', compact('payment_conditions', 'currencies', 'my_companies', 'warehouses', 'w', 'painters', 'tints', 'brands', 'modelos', 'colors'));
 	}
 
 	public function store()
@@ -101,7 +105,8 @@ class OrdersController extends Controller {
 		$tints = $this->employeeRepo->getListByJobWarehouse(2, $model->warehouse_id);
 		$brands = $this->brandRepo->getList();
 		$modelos = $this->modeloRepo->getListGroup('brand');
-		return view('partials.edit', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos'));
+		$colors = $this->colorRepo->getList('code', 'code');
+		return view('partials.edit', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos', 'colors'));
 	}
 
 	public function update($id)

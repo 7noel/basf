@@ -44,8 +44,8 @@
 							{!! Form::select('modelo_id', $modelos, ((isset($model->modelo_id)) ? $model->modelo_id : null),['class'=>'form-control']); !!}
 						</div>
 						<div class="col-sm-2">
-							{!! Form::label('code_color','Color', ['class'=>'control-label']) !!}
-							{!! Form::text('code_color', null, ['class'=>'form-control uppercase']) !!}
+							{!! Form::label('color_code','Color', ['class'=>'control-label']) !!}
+							{!! Form::select('color_code', $colors, ((isset($model->color_code)) ? $model->color_code : null),['class'=>'form-control']); !!}
 						</div>
 						<div class="col-sm-2">
 							{!! Form::label('quantity_news','Paños Nuevos', ['class'=>'control-label']) !!}
@@ -58,8 +58,8 @@
 					</div>
 					<div class="form-group form-group-sm">
 						<div class="col-sm-2">
-							{!! Form::label('code_color2','Color 2', ['class'=>'control-label']) !!}
-							{!! Form::text('code_color2', null, ['class'=>'form-control uppercase']) !!}
+							{!! Form::label('color_code2','Color 2', ['class'=>'control-label']) !!}
+							{!! Form::select('color_code2', $colors, ((isset($model->color_code2)) ? $model->color_code2 : null),['class'=>'form-control']); !!}
 						</div>
 						<div class="col-sm-10">
 							{!! Form::label('comment','Comentarios', ['class'=>'control-label']) !!}

@@ -1,19 +1,19 @@
 <?php namespace App\Modules\Logistics;
 
 use App\Modules\Base\BaseRepo;
-use App\Modules\Logistics\Modelo;
+use App\Modules\Logistics\Color;
 
-class ModeloRepo extends BaseRepo{
+class ColorRepo extends BaseRepo{
 
 	public function getModel(){
-		return new Modelo;
+		return new Color;
 	}
 	public function index($filter = false, $search = false)
 	{
 		if ($filter and $search) {
-			return Modelo::$filter($search)->with('brand')->orderBy("$filter", 'ASC')->paginate();
+			return Color::$filter($search)->with('brand')->orderBy("$filter", 'ASC')->paginate();
 		} else {
-			return Modelo::with('brand')->orderBy('id', 'DESC')->paginate();
+			return Color::with('brand')->orderBy('id', 'DESC')->paginate();
 		}
 	}
 }

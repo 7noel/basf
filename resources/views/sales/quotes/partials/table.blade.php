@@ -20,7 +20,7 @@
 							<td>{{ config('options.ot_types.'.$model->type_ot) }}</td>
 							<td>{{ $model->modelo->brand->name."-".$model->modelo->name }} </td>
 							<td>{{ $model->placa }}</td>
-							<td>{{ $model->code_color }}</td>
+							<td>{{ $model->color_code }}</td>
 							<td>{{ $model->created_at->formatLocalized('%d/%m/%Y') }}</td>
 							<td>{{ $model->currency->symbol." ".$model->total}} </td>
 							<td>{{ $model->status }}</td>
