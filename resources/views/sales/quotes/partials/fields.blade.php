@@ -32,6 +32,10 @@
 					</div>
 					<div class="form-group form-group-sm">
 						<div class="col-sm-2">
+							{!! Form::label('type_ot','Tipo OT', ['class'=>'control-label']) !!}
+							{!! Form::select('type_ot', config('options.ot_types'), ((isset($model)) ? $model->type_ot : null),['class'=>'form-control']); !!}
+						</div>
+						<div class="col-sm-2">
 							{!! Form::label('placa','Placa', ['class'=>'control-label']) !!}
 							{!! Form::text('placa', null, ['class'=>'form-control']) !!}
 						</div>

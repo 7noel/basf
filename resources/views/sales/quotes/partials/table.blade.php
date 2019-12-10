@@ -17,7 +17,7 @@
 							<td>{{ $model->oc }}</td>
 							<td>{{ $model->created_at->formatLocalized('%d/%m/%Y') }}</td>
 							<td>{{ $model->ot }}</td>
-							<td>{{ $model->type_ot }}</td>
+							<td>{{ config('options.ot_types.'.$model->type_ot) }}</td>
 							<td>{{ $model->modelo->brand->name."-".$model->modelo->name }} </td>
 							<td>{{ $model->placa }}</td>
 							<td>{{ $model->code_color }}</td>

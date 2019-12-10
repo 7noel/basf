@@ -1,5 +1,6 @@
 <?php 
 return array(
+	'ot_types' => ['Seleccionar', 'Siniestros', 'Particular', 'PDI', 'Gtía Post-Vta', 'Gtía-Comercial'],
 	'last_number' => [
 		'1' => [// importaciones
 			'1' => 0, //quote
