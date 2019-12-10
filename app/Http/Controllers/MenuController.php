@@ -54,13 +54,14 @@ class MenuController extends Controller
     private function arrayLinks()
     {
         $links = [
-            'Seguridad'=>[
-                ['name' => 'Usuarios', 'route' => 'users.index' ],
-                ['name' => 'Roles', 'route' => 'roles.index', 'div' => '1' ],
-                ['name' => 'Grupos', 'route' => 'permission_groups.index' ],
-                ['name' => 'Permisos', 'route' => 'permissions.index' ],
+            'Operación'=>[
+                ['name' => 'Ordenes de Compra', 'route' => 'quotes.filter' ],
+                ['name' => 'Despachos', 'route' => 'orders.filter' ],
+                // ['name' => 'Facturación', 'route' => 'issuance_vouchers.index' ],
+                // ['name' => 'Transportistas', 'route' => 'shippers.index' ],
             ],
-            'Almacén'=>[
+            'Reportes' => [],
+            'Inventario'=>[
                 ['name' => 'Tickets de Ingreso y Salida', 'route' => 'tickets.index' ],
                 // ['name' => 'Aprobar Notas de Pedido', 'url' => '#' ],
                 ['name' => 'Productos', 'route' => 'products.index' ],
@@ -71,13 +72,13 @@ class MenuController extends Controller
                 ['name' => 'Tipos de Unidad', 'route' => 'unit_types.index' ],
                 ['name' => 'Unidades', 'route' => 'units.index' ],
             ],
-            'Recursos Humanos'=>[
+            'Personal'=>[
                 ['name' => 'Empleados', 'route' => 'employees.index' ],
                 ['name' => 'Cargos', 'route' => 'jobs.index' ],
                 // ['name' => 'Planilla', 'url' => '#' ],
                 ['name' => 'Documentos', 'route' => 'id_types.index' ],
             ],
-            'Finanzas'=>[
+            'Entidades'=>[
                 ['name' => 'Distribuidores', 'route' => 'providers.index' ],
                 ['name' => 'Talleres', 'route' => 'clients.index' ],
                 // ['name' => 'Emite Letras', 'route' => 'issuance_letters.index' ],
@@ -93,11 +94,11 @@ class MenuController extends Controller
                 // ['name' => 'Condiciones de Pago', 'route' => 'payment_conditions.index' ],
                 // ['name' => 'Medios de Pago', 'route' => 'payment_conditions.index' ],
             ],
-            'Ventas'=>[
-                ['name' => 'Ordenes de Compra', 'route' => 'quotes.filter' ],
-                ['name' => 'Despachos', 'route' => 'orders.filter' ],
-                // ['name' => 'Facturación', 'route' => 'issuance_vouchers.index' ],
-                // ['name' => 'Transportistas', 'route' => 'shippers.index' ],
+            'Seguridad'=>[
+                ['name' => 'Usuarios', 'route' => 'users.index' ],
+                ['name' => 'Roles', 'route' => 'roles.index', 'div' => '1' ],
+                ['name' => 'Grupos', 'route' => 'permission_groups.index' ],
+                ['name' => 'Permisos', 'route' => 'permissions.index' ],
             ],
             // 'Logística'=>[
                 // ['name' => 'Ordenes de Compra', 'url' => '#' ],

@@ -1,4 +1,13 @@
-						<a href="#" id="btnAddProduct" class="btn btn-success btn-sm" title="Agregar Producto">{!! config('options.icons.add') !!} Agregar</a>
+
+<label class="radio-inline">
+  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"> PINTURA
+</label>
+<label class="radio-inline">
+  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"> DIRECTOS
+</label>
+<label class="radio-inline">
+  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3"> INDIRECTOS
+</label>
 						@php $i=0; @endphp
 						<div class="table-responsive">
 						<table class="table table-condensed">
@@ -41,6 +50,7 @@
 							@endif
 							</tbody>
 						</table>
+						<a href="#" id="btnAddProduct" class="btn btn-success btn-sm" title="Agregar Producto">{!! config('options.icons.add') !!} Agregar</a>
 						</div>
 						<template id="template-row-item">
 							<tr>

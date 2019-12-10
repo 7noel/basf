@@ -55,6 +55,15 @@ $(document).ready(function(){
 		}
 
 	});
+	$(document).on('change','.value', function (e) {
+		$presentacion = parseFloat($('#presentacion').val())
+		$divisor = parseFloat($('#divisor').val())
+		$density = parseFloat($('#density').val())
+		$value = parseFloat($(this).val())
+		$value_dispatch = ((($value/$presentacion)/$divisor)/$density).toFixed(6)
+		console.log($value_dispatch)
+		$(this).parent().parent().find('.value_dispatch').val($value_dispatch)
+	})
 
 });
 

@@ -13,40 +13,30 @@
           <table class="table table-hover table-condensed" id="tableStocks">
             <thead>
               <tr>
-                <th>Almacén <button type="button" class="btn btn-default btn-xs" id="btnNewStock">{!! config('options.icons.add') !!}</button></th>
+                <th>Almacén</th>
                 <th>Stock</th>
                 <th>Stock Mínimo</th>
                 <th>Stock Máximo</th>
+                <th>Precio Taller</th>
+                <th>Pre x und consumo</th>
                 <th>Valor (S/)</th>
               </tr>
             </thead>
             <tbody id="tbodyStocks">
               @php $i=0; @endphp
-              @if(!isset($model))
-              @php $i++; @endphp
-                @for ($i = 1; $i < 4; $i++)
-                <tr data-id="">
-                  <input type="hidden" name="stocks[{{ $i }}][warehouse_id]" value="{{ $i }}">
-                  <td align="center">{{ $i }}</td>
-                  <td align="center">0</td>
-                  <!-- <td><input type="text" name="stocks[1][stock_min]" value="" class="form-control input-sm"></td> -->
-                  <td>{!! Form::number('stocks['.$i.'][stock_min]', 0, ['class'=>"form-control input-sm"]) !!}</td>
-                  <!-- <td><input type="text" name="stocks[1][stock_max]" value="" class="form-control input-sm"></td> -->
-                  <td>{!! Form::number('stocks['.$i.'][stock_max]', 0, ['class'=>"form-control input-sm"]) !!}</td>
-                  <td align="center">0.00</td>
-                </tr>
-                @endfor
-              @else
+              @if(isset($model))
                 @foreach($model->stocks as $key => $stock)
                 <tr data-id="{{ $stock->id }}">
                   <input type="hidden" name="stocks[{{ $key }}][id]" value="{{ $stock->id }}">
                   <input type="hidden" name="stocks[{{ $key }}][warehouse_id]" value="{{ $stock->warehouse_id }}">
-                  <td align="center">{{ $stock->warehouse_id }}</td>
+                  <td>{{ $stock->warehouse->company->company_name.'-'.$stock->warehouse->name }}</td>
                   <td align="center">{{ $stock->stock }}</td>
                   <!-- <td><input type="text" name="stocks[{{ $key }}][stock_min]" value="{{ $stock->stock_min }}" class="form-control input-sm"></td> -->
                   <td>{!! Form::number('stocks['.$i.'][stock_min]', $stock->stock_min, ['class'=>"form-control input-sm"]) !!}</td>
                   <!-- <td><input type="text" name="stocks[{{ $key }}][stock_max]" value="{{ $stock->stock_max }}" class="form-control input-sm"></td> -->
                   <td>{!! Form::number('stocks['.$i.'][stock_max]', $stock->stock_max, ['class'=>"form-control input-sm"]) !!}</td>
+                  <td>{!! Form::number('stocks['.$i.'][value]', $stock->value, ['class'=>"form-control input-sm value"]) !!}</td>
+                  <td align="center">{!! Form::number('stocks['.$i.'][value_dispatch]', $stock->value_dispatch, ['class'=>"form-control input-sm value_dispatch", 'readonly'=>'readonly']) !!}</td>
                   <td align="center">{{ $stock->avarage_value }}</td>
                 </tr>
                 @php $i++; @endphp

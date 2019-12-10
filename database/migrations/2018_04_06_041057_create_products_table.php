@@ -25,10 +25,11 @@ class CreateProductsTable extends Migration {
 			$table->string('model');
 			$table->integer('sub_category_id')->unsigned();
 			$table->decimal('density', 12, 4);
+			$table->decimal('divisor', 12, 4);
 			$table->decimal('presentacion', 12, 4);
 			$table->integer('unit_id')->unsigned();
 			$table->integer('unit_dispatch_id')->unsigned();
-			$table->integer('currency_id')->unsigned();
+			$table->integer('currency_id')->unsigned()->default(1);
 
 			$table->decimal('last_purchase', 15, 2);
 			$table->decimal('profit_margin', 10, 2);

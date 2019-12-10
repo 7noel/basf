@@ -1,19 +1,29 @@
 					<table class="table table-hover table-condensed">
 						<tr>
-							<th>#</th>
-							<th>Fecha</th>
-							<th>Empresa</th>
-							<th>Estado</th>
+							<th>#OS</th>
+							<th>Fec_Orden</th>
+							<th>#OT</th>
+							<th>Tipo OT</th>
+							<th>Marca-Modelo</th>
+							<th>Placa</th>
+							<th>Color</th>
+							<th>Fec_Cierre</th>
 							<th>Total</th>
+							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 						@foreach($models as $model)
 						<tr data-id="{{ $model->id }}">
-							<td>{{ $model->id }}</td>
+							<td>{{ $model->oc }}</td>
 							<td>{{ $model->created_at->formatLocalized('%d/%m/%Y') }}</td>
-							<td>{{ $model->company->company_name }} </td>
-							<td>{{ $model->status }}</td>
+							<td>{{ $model->ot }}</td>
+							<td>{{ $model->type_ot }}</td>
+							<td>{{ $model->modelo->brand->name."-".$model->modelo->name }} </td>
+							<td>{{ $model->placa }}</td>
+							<td>{{ $model->code_color }}</td>
+							<td>{{ $model->created_at->formatLocalized('%d/%m/%Y') }}</td>
 							<td>{{ $model->currency->symbol." ".$model->total}} </td>
+							<td>{{ $model->status }}</td>
 							<td>
 								@if(0 == 0)
 								<a href="{{ route('create_order_by_quote', $model->id) }}" target="_blank" class="btn btn-default btn-xs" title="Generar Despacho">{!! config('options.icons.invoice') !!}</a>

@@ -11,7 +11,7 @@ class Order extends Model implements Auditable
 	use \OwenIt\Auditing\Auditable;
 	use SoftDeletes;
 
-	protected $fillable = ['mov', 'sn', 'order_type', 'type_op', 'my_company', 'company_id', 'warehouse_id', 'shipper_id', 'currency_id', 'type_ot', 'placa', 'oc', 'ot', 'brand', 'modelo', 'painter_id', 'tint_id', 'color_code', 'color_code2', 'quantity', 'quantity_news', 'meta_gr_pintura', 'meta_soles_pintura', 'meta_soles_directos', 'meta_soles_indirectos', 'real_gr_pintura', 'real_soles_pintura', 'real_soles_directos', 'real_soles_indirectos', 'ahorro_pintura', 'ahorro_directos', 'ahorro_indirectos', 'cumpli_total', 'cumpli_panios', 'pintor_recibe', 'approved_at', 'checked_at', 'invoiced_at', 'sent_at', 'canceled_at', 'status', 'subtotal', 'tax', 'total', 'amortization', 'exchange', 'exchange_sunat', 'order_id', 'user_id', 'comment'];
+	protected $fillable = ['mov', 'sn', 'order_type', 'type_op', 'my_company', 'company_id', 'warehouse_id', 'shipper_id', 'currency_id', 'type_ot', 'placa', 'oc', 'ot', 'brand', 'modelo_id', 'painter_id', 'tint_id', 'color_code', 'color_code2', 'quantity', 'quantity_news', 'meta_gr_pintura', 'meta_soles_pintura', 'meta_soles_directos', 'meta_soles_indirectos', 'real_gr_pintura', 'real_soles_pintura', 'real_soles_directos', 'real_soles_indirectos', 'ahorro_pintura', 'ahorro_directos', 'ahorro_indirectos', 'cumpli_total', 'cumpli_panios', 'pintor_recibe', 'approved_at', 'checked_at', 'invoiced_at', 'sent_at', 'canceled_at', 'status', 'subtotal', 'tax', 'total', 'amortization', 'exchange', 'exchange_sunat', 'order_id', 'user_id', 'comment'];
 
             
 	public function scopeName($query, $name){
@@ -71,5 +71,9 @@ class Order extends Model implements Auditable
 	public function attributes()
 	{
 		return $this->morphMany('App\Modules\Base\Attribute', 'attribute');
+	}
+	public function modelo()
+	{
+		return $this->belongsto('App\Modules\Logistics\Modelo');
 	}
 }
