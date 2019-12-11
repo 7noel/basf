@@ -14,7 +14,7 @@
 								<td>{{ $model->id }}</td>
 								<td>{{ $model->company_name }} </td>
 								<td>{{ $model->doc }} </td>
-								<td>{{ (isset($model->provider->company_name)) ? $model->provider->company_name : '' }}</td>
+								<td>{{ (isset($model->provider->company_name)) ? $model->provider->company_name : $model->provider_id }}</td>
 								<td>
 									<div class="btn-group">
 										<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
