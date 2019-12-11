@@ -81,7 +81,7 @@
 						{!! Form::text('bank_other', null, ['class'=>'form-control']) !!}
 						</div>
 					</div>
-
+@if(1==0)
 						<a href="#" id="btnAddWarehouse" class="btn btn-success btn-sm" title="Agregar Sucursal">{!! config('options.icons.add') !!} Agregar Sucursal</a>
 						@php $i=0; @endphp
 						<div class="table-responsive">
@@ -135,3 +135,4 @@
 							</tr>
 						</template>
 						{!! Form::hidden('items', $i, ['id'=>'items']) !!}
+@endif

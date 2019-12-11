@@ -10,23 +10,23 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-6 col-sm-3">
-                            <a href="{{ route('clients.index') }}" class="thumbnail">CLIENTES
-                                <img src="/img/companies.jpg" alt="...">
+                            <a href="{{ route('quotes.filter') }}" class="thumbnail">ORDENES DE COMPRA
+                                <img src="/img/ocompra.png" alt="...">
                             </a>
                         </div>
                         <div class="col-xs-6 col-sm-3">
-                            <a href="{{ route('products.index') }}" class="thumbnail">PRODUCTOS
-                                <img src="/img/productos.gif" alt="...">
+                            <a href="{{ route('orders.filter') }}" class="thumbnail">DESPACHOS
+                                <img src="/img/despacho.png" alt="...">
                             </a>
                         </div>
                         <div class="col-xs-6 col-sm-3">
-                            <a href="{{ route('orders.filter') }}" class="thumbnail">PEDIDOS
-                                <img src="/img/pedido.png" alt="...">
+                            <a href="{{ route('clients.index') }}" class="thumbnail">FACTURACIÓN
+                                <img src="/img/invoice.png" alt="...">
                             </a>
                         </div>
                         <div class="col-xs-6 col-sm-3">
-                            <a href="{{ route('purchases.index') }}" class="thumbnail">COMPRAS
-                                <img src="/img/buy.png" alt="...">
+                            <a href="{{ route('products.index') }}" class="thumbnail">STOCK
+                                <img src="/img/stock.png" alt="...">
                             </a>
                         </div>
                     </div>
