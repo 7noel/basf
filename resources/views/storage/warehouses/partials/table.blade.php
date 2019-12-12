@@ -3,6 +3,7 @@
 							<tr>
 								<th>#</th>
 								<th>Nombre</th>
+								<th>Taller</th>
 								<th>Distrito</th>
 								<th>Acciones</th>
 							</tr>
@@ -12,6 +13,7 @@
 							<tr data-id="{{ $model->id }}">
 								<td>{{ $model->id }}</td>
 								<td>{{ $model->name }} </td>
+								<td>{{ $model->company->company_name }} </td>
 								<td>{{ $model->ubigeo->departamento.' - '.$model->ubigeo->provincia.' - '.$model->ubigeo->distrito }} </td>
 								<td>
 									<a href="{{ route( $routes['edit'] , $model) }}" class="btn btn-primary btn-xs" title="Editar">{!! config('options.icons.edit') !!}</a>

@@ -12,7 +12,7 @@
 						{!! Form::label('provider_id','Distribuidor:', ['class'=>'col-sm-2 control-label']) !!}
 						<div class="col-sm-4">
 								{!! Form::hidden('provider_id', null, ['id'=>'provider_id']) !!}
-								<p class="form-control-static" id="txtProvider">{{ isset($model->provider->company_name) ? $model->provider->company_name : $model->provider_id }}</p>
+								<p class="form-control-static" id="txtProvider">{{ isset($model->provider->company_name) ? $model->provider->company_name : '' }}</p>
 						</div>
 					</div>
 					<div class="form-group  form-group-sm">

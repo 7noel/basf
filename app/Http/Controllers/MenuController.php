@@ -65,7 +65,6 @@ class MenuController extends Controller
                 ['name' => 'Tickets de Ingreso y Salida', 'route' => 'tickets.index' ],
                 // ['name' => 'Aprobar Notas de Pedido', 'url' => '#' ],
                 ['name' => 'Productos', 'route' => 'products.index' ],
-                ['name' => 'Almacenes', 'route' => 'warehouses.index' ],
                 // ['name' => 'Marcas', 'route' => 'brands.index', 'div' => '1' ],
                 ['name' => 'Categorías', 'route' => 'categories.index'],
                 ['name' => 'Sub Categorías', 'route' => 'sub_categories.index' ],
@@ -81,6 +80,7 @@ class MenuController extends Controller
             'Entidades'=>[
                 ['name' => 'Distribuidores', 'route' => 'providers.index' ],
                 ['name' => 'Talleres', 'route' => 'clients.index' ],
+                ['name' => 'Almacenes', 'route' => 'warehouses.index' ],
                 // ['name' => 'Emite Letras', 'route' => 'issuance_letters.index' ],
                 // ['name' => 'Recibe Letras', 'route' => 'reception_letters.index' ],
                 
