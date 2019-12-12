@@ -16,9 +16,9 @@
 						</div>
 					</div>
 					<div class="form-group  form-group-sm">
-						{!! Form::label('name','Nombres', ['class'=>'col-sm-2 control-label']) !!}
+						{!! Form::label('name','Nombre', ['class'=>'col-sm-2 control-label']) !!}
 						<div class="col-sm-10">
-						{!! Form::text('name', null, ['class'=>'form-control uppercase']) !!}
+						{!! Form::text('name', null, ['class'=>'form-control uppercase', 'maxlength'=>"25"]) !!}
 						</div>
 					</div>
 					<div class="form-group  form-group-sm">
