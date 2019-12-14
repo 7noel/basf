@@ -386,10 +386,10 @@ return array(
 			'edit'   => ['panel'=>'Editar Unidad: ', 'update'=>'Actualizar Unidad', 'delete'=>'Eliminar Unidad']
 		],
 		'warehouses' => [
-			'index'  => ['panel'=>'Almacenes', 'create'=>'Crear Almacén'],
-			'create' => ['panel'=>'Nuevo Almacén', 'create'=>'Crear Almacén'],
-			'show'   => ['panel'=>'Vizualizando Almacén:'],
-			'edit'   => ['panel'=>'Editar Almacén: ', 'update'=>'Actualizar Almacén', 'delete'=>'Eliminar Almacén']
+			'index'  => ['panel'=>'Sedes', 'create'=>'Crear Sede'],
+			'create' => ['panel'=>'Nuevo Sede', 'create'=>'Crear Sede'],
+			'show'   => ['panel'=>'Vizualizando Sede:'],
+			'edit'   => ['panel'=>'Editar Sede: ', 'update'=>'Actualizar Sede', 'delete'=>'Eliminar Sede']
 		],
 		'categories' => [
 			'index'  => ['panel'=>'Categorías', 'create'=>'Crear Categoría'],

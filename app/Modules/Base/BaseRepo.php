@@ -220,14 +220,14 @@ abstract class BaseRepo{
 			$data[$k['key']] = $k['value'];
 			if (isset($data['id'])) {
 				$model = $this->findOrFail($data['id']);
-				if (trim($data['name']) == '') {
+				if (isset($data['is_deleted'])) {
 					$model->delete();
 				} else {
 					$model->fill($data);
 					$model->save();
 				}
 			} else {
-				if (trim($data['name']) != '') {
+				if (!isset($data['is_deleted'])) {
 					$this->model->create($data);
 				}
 			}

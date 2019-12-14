@@ -80,7 +80,8 @@ class MenuController extends Controller
             'Entidades'=>[
                 ['name' => 'Distribuidores', 'route' => 'providers.index' ],
                 ['name' => 'Talleres', 'route' => 'clients.index' ],
-                ['name' => 'Almacenes', 'route' => 'warehouses.index' ],
+                ['name' => 'Sedes', 'route' => 'warehouses.index' ],
+                ['name' => 'Marcas', 'route' => 'brands.index' ],
                 // ['name' => 'Emite Letras', 'route' => 'issuance_letters.index' ],
                 // ['name' => 'Recibe Letras', 'route' => 'reception_letters.index' ],
                 

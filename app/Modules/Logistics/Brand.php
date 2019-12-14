@@ -19,6 +19,10 @@ class Brand extends Model implements Auditable {
 	
 	public function modelos()
 	{
-		return $this->hasMany('App\Modules\Sales\Modelo');
+		return $this->hasMany('App\Modules\Logistics\Modelo');
+	}
+	public function colors()
+	{
+		return $this->hasMany('App\Modules\Logistics\Color');
 	}
 }
