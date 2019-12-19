@@ -17,7 +17,27 @@ $(document).ready(function(){
 			$('#document_type_id').val(2)
 		}
 	}
-
+	$('.cat2').hide()
+	$('#btn-pintura').click(function(e){
+		e.preventDefault();
+		if(!$('#btn-pintura').hasClass('active')){
+			$('.cat1').show()
+			$('.cat2').hide()
+			$('#btn-pintura').toggleClass('active')
+			$('#btn-directo').toggleClass('active')
+			$('#category_id').val('1')
+		}
+	})
+	$('#btn-directo').click(function(e){
+		e.preventDefault();
+		if(!$('#btn-directo').hasClass('active')){
+			$('.cat1').hide()
+			$('.cat2').show()
+			$('#btn-pintura').toggleClass('active')
+			$('#btn-directo').toggleClass('active')
+			$('#category_id').val('2')
+		}
+	})
 	if ($('#with_tax').val() == 1) {
 		$('.withTax').show();
 		$('.withoutTax').hide();
@@ -70,13 +90,29 @@ $(document).ready(function(){
 	})
 
 //autocomplete para elementos agregados por javascript
+	// $(document).on('focus','.txtProduct', function (e) {
+	// 	$this = this;
+	// 	if ( !$($this).data("autocomplete") ) {
+	// 		e.preventDefault();
+	// 		$($this).autocomplete({
+	// 			source: "/api/products/autocompleteAjax",
+	// 			minLength: 4,
+	// 			select: function(event, ui){
+	// 				$p = ui.item.id;
+	// 				setRowProduct($this, $p);
+	// 			}
+	// 		});
+	// 	}
+	// });
+
 	$(document).on('focus','.txtProduct', function (e) {
-		//console.log($(this));
+		$w = $('#warehouse_id').val();
+		$c = $('#category_id').val();
 		$this = this;
 		if ( !$($this).data("autocomplete") ) {
 			e.preventDefault();
 			$($this).autocomplete({
-				source: "/api/products/autocompleteAjax",
+				source: "/api/stocks/autocompleteAjax/" + $w + "/" + $c + "/",
 				minLength: 4,
 				select: function(event, ui){
 					$p = ui.item.id;
@@ -91,21 +127,22 @@ $(document).ready(function(){
 	});
 
 	$('#btnAddProduct').bind("click touchstart", function(e){
-		addRowProduct();
+		e.preventDefault()
+		addRowProduct()
 	});
 });
 
 function setRowProduct($this, $p) {
-	//console.log($categories)
+	console.log($p)
 	if(isDesignEnabled($this, $p.id)){
 		$($this).parent().parent().find('.productId').val($p.id);
 		$($this).parent().parent().find('.txtProduct').val($p.name);
 		$($this).parent().parent().find('.unitId').val($p.unit_id);
-		$($this).parent().parent().find('.txtValue').val($p.value);
-		$($this).parent().parent().find('.txtPrecio').val(($p.value*1.18).toFixed(2));
+		$($this).parent().parent().find('.txtValue').val($p.value_dispatch);
+		$($this).parent().parent().find('.txtPrecio').val(($p.value_dispatch*1.18).toFixed(6));
 		$($this).parent().parent().find('.txtDscto').val(window.descuento1);
 		$($this).parent().parent().find('.txtDscto2').val(window.descuento2);
-		$($this).parent().parent().find('.intern_code').text($p.intern_code);
+		$($this).parent().parent().find('.intern_code').text($p.product.intern_code);
 		$($this).parent().parent().find('.txtCantidad').focus();
 	}
 }
@@ -113,6 +150,11 @@ function addRowProduct(data='') {
 	var items = $('#items').val();
 	if (items>0) {
 		if ($("input[name='details["+(items-1)+"][product_id]']").val() == "") {
+			$("input[name='details["+(items-1)+"][txtProduct]']").parent().parent().removeClass('cat1');
+			$("input[name='details["+(items-1)+"][txtProduct]']").parent().parent().removeClass('cat2');
+			$("input[name='details["+(items-1)+"][txtProduct]']").parent().parent().removeClass('cat3');
+			$("input[name='details["+(items-1)+"][txtProduct]']").parent().parent().addClass('cat' + $('#category_id').val());
+			$("input[name='details["+(items-1)+"][txtProduct]']").parent().parent().show();
 			$("input[name='details["+(items-1)+"][txtProduct]']").focus();
 		} else{
 			renderTemplateRowProduct(data);
@@ -131,11 +173,11 @@ function addRowProduct(data='') {
 
 function validateItem (myElement, id) {
 	n = $(myElement).parent().parent().find(id).val();
-	n = Math.round(parseFloat(n)*100)/100;
+	n = Math.round(parseFloat(n)*1000000)/1000000;
 	if (isNaN(n)) {n=0.00};
-	$(myElement).parent().parent().find(id).val(n.toFixed(2));
-	if (id=='.txtDscto') {window.descuento1 = n.toFixed(2)}
-	if (id=='.txtDscto2') {window.descuento2 = n.toFixed(2)}
+	$(myElement).parent().parent().find(id).val(n.toFixed(6));
+	if (id=='.txtDscto') {window.descuento1 = n.toFixed(6)}
+	if (id=='.txtDscto2') {window.descuento2 = n.toFixed(6)}
 	return n;
 }
 function calcTotalItem (myElement) {
@@ -144,18 +186,19 @@ function calcTotalItem (myElement) {
 	value = validateItem(myElement,'.txtValue');
 	dscto = validateItem(myElement,'.txtDscto');
 	dscto2 = validateItem(myElement,'.txtDscto2');
+	$(myElement).parent().parent().find('.txtCantidad').val( cantidad.toFixed(2) )
 	if ($(myElement).hasClass('txtPrecio')) {
-		$(myElement).parent().parent().find('.txtValue').val( (precio/1.18).toFixed(2) )
+		$(myElement).parent().parent().find('.txtValue').val( (precio/1.18).toFixed(6) )
 		value = validateItem(myElement,'.txtValue');
 	} else if($(myElement).hasClass('txtValue')) {
-		$(myElement).parent().parent().find('.txtPrecio').val( (value*1.18).toFixed(2) )
+		$(myElement).parent().parent().find('.txtPrecio').val( (value*1.18).toFixed(6) )
 		precio = validateItem(myElement,'.txtPrecio');
 	}
 	// D = Math.round(cantidad * value * dscto) / 100;
 	total = Math.round((cantidad*value)*(100-dscto)*(100-dscto2)/100)/100;
 	D = Math.round(cantidad * value - total) / 100;
 	// total = Math.round((cantidad*value-D)*100)/100;
-	$(myElement).parent().parent().find('.txtTotal').text( total.toFixed(2) );
+	$(myElement).parent().parent().find('.txtTotal').text( total.toFixed(6) );
 }
 function calcTotalOrder () {
 	var gross_value = 0;
@@ -186,7 +229,7 @@ function calcTotalOrder () {
 			// discount = (Math.round(q*v*d)/100) + discount;
 			// subtotal = gross_value - (Math.round(q*v*d)/100) + subtotal;
 		}
-	});
+	}); 	
 	gross_value = Math.round(100 * gross_value) / 100;
 	subtotal = Math.round(100 * subtotal) / 100;
 	total = Math.round(100 * total) / 100;
@@ -225,7 +268,8 @@ function renderTemplateRowProduct (data) {
 	clone.querySelector("[data-dscto2]").setAttribute("name", "details[" + items + "][d2]");
 	clone.querySelector("[data-isdeleted]").setAttribute("name", "details[" + items + "][is_deleted]");
 	if (items>0) {$("input[name='details["+(items-1)+"][txtProduct]']").attr('disabled', true);};
-	
+	$cat = 'cat' + $('#category_id').val()
+	clone.querySelector("tr").setAttribute("class", $cat);
 	items = parseInt(items) + 1;
 	$('#items').val(items);
 	$("#tableItems").append(clone);

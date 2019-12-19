@@ -14,6 +14,8 @@ use App\Modules\Logistics\BrandRepo;
 use App\Modules\Logistics\ModeloRepo;
 use App\Modules\Logistics\ColorRepo;
 use App\Modules\Storage\WarehouseRepo;
+use App\Modules\Storage\StockRepo;
+use App\Modules\Storage\Stock;
 
 class OrdersController extends Controller {
 
@@ -77,6 +79,7 @@ class OrdersController extends Controller {
 		$tints = $this->employeeRepo->getListByJobWarehouse(2, array_keys($warehouses)[0]);
 		$brands = $this->brandRepo->getList();
 		$colors = $this->colorRepo->getList('code', 'code');
+
 		// $modelos = ['Seleccionar'];
 		$modelos = $this->modeloRepo->getListGroup('brand');
 		return view('partials.create', compact('payment_conditions', 'currencies', 'my_companies', 'warehouses', 'w', 'painters', 'tints', 'brands', 'modelos', 'colors'));
@@ -170,7 +173,9 @@ class OrdersController extends Controller {
 		$tints = $this->employeeRepo->getListByJobWarehouse(2, $model->warehouse_id);
 		$brands = $this->brandRepo->getList();
 		$modelos = $this->modeloRepo->getListGroup('brand');
-		return view('partials.create', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos'));
+		$favorites = Stock::where('warehouse_id', 1)->where('is_favorite', 1)->with('product.sub_category')->get();
+		//dd($favorites);
+		return view('partials.create', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos', 'favorites'));
 
 		// $model = $this->repo->findOrFail($id);
 		// $my_companies = $this->companyRepo->getListMyCompany();

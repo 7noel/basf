@@ -119,7 +119,7 @@ class ProductsController extends Controller {
 		return \Response::json($result);
 	}
 
-	public function ajaxAutocomplete2($warehouse_id = 1)
+	public function ajaxAutocomplete2($warehouse_id = 1, $category_id=0)
 	{
 		$term = \Input::get('term');
 		ini_set('memory_limit','1024M');
@@ -127,11 +127,14 @@ class ProductsController extends Controller {
 		// dd($models);
 		$result=[];
 		foreach ($models as $model) {
-			$result[]=[
-				'value' => $model->product->name,
-				'id' => $model,
-				'label' => $model->product->intern_code.' | '.$model->product->name
-			];
+			if ($category_id == 0 or $category_id == $model->product->sub_category->category_id) {
+				$result[]=[
+					'value' => $model->product->name,
+					'id' => $model,
+					'label' => $model->product->intern_code.' | '.$model->product->name
+				];
+			}
+			
 		}
 		return \Response::json($result);
 	}

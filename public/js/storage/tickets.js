@@ -14,7 +14,7 @@ $(document).ready(function(){
 		if ( !$($this).data("autocomplete") ) {
 			e.preventDefault();
 			$($this).autocomplete({
-				source: "/api/stocks/autocompleteAjax/" + $w + "/",
+				source: "/api/stocks/autocompleteAjax/" + $w + "/0/",
 				minLength: 4,
 				select: function(event, ui){
 					$p = ui.item.id;

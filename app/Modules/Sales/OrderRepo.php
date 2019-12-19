@@ -65,6 +65,9 @@ class OrderRepo extends BaseRepo{
 		$total = 0;
 		if (isset($data['details'])) {
 			foreach ($data['details'] as $key => $detail) {
+				if ($detail['quantity']==0 or $detail['quantity']=='') {
+					$data['detail'][$key]['is_deleted'] = true;
+				}
 				if (!isset($detail['is_deleted'])) {
 					$p = $detail['value'] * (100 + config('options.tax.igv')) / 100;
 					$vt = round( $detail['value'] * $detail['quantity'] * (100-$detail['d1']) * (100-$detail['d2']) / 100 )/100;
