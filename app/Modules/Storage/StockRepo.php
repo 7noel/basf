@@ -33,6 +33,7 @@ class StockRepo extends BaseRepo{
 	}
 	public function autocomplete($warehouse_id, $term)
 	{
+		$warehouse_id = 9;
 		return Stock::with('product.unit')->where('warehouse_id', '=', $warehouse_id)
 			->whereHas('product', function ($q) use ($term){
 				$q->where('name','like',"%$term%")
