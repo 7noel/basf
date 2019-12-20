@@ -165,6 +165,7 @@ class OrdersController extends Controller {
 	public function createByQuote($quote_id)
 	{
 		$model = $this->repo->findOrFail($quote_id);
+		$order_id = $model->id;
 		$my_companies = $this->companyRepo->getListMyCompany();
 		$payment_conditions = $this->paymentConditionRepo->getList();
 		$currencies = $this->currencyRepo->getList('symbol');
@@ -173,9 +174,10 @@ class OrdersController extends Controller {
 		$tints = $this->employeeRepo->getListByJobWarehouse(2, $model->warehouse_id);
 		$brands = $this->brandRepo->getList();
 		$modelos = $this->modeloRepo->getListGroup('brand');
-		$favorites = Stock::where('warehouse_id', 1)->where('is_favorite', 1)->with('product.sub_category')->get();
+		$colors = $this->colorRepo->getList('code', 'code');
+		$favorites = Stock::where('warehouse_id', 1)->where('is_favorite', 1)->with('product.sub_category', 'product.unit')->get();
 		//dd($favorites);
-		return view('partials.create', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos', 'favorites'));
+		return view('sales.orders.create_by_oc', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos', 'favorites', 'colors', 'order_id'));
 
 		// $model = $this->repo->findOrFail($id);
 		// $my_companies = $this->companyRepo->getListMyCompany();

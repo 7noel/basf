@@ -135,9 +135,10 @@ $(document).ready(function(){
 function setRowProduct($this, $p) {
 	console.log($p)
 	if(isDesignEnabled($this, $p.id)){
-		$($this).parent().parent().find('.productId').val($p.id);
-		$($this).parent().parent().find('.txtProduct').val($p.name);
-		$($this).parent().parent().find('.unitId').val($p.unit_id);
+		$($this).parent().parent().find('.productId').val($p.product.id);
+		$($this).parent().parent().find('.stockId').val($p.id);
+		$($this).parent().parent().find('.txtProduct').val($p.product.name);
+		$($this).parent().parent().find('.unitId').val($p.product.unit_id);
 		$($this).parent().parent().find('.txtValue').val($p.value_dispatch);
 		$($this).parent().parent().find('.txtPrecio').val(($p.value_dispatch*1.18).toFixed(6));
 		$($this).parent().parent().find('.txtDscto').val(window.descuento1);
@@ -259,6 +260,7 @@ function renderTemplateRowProduct (data) {
 	var clone = activateTemplate("#template-row-item");
 	var items = $('#items').val();
 	clone.querySelector("[data-productid]").setAttribute("name", "details[" + items + "][product_id]");
+	clone.querySelector("[data-stockid]").setAttribute("name", "details[" + items + "][stock_id]");
 	clone.querySelector("[data-unitid]").setAttribute("name", "details[" + items + "][unit_id]");
 	clone.querySelector("[data-product]").setAttribute("name", "details[" + items + "][txtProduct]");
 	clone.querySelector("[data-cantidad]").setAttribute("name", "details[" + items + "][quantity]");

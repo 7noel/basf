@@ -68,7 +68,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('amortization', 12,2);
             $table->decimal('exchange', 12,2);
             $table->decimal('exchange_sunat', 12,2);
-            $table->integer('order_id')->unsigned();
+            $table->integer('order_id')->unsigned(); // id de la oc | solo colocarlo en los despachos creados a partir de una oc
             $table->integer('user_id')->unsigned();
             $table->text('comment');
 

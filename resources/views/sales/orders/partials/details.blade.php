@@ -25,7 +25,8 @@
 									<tr data-id="{{ $detail->id }}" class="{{ 'cat'.$detail->product->sub_category->category_id }}">
 										{!! Form::hidden("details[$i][id]", $detail->id, ['class'=>'detailId','data-detailId'=>'']) !!}
 										{!! Form::hidden("details[$i][product_id]", $detail->product_id, ['class'=>'productId','data-productid'=>'']) !!}
-										{!! Form::hidden("details[$i][unit_id]", $detail->unit_id, ['class'=>'unitId','data-unitid'=>'']) !!}
+										{!! Form::hidden("details[$i][stock_id]", $detail->stock_id, ['class'=>'stockId','data-stockid'=>'']) !!}
+										{!! Form::hidden("details[$i][unit_id]", $detail->product->unit_id, ['class'=>'unitId','data-unitid'=>'']) !!}
 										<td><span data-labelid class="intern_code">{{ $detail->product->intern_code }}</span></td>
 										<td>{!! Form::text("details[$i][txtProduct]", $detail->product->name, ['class'=>'form-control input-sm txtProduct', 'data-product'=>'', 'required'=>'required', 'disabled']); !!}</td>
 										<td>{!! Form::text("details[$i][quantity]", $detail->quantity, ['class'=>'form-control input-sm txtCantidad text-right', 'data-cantidad'=>'']) !!}</td>
@@ -41,11 +42,13 @@
 									</tr>
 									@php $i++; @endphp
 								@empty
+									@if(isset($order_id))
 									@foreach($favorites->whereIn('product.sub_category.category_id', [1, 2]) as $detail)
 
 									<tr class="{{ 'cat'.$detail->product->sub_category->category_id }}">
+										{!! Form::hidden("details[$i][stock_id]", $detail->stock_id, ['class'=>'stockId','data-stockid'=>'']) !!}
 										{!! Form::hidden("details[$i][product_id]", $detail->product_id, ['class'=>'productId','data-productid'=>'']) !!}
-										{!! Form::hidden("details[$i][unit_id]", $detail->unit_id, ['class'=>'unitId','data-unitid'=>'']) !!}
+										{!! Form::hidden("details[$i][unit_id]", $detail->product->unit_id, ['class'=>'unitId','data-unitid'=>'']) !!}
 										<td><span data-labelid class="intern_code">{{ $detail->product->intern_code }}</span></td>
 										<td>{!! Form::text("details[$i][txtProduct]", $detail->product->name, ['class'=>'form-control input-sm txtProduct', 'data-product'=>'', 'required'=>'required', 'disabled']); !!}</td>
 										<td>{!! Form::text("details[$i][quantity]", 0, ['class'=>'form-control input-sm txtCantidad text-right', 'data-cantidad'=>'']) !!}</td>
@@ -61,6 +64,7 @@
 									</tr>
 									@php $i++; @endphp
 									@endforeach
+									@endif
 								@endforelse
 							@endif
 							</tbody>
@@ -70,7 +74,8 @@
 						<template id="template-row-item">
 							<tr>
 								{!! Form::hidden('data1', null, ['class'=>'productId','data-productid'=>'']) !!}
-								{!! Form::hidden('data2', null, ['class'=>'unitId','data-unitid'=>'']) !!}
+								{!! Form::hidden('data2', null, ['class'=>'stockId','data-stockid'=>'']) !!}
+								{!! Form::hidden('data3', null, ['class'=>'unitId','data-unitid'=>'']) !!}
 								<td><span data-labelid class="intern_code"></span></td>
 								<td>{!! Form::text('data3', null, ['class'=>'col-sm-4 form-control input-sm txtProduct', 'data-product'=>'', 'required'=>'required']); !!}</td>
 								<td>{!! Form::text('data4', null, ['class'=>'form-control input-sm txtCantidad text-right', 'data-cantidad'=>'']) !!}</td>
