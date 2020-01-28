@@ -34,7 +34,7 @@ class Permissions {
 			}
 		}
 		//return redirect()->to('home');
-		return view('errors.access_denied');
+		return response(view('errors.access_denied'));
 		}
 	}
 
