@@ -55,6 +55,12 @@ class CompanyRepo extends BaseRepo{
 			$warehouseRepo->saveMany($data['warehouses'], ['key'=>'company_id', 'value'=>$model->id]);
 		}
 
+
+		if (!isset($data['brands'])) {
+			$data['brands'] = [];
+		}
+		$model->brands()->sync($data['brands']);
+
 		return $model;
 	}
 

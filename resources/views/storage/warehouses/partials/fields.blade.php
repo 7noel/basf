@@ -41,7 +41,7 @@
 						</div>
 					</div>
 
-					
+					@if(isset($model))
 					<div class="form-group">
 						<div class="col-sm-4 col-sm-offset-1">
 							<label>Empleados No Autorizados</label>
@@ -75,3 +75,8 @@
 							</select>
 						</div>
 					</div>
+					@else
+					<div class="alert alert-info" role="alert">
+						Para asignar empleados a esta sede debe crearla y luego editarla.
+					</div>
+					@endif

@@ -53,8 +53,9 @@ class WarehousesController extends Controller {
 	public function edit($id)
 	{
 		$model = $this->repo->findOrFail($id);
-		$employees = $this->employeeRepo->toWarehouses($model->company_id);
-		//dd($employees);
+		$employees = $this->employeeRepo->toWarehouses($model->company_id, $model->provider_id);
+		// $employees = $this->employeeRepo->toWarehouses($model->company_id);
+		// dd($employees);
 		$employees = $employees->diff($model->employees);
 		$jobs = $this->jobRepo->all();
 		$ubigeo = $this->ubigeoRepo->listUbigeo($model->ubigeo_id);

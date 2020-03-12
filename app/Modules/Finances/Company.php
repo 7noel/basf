@@ -48,4 +48,8 @@ class Company extends Model implements Auditable {
 			$query->where('company_name', 'LIKE', "%$name%")->orWhere('doc', 'LIKE', "%$name%");
 		}
 	}
+	public function brands()
+	{
+		return $this->belongsToMany('App\Modules\Logistics\Brand');
+	}
 }

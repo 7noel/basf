@@ -8,6 +8,7 @@ use App\Modules\Base\IdTypeRepo;
 use App\Modules\Finances\CompanyRepo;
 use App\Modules\Base\UbigeoRepo;
 use App\Modules\Base\SunatRepo;
+use App\Modules\Logistics\BrandRepo;
 
 use App\Http\Requests\Finances\FormCompanyRequest;
 
@@ -17,12 +18,14 @@ class CompaniesController extends Controller {
 	protected $ubigeoRepo;
 	protected $sunatRepo;
 	protected $idTypeRepo;
+	protected $brandRepo;
 
-	public function __construct(CompanyRepo $repo, UbigeoRepo $ubigeoRepo, IdTypeRepo $idTypeRepo, SunatRepo $sunatRepo) {
+	public function __construct(CompanyRepo $repo, UbigeoRepo $ubigeoRepo, IdTypeRepo $idTypeRepo, SunatRepo $sunatRepo, BrandRepo $brandRepo) {
 		$this->repo = $repo;
 		$this->ubigeoRepo = $ubigeoRepo;
 		$this->idTypeRepo = $idTypeRepo;
 		$this->sunatRepo = $sunatRepo;
+		$this->brandRepo = $brandRepo;
 
 	}
 
@@ -50,11 +53,12 @@ class CompaniesController extends Controller {
 
 	public function create()
 	{
+		$brands = $this->brandRepo->all();
 		$id_types = $this->idTypeRepo->getList('symbol');
 		$ubigeo = $this->ubigeoRepo->listUbigeo();
 		$countries = $this->sunatRepo->getList2('FE', 4);
 		$providers = $this->repo->getProviders();
-		return view('partials.create', compact('id_types', 'ubigeo', 'countries', 'providers'));
+		return view('partials.create', compact('id_types', 'ubigeo', 'countries', 'providers', 'brands'));
 	}
 
 	public function store(FormCompanyRequest $request)
@@ -79,11 +83,13 @@ class CompaniesController extends Controller {
 	public function edit($id)
 	{
 		$model = $this->repo->findOrFail($id);
+		$brands = $this->brandRepo->all();
+		$brands = $brands->diff($model->brands);
 		$id_types = $this->idTypeRepo->getList('symbol');
 		$ubigeo = $this->ubigeoRepo->listUbigeo($model->ubigeo_id);
 		$countries = $this->sunatRepo->getList2('FE', 4);
 		$providers = $this->repo->getProviders();
-		return view('partials.edit', compact('model', 'id_types', 'ubigeo', 'countries', 'providers'));
+		return view('partials.edit', compact('model', 'id_types', 'ubigeo', 'countries', 'providers', 'brands'));
 	}
 
 	public function update($id, FormCompanyRequest $request)

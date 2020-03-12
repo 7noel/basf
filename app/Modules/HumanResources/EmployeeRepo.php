@@ -79,10 +79,12 @@ class EmployeeRepo extends BaseRepo{
 	{
 		return Employee::select('id', 'full_name', 'job_id')->whereHas('warehouses', function($q) use ($warehouse_id){$q->where('warehouse_id', $warehouse_id);})->get();
 	}
-	public function toWarehouses($company_id)
+	//public function toWarehouses($company_id)
+	public function toWarehouses($company_id, $provider_id)
 	{
 		//dd($company_id);
 		//return Employee::where(function($query) use ($company_id) {$query->where('job_id', '3')->where('company_id', $company_id);})->get();
-		return Employee::where('job_id','!=',3)->orWhere(function($query) use ($company_id) {$query->where('job_id', '3')->where('company_id', $company_id);})->get();
+		//return Employee::where('job_id','!=',3)->orWhere(function($query) use ($company_id) {$query->where('job_id', '3')->where('company_id', $company_id);})->get();
+		return Employee::where('company_id', $company_id)->orWhere('company_id', $provider_id)->get();
 	}
 }
