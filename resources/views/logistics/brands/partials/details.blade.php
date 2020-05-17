@@ -73,7 +73,7 @@
 								<tr data-id="{{ $color->id }}">
 									{!! Form::hidden("colors[$i][id]", $color->id, ['class'=>'colorId','data-colorId'=>'']) !!}
 									<td>{!! Form::text("colors[$i][code]", $color->code, ['class'=>'form-control input-sm code uppercase', 'data-code'=>'', 'required'=>'required']) !!}</td>
-									<td>{!! Form::text("colors[$i][description]", $color->description, ['class'=>'form-control input-sm other_code uppercase', 'data-OtherCode'=>'']) !!}</td>
+									<td>{!! Form::text("colors[$i][other_code]", $color->other_code, ['class'=>'form-control input-sm other_code uppercase', 'data-OtherCode'=>'']) !!}</td>
 									<td>{!! Form::text("colors[$i][description]", $color->description, ['class'=>'form-control input-sm description', 'data-description'=>'']) !!}</td>
 									<td>{!! Form::text("colors[$i][modelos]", $color->modelos, ['class'=>'form-control input-sm modelos', 'data-modelos'=>'']) !!}</td>
 									<td>{!! Form::checkbox("colors[$i][is_tricapa]", '1', ($color->is_tricapa)? true : false, ['class'=>'is_tricapa', 'data-isTricapa'=>'']) !!}</td>

@@ -13,6 +13,7 @@ class BrandRepo extends BaseRepo{
 
 	public function prepareData($data)
 	{
+		// dd($data);
 		if (!isset($data['is_car'])) {
 			$data['is_car'] = false;
 		}
@@ -39,8 +40,12 @@ class BrandRepo extends BaseRepo{
 		$colorRepo= new ColorRepo;
 		$modeloRepo= new ModeloRepo;
 		$model = parent::save($data, $id);
-		$colorRepo->saveMany($data['colors'], ['key' => 'brand_id', 'value' => $model->id]);
-		$modeloRepo->saveMany($data['modelos'], ['key' => 'brand_id', 'value' => $model->id]);
+		if (isset($data['colors'])) {
+			$colorRepo->saveMany($data['colors'], ['key' => 'brand_id', 'value' => $model->id]);
+		}
+		if (isset($data['modelos'])) {
+			$modeloRepo->saveMany($data['modelos'], ['key' => 'brand_id', 'value' => $model->id]);
+		}
 		return $model;
 	}
 
