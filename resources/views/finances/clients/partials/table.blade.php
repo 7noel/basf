@@ -5,6 +5,7 @@
 								<th>Razón Social</th>
 								<th>DNI/RUC</th>
 								<th>Distribuidor</th>
+								<th class="text-center">#Sedes</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
@@ -15,6 +16,7 @@
 								<td>{{ $model->company_name }} </td>
 								<td>{{ $model->doc }} </td>
 								<td>{{ (isset($model->provider->company_name)) ? $model->provider->company_name : $model->provider_id }}</td>
+								<td class="text-center">{{ $model->warehouses->count() }}</td>
 								<td>
 									<div class="btn-group">
 										<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

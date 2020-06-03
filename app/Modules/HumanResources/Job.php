@@ -18,5 +18,9 @@ class Job extends Model implements Auditable
 			$query->where('name', 'LIKE', "%$name%");
 		}
 	}
+	public function employees()
+	{
+		return $this->hasMany('App\Modules\HumanResources\Employee');
+	}
 
 }
