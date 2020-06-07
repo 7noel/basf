@@ -14,7 +14,7 @@ class Stock extends Model implements Auditable {
 
 	public function warehouse()
 	{
-		return $this->belongsTo('App\Modules\Storage\WareHouse');
+		return $this->belongsTo('App\Modules\Storage\Warehouse');
 	}
 	public function product()
 	{
