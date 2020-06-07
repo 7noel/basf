@@ -3,6 +3,7 @@
 							<tr>
 								<th>#</th>
 								<th>Nombre</th>
+								<th>Categoría</th>
 								<th>Sub Categoría</th>
 								<th>Unidad</th>
 								<th>Acciones</th>
@@ -11,10 +12,11 @@
 						<tbody>
 							@foreach($models as $model)
 							<tr data-id="{{ $model->id }}">
-								<td>{{ $model->id }}</td>
-								<td>{{ $model->name }} </td>
-								<td>{{ $model->sub_category->name }} </td>
-								<td>{{ $model->unit->symbol }} </td>
+								<td>{{ $model->intern_code }}</td>
+								<td>{{ $model->name }}</td>
+								<td>{{ $model->sub_category->category->name }}</td>
+								<td>{{ $model->sub_category->name }}</td>
+								<td>{{ $model->unit->symbol }}</td>
 								<td>
 									<div class="btn-group">
 										<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="kardex">

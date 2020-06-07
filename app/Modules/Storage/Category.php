@@ -19,7 +19,7 @@ class Category extends Model implements Auditable {
 	}
 	public function sub_categories()
 	{
-		return $this->hasMany('App\Modules\Base\SubCategory');
+		return $this->hasMany('App\Modules\Storage\SubCategory');
 	}
 
 }
