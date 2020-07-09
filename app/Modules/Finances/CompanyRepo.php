@@ -15,9 +15,9 @@ class CompanyRepo extends BaseRepo{
 	public function index($filter = false, $search = false)
 	{
 		if ($filter and $search) {
-			return Company::where($this->getType(), 1)->$filter($search)->orderBy("$filter", 'ASC')->paginate();
+			return Company::where($this->getType(), 1)->$filter($search)->where('provider_id',10)->orderBy("$filter", 'ASC')->paginate();
 		} else {
-			return Company::where($this->getType(), 1)->orderBy('id', 'DESC')->paginate();
+			return Company::where($this->getType(), 1)->where('provider_id',10)->orderBy('id', 'DESC')->paginate();
 		}
 	}
 	public function autocomplete($term)

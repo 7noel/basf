@@ -10,6 +10,15 @@ class EmployeeRepo extends BaseRepo{
 	public function getModel(){
 		return new Employee;
 	}
+
+	public function index($filter = false, $search = false)
+	{
+		if ($filter and $search) {
+			return $this->model->$filter($search)->where('company_id',10)->orderBy("$filter", 'ASC')->paginate();
+		} else {
+			return $this->model->where('company_id',10)->orderBy('id', 'DESC')->paginate();
+		}
+	}
 	public function autocomplete($term)
 	{
 		return Employee::where('full_name','like',"%$term%")->get();
