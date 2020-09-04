@@ -160,7 +160,7 @@ class OrderRepo extends BaseRepo{
 
 	public function filter($filter, $order_type)
 	{
-		$q = Order::where('my_company', session('my_company')->id)->where('order_type', $order_type);
+		$q = Order::where('order_type', $order_type);
 		if (!\Auth::user()->is_superuser) {
 			$ws = \Auth::user()->employee->warehouses->pluck('id')->toArray();
 			$q->whereIn('warehouse_id', $ws);
@@ -169,7 +169,7 @@ class OrderRepo extends BaseRepo{
 			return $q->where('sn', $filter->sn)->get();
 		} else {
 			// $q->where('created_at', '>=', $filter->f1.' 00:00:00')->where('created_at', '<=', $filter->f2.' 23:59:59');
-			$q->where('created_at', '>=', date('Y-m-01 00:00:00'))->where('created_at', '<=', $filter->f2.' 23:59:59');
+			$q->where('created_at', '>=', $filter->f1.' 00:00:00')->where('created_at', '<=', $filter->f2.' 23:59:59');
 			if($filter->painter_id > 0) {
 				$q->where('painter_id', $filter->painter_id);
 			}

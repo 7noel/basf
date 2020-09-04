@@ -53,8 +53,8 @@ class OrdersController extends Controller {
 			$filter->sn = '';
 			$filter->painter_id = '';
 			$filter->status = '';
-			$filter->f1 = date('Y-m-d');
 			$filter->f2 = date('Y-m-d');
+			$filter->f1 = date('Y-m-d',strtotime($filter->f2."- 1 month")); ;
 		}
 		$models = $this->repo->filter($filter, $order_type);
 
