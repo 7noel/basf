@@ -14,10 +14,24 @@ class CompanyRepo extends BaseRepo{
 
 	public function index($filter = false, $search = false)
 	{
+		$current_company = \Auth::user()->employee->company_id;
+		$ids=Company::where('provider_id', $current_company)->orWhere('id', $current_company)->pluck('id')->toArray();
 		if ($filter and $search) {
-			return Company::where($this->getType(), 1)->$filter($search)->where('provider_id',10)->orderBy("$filter", 'ASC')->paginate();
+			if ($current_company == 1 or $current_company == 0) { // Si es un usuario administrador de todo el sistema
+				return Company::where($this->getType(), 1)->$filter($search)->orderBy("$filter", 'ASC')->paginate();
+			} else {
+				return Company::whereIn('id', $ids)->where($this->getType(), 1)->$filter($search)->orderBy("$filter", 'ASC')->paginate();
+			}
+			
+			//return Company::where($this->getType(), 1)->$filter($search)->where('provider_id',10)->orderBy("$filter", 'ASC')->paginate();
 		} else {
-			return Company::where($this->getType(), 1)->where('provider_id',10)->orderBy('id', 'DESC')->paginate();
+			if ($current_company == 1 or $current_company == 0) { // Si es un usuario administrador de todo el sistema
+				return Company::where($this->getType(), 1)->orderBy('id', 'DESC')->paginate();
+			} else {
+				return Company::whereIn('id', $ids)->where($this->getType(), 1)->orderBy('id', 'DESC')->paginate();
+			}
+			return Company::where($this->getType(), 1)->orderBy('id', 'DESC')->paginate();
+			//return Company::where($this->getType(), 1)->where('provider_id',10)->orderBy('id', 'DESC')->paginate();
 		}
 	}
 	public function autocomplete($term)

@@ -4,6 +4,7 @@ namespace App\Modules\HumanResources;
 
 use App\Modules\Base\BaseRepo;
 use App\Modules\HumanResources\Employee;
+use App\Modules\Finances\Company;
 
 class EmployeeRepo extends BaseRepo{
 
@@ -13,10 +14,24 @@ class EmployeeRepo extends BaseRepo{
 
 	public function index($filter = false, $search = false)
 	{
+		$current_company = \Auth::user()->employee->company_id;
+		$ids=Company::where('provider_id', $current_company)->orWhere('id', $current_company)->pluck('id')->toArray();
+		//dd($ids);
 		if ($filter and $search) {
-			return $this->model->$filter($search)->where('company_id',10)->orderBy("$filter", 'ASC')->paginate();
+			if ($current_company == 1 or $current_company == 0) { // Si es un usuario administrador de todo el sistema
+				return $this->model->$filter($search)->orderBy("$filter", 'ASC')->paginate();
+			} else { // Otro caso
+				return $this->model->$filter($search)->whereIn('company_id', $ids)->orderBy("$filter", 'ASC')->paginate();
+			}
+			
+			//return $this->model->$filter($search)->where('company_id',10)->orderBy("$filter", 'ASC')->paginate();
 		} else {
-			return $this->model->where('company_id',10)->orderBy('id', 'DESC')->paginate();
+			if ($current_company == 1 or $current_company == 0) { // Si es un usuario administrador de todo el sistema
+				return $this->model->orderBy("id", 'DESC')->paginate();
+			} else { // Otro caso
+				return $this->model->whereIn('company_id', $ids)->orderBy('id', 'DESC')->paginate();
+			}
+			//return $this->model->where('company_id',10)->orderBy('id', 'DESC')->paginate();
 		}
 	}
 	public function autocomplete($term)

@@ -4,6 +4,7 @@ namespace App\Modules\Storage;
 
 use App\Modules\Base\BaseRepo;
 use App\Modules\Storage\Warehouse;
+use App\Modules\Finances\Company;
 
 class WarehouseRepo extends BaseRepo{
 
@@ -22,10 +23,22 @@ class WarehouseRepo extends BaseRepo{
 	}
 	public function index($filter = false, $search = false)
 	{
+		$current_company = \Auth::user()->employee->company_id;
+		$ids = Company::where('provider_id', $current_company)->orWhere('id', $current_company)->pluck('id')->toArray();
 		if ($filter and $search) {
-			return Warehouse::$filter($search)->with('ubigeo')->orderBy("$filter", 'ASC')->paginate();
+			if ($current_company == 1 or $current_company == 0) { // Si es un usuario administrador de todo el sistema
+				return Warehouse::$filter($search)->with('ubigeo')->orderBy("$filter", 'ASC')->paginate();
+			} else {
+				return Warehouse::$filter($search)->whereIn('company_id', $ids)->with('ubigeo')->orderBy("$filter", 'ASC')->paginate();
+			}
+			
 		} else {
-			return Warehouse::with('ubigeo')->orderBy('id', 'DESC')->paginate();
+			if ($current_company == 1 or $current_company == 0) { // Si es un usuario administrador de todo el sistema
+				return Warehouse::with('ubigeo')->orderBy('id', 'DESC')->paginate();
+			} else {
+				return Warehouse::with('ubigeo')->whereIn('company_id', $ids)->orderBy('id', 'DESC')->paginate();
+			}
+			
 		}
 	}
 	public function ajaxList()

@@ -10,7 +10,15 @@
 							{!! Form::text('sn', null, ['class'=>'form-control text-center', 'readonly']) !!}
 						</div>
 						<div class="col-sm-2">
-							{!! Form::label('warehouse_id','Almacén', ['class'=>'control-label']) !!}
+							{!! Form::label('oc','O. Compra', ['class'=>'control-label']) !!}
+							{!! Form::text('oc', null, ['class'=>'form-control']) !!}
+						</div>
+						<div class="col-sm-2">
+							{!! Form::label('ot','O. Trabajo', ['class'=>'control-label']) !!}
+							{!! Form::text('ot', null, ['class'=>'form-control']) !!}
+						</div>
+						<div class="col-sm-2">
+							{!! Form::label('warehouse_id','Sede', ['class'=>'control-label']) !!}
 							{!! Form::select('warehouse_id', $warehouses, ((isset($model->warehouse_id)) ? $model->warehouse_id : null),['class'=>'form-control']); !!}
 						</div>
 						<div class="col-sm-2">
@@ -20,14 +28,6 @@
 						<div class="col-sm-2">
 							{!! Form::label('tint_id','Matizador', ['class'=>'control-label']) !!}
 							{!! Form::select('tint_id', $tints, ((isset($model->tint_id)) ? $model->tint_id : null),['class'=>'form-control']); !!}
-						</div>
-						<div class="col-sm-2">
-							{!! Form::label('oc','O. Compra', ['class'=>'control-label']) !!}
-							{!! Form::text('oc', null, ['class'=>'form-control']) !!}
-						</div>
-						<div class="col-sm-2">
-							{!! Form::label('ot','O. Trabajo', ['class'=>'control-label']) !!}
-							{!! Form::text('ot', null, ['class'=>'form-control']) !!}
 						</div>
 					</div>
 					<div class="form-group form-group-sm">
