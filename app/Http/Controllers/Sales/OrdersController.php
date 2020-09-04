@@ -42,6 +42,10 @@ class OrdersController extends Controller {
 	}
 	public function filter()
 	{
+		$warehouses = $this->warehouseRepo->getList();
+		$w = (array_keys($warehouses)[0]=='') ? '' : $this->warehouseRepo->find(array_keys($warehouses[array_keys($warehouses)[0]])[0])->company->provider->id;
+		//dd($warehouses[array_keys($warehouses)[1]]);
+		//dd($warehouses);
 		if (explode('.', \Request::route()->getName())[0] == 'quotes') {
 			$order_type = 2;
 		} else {
@@ -50,17 +54,22 @@ class OrdersController extends Controller {
 		
 		$filter = (object) \Request::all();
 		if( !((array) $filter) ) {
+			$filter->warehouse_id = session('sede')->id;
 			$filter->sn = '';
 			$filter->painter_id = '';
 			$filter->status = '';
 			$filter->f2 = date('Y-m-d');
 			$filter->f1 = date('Y-m-d',strtotime($filter->f2."- 1 month")); ;
 		}
+		if (session('sede')->id != $filter->warehouse_id) {
+			session(['sede' => $this->warehouseRepo->find($filter->warehouse_id)]);
+		}
+		//dd(session('sede'));
 		$models = $this->repo->filter($filter, $order_type);
 
 		$painters = $this->employeeRepo->getListByJobWarehouse(3);
 		$payment_conditions = $this->paymentConditionRepo->getList();
-		return view('partials.filter',compact('models', 'filter', 'painters'));
+		return view('partials.filter',compact('models', 'filter', 'painters', 'warehouses'));
 	}
 	public function index()
 	{
@@ -75,8 +84,10 @@ class OrdersController extends Controller {
 		$currencies = $this->currencyRepo->getList('symbol');
 		$warehouses = $this->warehouseRepo->getList();
 		$w = (array_keys($warehouses)[0]=='') ? '' : $this->warehouseRepo->find(array_keys($warehouses[array_keys($warehouses)[0]])[0])->company->provider->id;
-		$painters = $this->employeeRepo->getListByJobWarehouse(3, array_keys($warehouses)[0]);
-		$tints = $this->employeeRepo->getListByJobWarehouse(2, array_keys($warehouses)[0]);
+		//$painters = $this->employeeRepo->getListByJobWarehouse(3, array_keys($warehouses)[0]);
+		$painters = $this->employeeRepo->getListByJobWarehouse(3, session('sede')->id);
+		//$tints = $this->employeeRepo->getListByJobWarehouse(2, array_keys($warehouses)[0]);
+		$tints = $this->employeeRepo->getListByJobWarehouse(2, session('sede')->id);
 		$brands = $this->brandRepo->getList();
 		$colors = $this->colorRepo->getList('code', 'code');
 

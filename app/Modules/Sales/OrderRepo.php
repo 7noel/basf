@@ -161,12 +161,13 @@ class OrderRepo extends BaseRepo{
 	public function filter($filter, $order_type)
 	{
 		$q = Order::where('order_type', $order_type);
-		if (!\Auth::user()->is_superuser) {
-			$ws = \Auth::user()->employee->warehouses->pluck('id')->toArray();
-			$q->whereIn('warehouse_id', $ws);
-		}
+		// if (!\Auth::user()->is_superuser) {
+		// 	$ws = \Auth::user()->employee->warehouses->pluck('id')->toArray();
+		// 	$q->whereIn('warehouse_id', $ws);
+		// }
+		$q->where('warehouse_id', $filter->warehouse_id);
 		if ($filter->sn > 0) {
-			return $q->where('sn', $filter->sn)->orderBy('created_at', 'DESC')->get();
+			return $q->where('warehouse_id', $filter->warehouse_id)->where('sn', $filter->sn)->orderBy('created_at', 'DESC')->get();
 		} else {
 			// $q->where('created_at', '>=', $filter->f1.' 00:00:00')->where('created_at', '<=', $filter->f2.' 23:59:59');
 			$q->where('created_at', '>=', $filter->f1.' 00:00:00')->where('created_at', '<=', $filter->f2.' 23:59:59');

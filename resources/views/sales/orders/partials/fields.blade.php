@@ -11,7 +11,7 @@
 						</div>
 						<div class="col-sm-2">
 							{!! Form::label('warehouse_id','Almacén', ['class'=>'control-label']) !!}
-							{!! Form::select('warehouse_id', $warehouses, ((isset($model->warehouse_id)) ? $model->warehouse_id : null),['class'=>'form-control']); !!}
+							{!! Form::select('warehouse_id', $warehouses, ((isset($model->warehouse_id)) ? $model->warehouse_id : session('sede')->id),['class'=>'form-control']); !!}
 						</div>
 						<div class="col-sm-2">
 							{!! Form::label('painter_id','Pintor', ['class'=>'control-label']) !!}

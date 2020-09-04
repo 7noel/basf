@@ -50,6 +50,11 @@ class WarehouseRepo extends BaseRepo{
 	{
 		$ws = (\Auth::user()->is_superuser) ? Warehouse::with('company')->get() : \Auth::user()->employee->warehouses;
 		$r = [];
+		if (null == session('sede')) {
+            $c = new Warehouse;
+            session(['sede' => $ws[0]]);
+        }
+        //dd(session('sede')->id);
 		foreach ($ws as $key => $u) {
 			$r[$u->company->company_name][$u->$id] = $u->$name;
 		}

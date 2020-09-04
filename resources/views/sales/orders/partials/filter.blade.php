@@ -1,4 +1,8 @@
 						<div class="form-group form-group-sm">
+							{!! Form::label('warehouse_id','SEDE', ['class'=>'col-sm-2 control-label']) !!}
+							<div class="col-sm-2 has-success">
+							{!! Form::select('warehouse_id', $warehouses, session('sede')->id, ['class'=>'form-control', 'id'=>'warehouse_id', 'required']); !!}
+							</div>
 							{!! Form::label('f1','Desde', ['class'=>'col-sm-2 control-label']) !!}
 							<div class="col-sm-2">
 							{!! Form::date('f1', null, ['class'=>'form-control', 'id'=>'f1']); !!}
