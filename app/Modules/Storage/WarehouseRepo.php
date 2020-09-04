@@ -48,13 +48,25 @@ class WarehouseRepo extends BaseRepo{
 	}
 	public function getList($name='name', $id='id')
 	{
+		$current_company = \Auth::user()->employee->company_id;
+		$my_ws = \Auth::user()->employee->warehouses;
+		$ids=Warehouse::where('provider_id', $current_company)->orWhere('company_id', $current_company)->pluck('id')->toArray();
 		$ws = (\Auth::user()->is_superuser) ? Warehouse::with('company')->get() : \Auth::user()->employee->warehouses;
+		$ws = (\Auth::user()->is_superuser) ? Warehouse::with('company')->get() : \Auth::user()->employee->warehouses;
+		if (\Auth::user()->is_superuser) {
+			$ws = Warehouse::with('company')->get();
+		} elseif ($my_ws->isNotEmpty()) {
+			$ws = $my_ws;
+		} else {
+			$ws=Warehouse::where('provider_id', $current_company)->orWhere('company_id', $current_company)->get();
+		}
+		//dd($ws[0]);
 		$r = [];
 		if (null == session('sede')) {
             $c = new Warehouse;
             session(['sede' => $ws[0]]);
         }
-        //dd(session('sede')->id);
+        //dd(session('sede'));
 		foreach ($ws as $key => $u) {
 			$r[$u->company->company_name][$u->$id] = $u->$name;
 		}
