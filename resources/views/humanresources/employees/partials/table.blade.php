@@ -3,7 +3,7 @@
 							<tr>
 								<th>#</th>
 								<th>Empleado</th>
-								<th>Documento</th>
+								<th>Usuario</th>
 								<th>Cargo</th>
 								<th>Empresa</th>
 								<th>Acciones</th>
@@ -14,7 +14,7 @@
 							<tr data-id="{{ $model->id }}">
 								<td>{{ $model->id }}</td>
 								<td>{{ $model->full_name }}</td>
-								<td>{{ $model->id_type->symbol.' '.$model->doc }}</td>
+								<td>{{ (isset($model->user->email)) ? $model->user->email : 'SIN USUARIO' }}</td>
 								<td>{{ $model->job->name }}</td>
 								<td>{{ isset($model->company) ? $model->company->company_name : 'BASF' }}</td>
 								<td>
