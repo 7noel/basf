@@ -166,7 +166,7 @@ class OrderRepo extends BaseRepo{
 			$q->whereIn('warehouse_id', $ws);
 		}
 		if ($filter->sn > 0) {
-			return $q->where('sn', $filter->sn)->get();
+			return $q->where('sn', $filter->sn)->orderBy('created_at', 'DESC')->get();
 		} else {
 			// $q->where('created_at', '>=', $filter->f1.' 00:00:00')->where('created_at', '<=', $filter->f2.' 23:59:59');
 			$q->where('created_at', '>=', $filter->f1.' 00:00:00')->where('created_at', '<=', $filter->f2.' 23:59:59');
@@ -176,7 +176,7 @@ class OrderRepo extends BaseRepo{
 			if($filter->status > 0) {
 				$q->where('status', $filter->status);
 			}
-			return $q->get();
+			return $q->orderBy('created_at', 'DESC')->get();
 		}
 	}
 }
