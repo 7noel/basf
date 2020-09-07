@@ -5,13 +5,19 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Modules\Logistics\BrandRepo;
+use App\Modules\Logistics\ModeloRepo;
+use App\Modules\Logistics\ColorRepo;
 
 class BrandsController extends Controller {
 
 	protected $repo;
+	protected $modeloRepo;
+	protected $colorRepo;
 
-	public function __construct(BrandRepo $repo) {
+	public function __construct(BrandRepo $repo, ModeloRepo $modeloRepo, ColorRepo $colorRepo) {
 		$this->repo = $repo;
+		$this->modeloRepo = $modeloRepo;
+		$this->colorRepo = $colorRepo;
 	}
 
 	public function index()
@@ -53,5 +59,16 @@ class BrandsController extends Controller {
 		$model = $this->repo->destroy($id);
 		if (\Request::ajax()) {	return $model; }
 		return redirect()->route('logistics.brands.index');
+	}
+
+	public function colorsByModelo($modelo_id)
+	{
+		$colors = $this->colorRepo->colorsByModelo($modelo_id);
+		return \Response::json($colors);
+	}
+	public function modelosByWarehouse($warehouse_id)
+	{
+		$modelos = $this->modeloRepo->modelosByWarehouse($warehouse_id);
+		return \Response::json($modelos);
 	}
 }

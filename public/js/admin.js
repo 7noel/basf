@@ -61,15 +61,29 @@ $(document).ready(function () {
 	// 	$(this).val(cadena);
 	// });
 
-	//carga almacenes
+	//carga empleados y modelos
 	$('#warehouse_id').change(function(){
 		cargaEmpleados();
+		cargaModelosBySede();
 		var w=$('#warehouse_id').val();
 		if (w==='') {
 			$('#painter_id').html("");
 			$('#tint_id').html("");
+			$('#modelo_id').html("");
+			$('#color_code').html("");
+			$('#color_code2').html("");
 		}
 		cargaEmpresas();
+	});
+
+	//carga colores
+	$('#modelo_id').change(function(){
+		cargaColores();
+		var m=$('#modelo_id').val();
+		if (m==='') {
+			$('#color_code').html("");
+			$('#color_code2').html("");
+		}
 	});
 
 	//carga departamentos
@@ -216,7 +230,7 @@ function cargaEmpresas() {
 	var page ="/distribuidorByWarehouse/" + warehouse_id;
 	if(warehouse_id !== ''){
 		$.get(page, function(data){
-			console.log(data);
+			//console.log(data);
 			$('#company_id').val(data.company_id);
 			$('#provider_id').val(data.provider_id);
 		});
@@ -246,6 +260,52 @@ function cargaEmpleados() {
 		});
 	}
 }
+
+/*carga Modelos*/
+function cargaModelosBySede() {
+	var warehouse_id = $('#warehouse_id option:selected').val();
+	var page ="/modelosByWarehouse/" + warehouse_id;
+	var options = ''
+	if(warehouse_id !== ''){
+		$.get(page, function(data){
+			$('#modelo_id').empty();
+			// $('#modelo_id').prepend("<option value=''>Seleccionar</option>");
+			options = "<option value=''>Seleccionar</option>"
+			$.each(data, function (marca, modelos) {
+				// $('#modelo_id').append("<optgroup label='"+marca+"'>");
+				options += "<optgroup label='"+marca+"'>"
+				//console.log(Obj);
+				$.each(modelos, function (id, modelo) {
+					// $('#modelo_id').append("<option value='"+id+"'>"+modelo+"</option>");
+					options += "<option value='"+id+"'>"+modelo+"</option>"
+				});
+				// $('#modelo_id').append("</optgroup>");
+				options += "</optgroup>"
+			});
+			console.log(options)
+			$('#modelo_id').prepend(options);
+		});
+	}
+}
+
+/*carga colores*/
+function cargaColores() {
+	var modelo_id = $('#modelo_id option:selected').val();
+	var page ="/colorsByModelo/" + modelo_id;
+	if(modelo_id !== ''){
+		$.get(page, function(data){
+			$('#color_code').empty();
+			$('#color_code2').empty();
+			$('#color_code').prepend("<option value=''>Seleccionar</option>");
+			$('#color_code2').prepend("<option value=''>Seleccionar</option>");
+			$.each(data, function (index, Obj) {
+				$('#color_code').append("<option value='"+Obj.code+"'>"+Obj.code+"</option>");
+				$('#color_code2').append("<option value='"+Obj.code+"'>"+Obj.code+"</option>");
+			});
+		});
+	}
+}
+
 
 /*cargar provincias*/
 function cargaProvincias(){
@@ -306,6 +366,7 @@ function loadSubCategories(){
 			});
 		});
 	} else {
+	
 		$('#lstSubCategories').html("");
 	}
 }

@@ -89,10 +89,8 @@ class OrdersController extends Controller {
 		//$tints = $this->employeeRepo->getListByJobWarehouse(2, array_keys($warehouses)[0]);
 		$tints = $this->employeeRepo->getListByJobWarehouse(2, session('sede')->id);
 		$brands = $this->brandRepo->getList();
-		$colors = $this->colorRepo->getList('code', 'code');
-
-		// $modelos = ['Seleccionar'];
-		$modelos = $this->modeloRepo->getListGroup('brand');
+		$colors = ['' => 'Seleccionar'];
+		$modelos = $this->modeloRepo->modelosByWarehouse(session('sede')->id);
 		return view('partials.create', compact('payment_conditions', 'currencies', 'my_companies', 'warehouses', 'w', 'painters', 'tints', 'brands', 'modelos', 'colors'));
 	}
 
@@ -118,8 +116,9 @@ class OrdersController extends Controller {
 		$painters = $this->employeeRepo->getListByJobWarehouse(3, $model->warehouse_id);
 		$tints = $this->employeeRepo->getListByJobWarehouse(2, $model->warehouse_id);
 		$brands = $this->brandRepo->getList();
-		$modelos = $this->modeloRepo->getListGroup('brand');
-		$colors = $this->colorRepo->getList('code', 'code');
+		//$modelos = $this->modeloRepo->getListGroup('brand');
+		$modelos = $this->modeloRepo->modelosByWarehouse($model->warehouse_id);
+		$colors = $this->colorRepo->colorsByModelo($model->modelo_id);
 		return view('partials.edit', compact('model', 'payment_conditions', 'currencies', 'my_companies', 'warehouses', 'painters', 'tints', 'brands', 'modelos', 'colors'));
 	}
 

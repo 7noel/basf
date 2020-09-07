@@ -2,6 +2,7 @@
 
 use App\Modules\Base\BaseRepo;
 use App\Modules\Logistics\Color;
+use App\Modules\Logistics\Modelo;
 
 class ColorRepo extends BaseRepo{
 
@@ -15,5 +16,13 @@ class ColorRepo extends BaseRepo{
 		} else {
 			return Color::with('brand')->orderBy('id', 'DESC')->paginate();
 		}
+	}
+	public function colorsByModelo($modelo_id)
+	{
+		$modelo = Modelo::find($modelo_id);
+		if (\Request::ajax()) {
+			return Color::select('code')->where('brand_id' ,$modelo->brand_id)->orderBY('code', 'ASC')->get();
+		}
+		return ['' => 'Seleccionar']+Color::select('code')->where('brand_id' ,$modelo->brand_id)->orderBY('code', 'ASC')->pluck('code', 'code')->toArray();
 	}
 }
