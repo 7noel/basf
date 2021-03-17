@@ -42,8 +42,9 @@ class OrdersController extends Controller {
 	}
 	public function filter()
 	{
-		$warehouses = $this->warehouseRepo->getList();
-		$w = (array_keys($warehouses)[0]=='') ? '' : $this->warehouseRepo->find(array_keys($warehouses[array_keys($warehouses)[0]])[0])->company->provider->id;
+		// $warehouses = $this->warehouseRepo->getList();
+		// dd($warehouses);
+		//$w = (array_keys($warehouses)[0]=='') ? '' : $this->warehouseRepo->find(array_keys($warehouses[array_keys($warehouses)[0]])[0])->company->provider->id;
 		//dd($warehouses[array_keys($warehouses)[1]]);
 		//dd($warehouses);
 		if (explode('.', \Request::route()->getName())[0] == 'quotes') {
@@ -53,23 +54,33 @@ class OrdersController extends Controller {
 		}
 		
 		$filter = (object) \Request::all();
+		//dd($filter);
 		if( !((array) $filter) ) {
-			$filter->warehouse_id = session('sede')->id;
+			$filter->company_id = '';
+			$filter->warehouse_id = '';
 			$filter->sn = '';
 			$filter->painter_id = '';
 			$filter->status = '';
 			$filter->f2 = date('Y-m-d');
 			$filter->f1 = date('Y-m-d',strtotime($filter->f2."- 1 month")); ;
 		}
-		if (session('sede')->id != $filter->warehouse_id) {
+		if ($filter->warehouse_id > 0) {
 			session(['sede' => $this->warehouseRepo->find($filter->warehouse_id)]);
 		}
 		//dd(session('sede'));
-		$models = $this->repo->filter($filter, $order_type);
+		$ws = $this->warehouseRepo->getMySedes();
+		$clients = $this->companyRepo->getListClientsBySedes($ws);
+		if ($filter->company_id != '') {
+			$ws = $ws->where('company_id', $filter->company_id);
+		}
+		$warehouses = $this->warehouseRepo->getSedesByClient($filter->company_id);
+		
+		$models = $this->repo->filter($filter, $ws, $order_type);
 
-		$painters = $this->employeeRepo->getListByJobWarehouse(3);
+		$painters = ['' => 'Seleccionar'];
+		// $painters = $this->employeeRepo->getListByJobWarehouse(3);
 		$payment_conditions = $this->paymentConditionRepo->getList();
-		return view('partials.filter',compact('models', 'filter', 'painters', 'warehouses'));
+		return view('partials.filter',compact('models', 'filter', 'painters', 'warehouses', 'clients'));
 	}
 	public function index()
 	{

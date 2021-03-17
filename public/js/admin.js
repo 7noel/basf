@@ -61,10 +61,19 @@ $(document).ready(function () {
 	// 	$(this).val(cadena);
 	// });
 
+
+	//carga colores
+	$('#company_id').change(function(){
+		var m=$('#company_id').val();
+		if (m==='') {
+			$('#warehouse_id').html("");
+		}
+		cargaSedes();
+		cargaEmpleados();
+	});
+
 	//carga empleados y modelos
 	$('#warehouse_id').change(function(){
-		cargaEmpleados();
-		cargaModelosBySede();
 		var w=$('#warehouse_id').val();
 		if (w==='') {
 			$('#painter_id').html("");
@@ -73,6 +82,8 @@ $(document).ready(function () {
 			$('#color_code').html("");
 			$('#color_code2').html("");
 		}
+		cargaModelosBySede();
+		cargaEmpleados();
 		cargaEmpresas();
 	});
 
@@ -237,6 +248,23 @@ function cargaEmpresas() {
 	}
 	
 }
+/*carga Sedes*/
+function cargaSedes() {
+	var company_id = $('#company_id option:selected').val();
+	var page ="/sedesByClient/" + company_id;
+	if(company_id !== ''){
+		$.get(page, function(data){
+			j = 0
+			$('#warehouse_id').empty();
+			$.each(data, function (index, Obj) {
+				$('#warehouse_id').append("<option value='"+Obj.id+"'>"+Obj.name+"</option>");
+				j += 1
+			});
+			if (j>1) {$('#warehouse_id').prepend("<option value=''>Seleccionar</option>")}
+		});
+	} else {$('#warehouse_id').prepend("<option value=''>Seleccionar</option>")}
+	
+}
 /*carga pintores y matizadores*/
 function cargaEmpleados() {
 	var warehouse_id = $('#warehouse_id option:selected').val();
@@ -258,6 +286,9 @@ function cargaEmpleados() {
 			if ($i!=1) {$('#painter_id').prepend("<option value=''>Seleccionar</option>");}
 			if ($j!=1) {$('#tint_id').prepend("<option value=''>Seleccionar</option>");}
 		});
+	} else {
+		$('#painter_id').prepend("<option value=''>Seleccionar</option>")
+		$('#tint_id').prepend("<option value=''>Seleccionar</option>")
 	}
 }
 
@@ -282,7 +313,6 @@ function cargaModelosBySede() {
 				// $('#modelo_id').append("</optgroup>");
 				options += "</optgroup>"
 			});
-			console.log(options)
 			$('#modelo_id').prepend(options);
 		});
 	}

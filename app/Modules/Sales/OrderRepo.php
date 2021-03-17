@@ -158,16 +158,28 @@ class OrderRepo extends BaseRepo{
 		return $data;
 	}
 
-	public function filter($filter, $order_type)
+	public function filter($filter, $ws, $order_type)
 	{
 		$q = Order::where('order_type', $order_type);
 		// if (!\Auth::user()->is_superuser) {
 		// 	$ws = \Auth::user()->employee->warehouses->pluck('id')->toArray();
 		// 	$q->whereIn('warehouse_id', $ws);
 		// }
-		$q->where('warehouse_id', $filter->warehouse_id);
+		if (isset($filter->company_id)) {
+			if ($filter->company_id != '') {
+				$q->where('company_id', $filter->company_id);
+			}
+			
+		}
+		//dd($filter->warehouse_id);
+		if ($filter->warehouse_id == '') {
+			$q->whereIn('warehouse_id', $ws->pluck('id'));
+		} else {
+			$q->where('warehouse_id', $filter->warehouse_id);
+		}
+		
 		if ($filter->sn > 0) {
-			return $q->where('warehouse_id', $filter->warehouse_id)->where('sn', $filter->sn)->orderBy('created_at', 'DESC')->get();
+			return $q->where('sn', $filter->sn)->orderBy('created_at', 'DESC')->get();
 		} else {
 			// $q->where('created_at', '>=', $filter->f1.' 00:00:00')->where('created_at', '<=', $filter->f2.' 23:59:59');
 			$q->where('created_at', '>=', $filter->f1.' 00:00:00')->where('created_at', '<=', $filter->f2.' 23:59:59');
@@ -177,6 +189,7 @@ class OrderRepo extends BaseRepo{
 			if($filter->status > 0) {
 				$q->where('status', $filter->status);
 			}
+		// dd($q);
 			return $q->orderBy('created_at', 'DESC')->get();
 		}
 	}

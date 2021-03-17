@@ -101,5 +101,8 @@ class CompanyRepo extends BaseRepo{
 		return ['' => 'Seleccionar'] + Company::where('is_provider','1')->pluck('company_name', 'id')->toArray();
 	}
 
-	
+	public function getListClientsBySedes($ws)
+	{
+		return ['' => 'Seleccionar'] + Company::where('is_client', '1')->whereIn('id', $ws->pluck('company_id'))->pluck('company_name', 'id')->toArray();
+	}
 }

@@ -46,13 +46,13 @@ class WarehouseRepo extends BaseRepo{
 		$ajax = Warehouse::select('id','name')->get();
 		return $ajax;
 	}
-	public function getList($name='name', $id='id')
+	public function getMySedes($value='')
 	{
 		$current_company = \Auth::user()->employee->company_id;
 		$my_ws = \Auth::user()->employee->warehouses;
 		$ids=Warehouse::where('provider_id', $current_company)->orWhere('company_id', $current_company)->pluck('id')->toArray();
 		$ws = (\Auth::user()->is_superuser) ? Warehouse::with('company')->get() : \Auth::user()->employee->warehouses;
-		$ws = (\Auth::user()->is_superuser) ? Warehouse::with('company')->get() : \Auth::user()->employee->warehouses;
+		// $ws = (\Auth::user()->is_superuser) ? Warehouse::with('company')->get() : \Auth::user()->employee->warehouses;
 		if (\Auth::user()->is_superuser) {
 			$ws = Warehouse::with('company')->get();
 		} elseif ($my_ws->isNotEmpty()) {
@@ -60,6 +60,26 @@ class WarehouseRepo extends BaseRepo{
 		} else {
 			$ws=Warehouse::where('provider_id', $current_company)->orWhere('company_id', $current_company)->get();
 		}
+		return $ws;
+	}
+	public function getSedesByClient($company_id)
+	{
+		if ($company_id == '') {
+			return ['' => 'Seleccionar'];
+		}
+		$ws = $this->getMySedes()->where('company_id', $company_id);
+		//$ws = Warehouse::where('client_id', $client_id)->get();
+		if (\Request::ajax()) {
+			return $ws;
+		}
+		if ($ws->count() == 1) {
+			return $ws->pluck('name', 'id')->toArray();
+		}
+		return ['' => 'Seleccionar'] + $ws->pluck('name', 'id')->toArray();
+	}
+	public function getList($name='name', $id='id')
+	{
+		$ws = $this->getMySedes();
 		//dd($ws[0]);
 		$r = [];
 		if (null == session('sede')) {
@@ -73,7 +93,7 @@ class WarehouseRepo extends BaseRepo{
 		if (count($ws)==1) {
 			return $r;
 		}
-		return [''=>'Seleccionar'] + $r;		
+		return [''=>'Seleccionar'] + $r;
 	}
 	
 	public function getListGroup2($group = 'company', $name='name', $id='id')

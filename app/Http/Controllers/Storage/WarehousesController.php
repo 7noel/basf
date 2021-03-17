@@ -84,4 +84,8 @@ class WarehousesController extends Controller {
 		//return $this->repo->getDistribuidorAjax($warehouse_id);
 		return \Response::json($this->repo->find($warehouse_id));
 	}
+	public function sedesByClient($company_id)
+	{
+		return response()->json($this->repo->getSedesByClient($company_id));
+	}
 }

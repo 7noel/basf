@@ -40,6 +40,7 @@ Route::group(['middleware' => ['web']], function() {
 Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware'=>['auth']], function(){
+	Route::get('sedesByClient/{company_id}', ['as' => 'sedesByClient', 'uses' => 'Storage\WarehousesController@sedesByClient']);
 	Route::get('employeesByWarehouse/{warehouse_id}', ['as' => 'employeesByWarehouse', 'uses' => 'HumanResources\EmployeesController@employeesByWarehouse']);
 	Route::get('colorsByModelo/{modelo_id}', ['as' => 'colorsByModelo', 'uses' => 'Logistics\BrandsController@colorsByModelo']);
 	Route::get('modelosByWarehouse/{warehouse_id}', ['as' => 'modelosByWarehouse', 'uses' => 'Logistics\BrandsController@modelosByWarehouse']);
